@@ -19,9 +19,10 @@ public class CrminfoServiceImpl implements CrminfoService {
         Crminfo crminfo1=null;
         List<Crminfo> crminfoList=null;
         try {
+            crminfoList=crminfoDao.selectcrmByName(crminfo);
             if(null !=crminfoList){
                 crminfo1=crminfoList.get(0);
-                if(CommonUtils.MD5Encrypt(crminfo.getPassWord()).equals(crminfo1.getPassWord())){
+                if(CommonUtils.getMD5(crminfo.getPassWord()).equals(crminfo1.getPassWord())){
                     return crminfo1;
                 }else {
                     crminfo1=new Crminfo();

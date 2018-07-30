@@ -265,7 +265,7 @@
             $.ajax({
                 url : "dologin.do",
                 data : {
-                    crmName:$("#crmName").val().trim(),
+                    userName:$("#crmName").val().trim(),
                     passWord:$("#crmPwd").val().trim()
                 },
                 type : "post",

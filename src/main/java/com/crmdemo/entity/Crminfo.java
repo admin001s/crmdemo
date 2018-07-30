@@ -3,7 +3,7 @@ package com.crmdemo.entity;
 
 public class Crminfo {
 
-  private long userId;
+  private Integer userId;
   private String userName;
   private String passWord;
   private long roleId;
@@ -13,14 +13,13 @@ public class Crminfo {
   private java.sql.Timestamp updateTime;
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
-
 
   public String getUserName() {
     return userName;
