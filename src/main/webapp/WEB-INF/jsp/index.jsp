@@ -367,7 +367,6 @@
                             <i class="menu-icon fa fa-caret-right"></i>
                             简单通用表格
                         </a>
-
                         <b class="arrow"></b>
                     </li>
 
