@@ -17,8 +17,8 @@ public class JspController {
      * @return
      */
     @RequestMapping("index.do")
-    public String index(){
-        return  "login";
+    public String index() {
+        return "login";
     }
 
     /**
@@ -26,7 +26,7 @@ public class JspController {
      * @return
      */
     @RequestMapping("doindex.do")
-    public String doindex(){
+    public String doindex() {
         return "index";
     }
 
@@ -49,3 +49,7 @@ public class JspController {
         return "crm/customer_add";
     }
 }
+
+
+
+

@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
     <![endif]-->
     <script src="assets/js/ace-extra.min.js"></script>
-
+    <script src="assets/js/jquery.min.js"></script>
     <!--[if lte IE 8]>
     <script src="assets/js/html5shiv.min.js"></script>
     <script src="assets/js/respond.min.js"></script>
@@ -272,10 +272,10 @@
                 dataType : "JSON",
                 success : function(data) {
                     if (data.is) {
-                        alert(data.tips);
+                        toastr.success(data.tips);
                         window.location.href="/doindex.do";
                     } else {
-                        alert(data.tips);
+                        toastr.error(data.tips);
                     }
                 },
                 error : function(errMsg) {}
