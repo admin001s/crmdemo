@@ -3,9 +3,9 @@ package com.crmdemo.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.xdf.util.AESUtil;
-import com.xdf.util.HexUtil;
-import com.xdf.util.MD5Util;
+import com.crmdemo.util.AESUtil;
+import com.crmdemo.util.HexUtil;
+import com.crmdemo.util.MD5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

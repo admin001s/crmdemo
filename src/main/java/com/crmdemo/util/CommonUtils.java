@@ -32,9 +32,9 @@ import java.util.zip.GZIPInputStream;
  */
 public class CommonUtils {
 
-    public static Userinfo getUser(HttpSession session){
+    /*public static Userinfo getUser(HttpSession session){
         return  (Userinfo)session.getAttribute("user");
-    }
+    }*/
 
     /**
      * SHA1加密

@@ -1,4 +1,4 @@
-package com.sample;
+package com.crmdemo.entity;
 
 
 public class CrmpraiseComplaint {

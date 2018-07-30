@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/css/ace-fonts.css" />
     <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/toastr/toastr.min.css"/>
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="assets/css/ace-part2.min.css" />
     <![endif]-->
@@ -23,10 +24,12 @@
     <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
     <![endif]-->
     <script src="assets/js/ace-extra.min.js"></script>
+
     <!--[if lte IE 8]>
     <script src="assets/js/html5shiv.min.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+    <script src="assets/toastr/toastr.min.js"></script>
 </head>
 <body class="login-layout blur-login">
 <div class="main-container">
@@ -57,14 +60,14 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" />
+															<input type="text" class="form-control" placeholder="用户名" id="crmName"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input type="password" class="form-control" placeholder="密码" id="crmPwd"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </label>
@@ -77,7 +80,7 @@
                                                     <span class="lbl"> 记住我</span>
                                                 </label>
 
-                                                <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary" id="comment">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">登录</span>
                                                 </button>
@@ -257,6 +260,26 @@
             var target = $(this).data('target');
             $('.widget-box.visible').removeClass('visible');//hide others
             $(target).addClass('visible');//show target
+        });
+        $("#comment").on('click', function() {
+            $.ajax({
+                url : "dologin.do",
+                data : {
+                    crmName:$("#crmName").val().trim(),
+                    passWord:$("#crmPwd").val().trim()
+                },
+                type : "post",
+                dataType : "JSON",
+                success : function(data) {
+                    if (data.is) {
+                        alert(data.tips);
+                        window.location.href="/doindex.do";
+                    } else {
+                        alert(data.tips);
+                    }
+                },
+                error : function(errMsg) {}
+            });
         });
     });
 
