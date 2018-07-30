@@ -23,10 +23,14 @@
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
     <![endif]-->
+    <script type="assets/js/jquery.min.js"></script>
+
+    <script src="assets/js/ace-extra.min.js"></script>
     <!--[if lte IE 8]>
     <script src="assets/js/html5shiv.min.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <style type="text/css">
 

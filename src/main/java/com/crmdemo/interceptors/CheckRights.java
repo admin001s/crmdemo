@@ -11,7 +11,6 @@ public class CheckRights implements HandlerInterceptor {
     private Logger logger = Logger.getLogger(CheckRights.class);
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String i=httpServletRequest.getRequestURI();
         if(httpServletRequest.getRequestURI().equals("/dologin.do") || httpServletRequest.getRequestURI().equals("/index.do")){
             return true;
         }

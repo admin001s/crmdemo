@@ -137,33 +137,11 @@
             </li>
 
             <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-list"></i>
-                    <span class="menu-text"> 客户资源管理 </span>
-
-                    <b class="arrow fa fa-angle-down"></b>
+                <a href="customer.do">
+                    <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text"> 客户</span>
                 </a>
 
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="tables.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            简单通用表格
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="jqgrid.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            jqGrid插件表格
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
             </li>
 
             <li class="">
