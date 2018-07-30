@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping("dologin.do")
-    public Map<String,Object> dologin(Crminfo crminfo){
+    public Map<String,Object> dologin(Crminfo crminfo, HttpSession session){
         Crminfo crminfo1=crminfoService.selectLogin(crminfo);
         Map<String,Object> map=new HashMap<String,Object>();
         if(null== crminfo1){
@@ -28,6 +29,7 @@ public class HomeController {
                 map.put("is",false);
                 map.put("tips","密码错误！");
             }else {
+                session.setAttribute("user",crminfo1);
                 map.put("is",true);
                 map.put("tips","登录成功！");
             }

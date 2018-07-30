@@ -3,6 +3,7 @@ package com.crmdemo.util;
 
 //import com.bali.onbase.web.model.helperclass.LoginBuyerInfo;
 //import com.bali.onbase.web.vo.BuyerInfoVo;
+import com.crmdemo.entity.Crminfo;
 import org.apache.commons.lang3.StringUtils;
         import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import sun.misc.BASE64Encoder;
@@ -32,9 +33,9 @@ import java.util.zip.GZIPInputStream;
  */
 public class CommonUtils {
 
-    /*public static Userinfo getUser(HttpSession session){
-        return  (Userinfo)session.getAttribute("user");
-    }*/
+    public static Crminfo getUser(HttpSession session){
+        return  (Crminfo)session.getAttribute("user");
+    }
 
     /**
      * SHA1加密
