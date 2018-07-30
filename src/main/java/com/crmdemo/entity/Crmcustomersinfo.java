@@ -4,7 +4,7 @@ package com.crmdemo.entity;
 public class Crmcustomersinfo {
 
   private long id;
-  private long customersId;
+  private String customersId;
   private String customersName;
   private String customersSex;
   private long provinceId;
@@ -45,14 +45,13 @@ public class Crmcustomersinfo {
   }
 
 
-  public long getCustomersId() {
+  public String getCustomersId() {
     return customersId;
   }
 
-  public void setCustomersId(long customersId) {
+  public void setCustomersId(String customersId) {
     this.customersId = customersId;
   }
-
 
   public String getCustomersName() {
     return customersName;

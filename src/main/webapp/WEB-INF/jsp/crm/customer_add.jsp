@@ -22,7 +22,6 @@
                                     <!-- #section:elements.form -->
                                     <div class="form-group">
                                         <label class="col-lg-3 col-sm-3 control-label no-padding-right" for="customersId"> 客户编号：</label>
-
                                         <div class="col-lg-9 col-sm-9">
                                             <input type="text" id="customersId" placeholder="输入客户编号" class="col-xs-10 col-sm-5" autocomplete="off"/>
                                         </div>
@@ -52,7 +51,7 @@
                                     </div>
                                     <!-- /section:elements.form -->
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-tags">地区：</label>
+                                        <label class="col-sm-3 control-label no-padding-right" for="provinceName">地区：</label>
                                         <div class="col-sm-2">
                                             <div class="pos-rel">
                                                 <select class="form-control" id="provinceName">
@@ -99,7 +98,7 @@
 																	<span class="input-group-addon">
 																		<i class="ace-icon fa fa-phone"></i>
 																	</span>
-                                                <input type="tel" id="phone" name="phone" />
+                                                <input type="tel" id="telephone" name="phone" />
                                             </div>
                                         </div>
                                     </div>
@@ -109,11 +108,11 @@
                                         <div class="col-sm-9">
                                             <div>
                                                 <label class="line-height-1 blue">
-                                                    <input name="isVIP" id="isVIP" value="0" type="radio" class="ace" />
+                                                    <input name="isVip" id="isVIP" value="0" type="radio" class="ace" />
                                                     <span class="lbl"> 是</span>
                                                 </label>
                                                 <label class="line-height-1 blue">
-                                                    <input name="isVIP" value="1" type="radio" class="ace" checked/>
+                                                    <input name="isVip" value="1" type="radio" class="ace" checked/>
                                                     <span class="lbl"> 否</span>
                                                 </label>
                                             </div>
@@ -209,7 +208,39 @@
 </div>
 <script type="text/javascript">
     function add(){
-
+        $.ajax({
+            url : "addCrmcustomersinfo.do",
+            data : {
+                customersId:$("#customersId").val(),
+                customersName:$("#customersName").val(),
+                customersSex:$("#customersSex").val(),
+                provinceName:$("#provinceName").val(),
+                cityName:$("#cityName").val(),
+                mainsalesarea:$("#mainsalesarea").val(),
+                department:$("#department").val(),
+                position:$("#position").val(),
+                telephone:$("#telephone").val(),
+                isVip:$("#isVip").val(),
+                email:$("#email").val(),
+                industryCategory:$("#industryCategory").val(),
+                industrySubclass:$("#industrySubclass").val(),
+                customerSource:$("#customerSource").val(),
+                companywebsite:$("#companywebsite").val(),
+                companyAddress:$("#companyAddress").val(),
+                companydetails:$("#companydetails").val(),
+                mainproducts:$("#mainproducts").val()
+            },
+            type : "post",
+            dataType : "JSON",
+            success : function(data) {
+                if(data){
+                    alert("新增成功！");
+                }else{
+                    alert("新增失败！");
+                }
+            },
+            error : function(errMsg) {}
+        });
     }
     $(function(){
         $("#provinceName").change(function(){

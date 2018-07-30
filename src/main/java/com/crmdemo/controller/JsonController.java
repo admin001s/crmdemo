@@ -2,8 +2,11 @@ package com.crmdemo.controller;
 
 import com.crmdemo.entity.Areas;
 import com.crmdemo.entity.Cities;
+import com.crmdemo.entity.Crmcustomersinfo;
 import com.crmdemo.service.AreasService;
 import com.crmdemo.service.CitiesService;
+import com.crmdemo.service.CrmcustomersinfoService;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +18,8 @@ public class JsonController {
     AreasService areasService;
     @Resource
     CitiesService citiesService;
+    @Resource
+    CrmcustomersinfoService crmcustomersinfoService;
 
     /**
      * 获取城市
@@ -38,5 +43,18 @@ public class JsonController {
         Areas areas=new Areas();
         areas.setCityid(cityid);
         return areasService.selectAreasList(areas);
+    }
+
+    /**
+     * 新增客户
+     * @param crmcustomersinfo
+     * @return
+     */
+    @RequestMapping("addCrmcustomersinfo.do")
+    public Object addCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo){
+        if(crmcustomersinfoService.addCrmcustomersinfo(crmcustomersinfo)){
+            return  true;
+        }
+        return  false;
     }
 }

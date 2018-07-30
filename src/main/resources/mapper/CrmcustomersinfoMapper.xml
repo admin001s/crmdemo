@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.CrmcustomersinfoDao">
+    <insert id="insertCrmcustomersinfo">
+        insert into crmcustomersinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customersId != null">
+                customersId
+            </if>
+            <if test="customersName != null">
+                customersName,
+            </if>
+            <if test="customersSex != null">
+                customersSex,
+            </if>
+            <if test="provinceId != null">
+                provinceId,
+            </if>
+            <if test="provinceName != null">
+                provinceName,
+            </if>
+            <if test="cityName != null">
+                cityName,
+            </if>
+            <if test="countryName != null">
+                countryName,
+            </if>
+            <if test="department != null">
+                department,
+            </if>
+            <if test="mainsalesarea != null">
+                mainsalesarea,
+            </if>
+            <if test="mobilephone != null">
+                mobilephone,
+            </if>
+            <if test="telephone != null">
+                telephone,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="isVip != null">
+                isVip,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="fax != null">
+                fax,
+            </if>
+            <if test="industryCategory != null">
+                industryCategory,
+            </if>
+            <if test="industrySubclass != null">
+                industrySubclass,
+            </if>
+            <if test="customerSource != null">
+                customerSource,
+            </if>
+            <if test="customerUrlSource != null">
+                customerUrlSource,
+            </if>
+            <if test="companywebsite != null">
+                companywebsite,
+            </if>
+            <if test="companyAddress != null">
+                companyAddress,
+            </if>
+            <if test="companydetails != null">
+                companydetails,
+            </if>
+            <if test="customerStatus != null">
+                customerStatus,
+            </if>
+            <if test="mainproducts != null">
+                mainproducts,
+            </if>
+            <if test="adduserId != null">
+                adduserId,
+            </if>
+            <if test="adduserHierarchy != null">
+                adduserHierarchy,
+            </if>
+            <if test="deleteStatus != null">
+                deleteStatus,
+            </if>
+            <if test="addmethod != null">
+                addmethod,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="updateTime != null">
+                updateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customersId != null">
+                #{customersId},
+            </if>
+            <if test="customersName != null">
+                #{customersName},
+            </if>
+            <if test="customersSex != null">
+                #{customersSex},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId},
+            </if>
+            <if test="provinceName != null">
+                #{provinceName},
+            </if>
+            <if test="cityName != null">
+                #{cityName},
+            </if>
+            <if test="countryName != null">
+                #{countryName},
+            </if>
+            <if test="department != null">
+                #{department},
+            </if>
+            <if test="mainsalesarea != null">
+                #{mainsalesarea},
+            </if>
+            <if test="mobilephone != null">
+                #{mobilephone},
+            </if>
+            <if test="telephone != null">
+                #{telephone},
+            </if>
+            <if test="qq != null">
+                #{qq},
+            </if>
+            <if test="isVip != null">
+                #{isVip},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="fax != null">
+                #{fax},
+            </if>
+            <if test="industryCategory != null">
+                #{industryCategory},
+            </if>
+            <if test="industrySubclass != null">
+                #{industrySubclass},
+            </if>
+            <if test="customerSource != null">
+                #{customerSource},
+            </if>
+            <if test="customerUrlSource != null">
+                #{customerUrlSource},
+            </if>
+            <if test="companywebsite != null">
+                #{companywebsite},
+            </if>
+            <if test="companyAddress != null">
+                #{companyAddress},
+            </if>
+            <if test="companydetails != null">
+                #{companydetails},
+            </if>
+            <if test="customerStatus != null">
+                #{customerStatus},
+            </if>
+            <if test="mainproducts != null">
+                #{mainproducts},
+            </if>
+            <if test="adduserId != null">
+                #{adduserId},
+            </if>
+            <if test="adduserHierarchy != null">
+                #{adduserHierarchy},
+            </if>
+            <if test="deleteStatus != null">
+                #{deleteStatus},
+            </if>
+            <if test="addmethod != null">
+                #{addmethod},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+</mapper>
