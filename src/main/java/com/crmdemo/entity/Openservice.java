@@ -1,51 +1,53 @@
 package com.crmdemo.entity;
 
 
+import java.security.Timestamp;
+import java.util.Date;
+
 public class Openservice {
 
-  private long cashierId;
-  private long userId;
-  private long isopen;
-  private long crmcustomersinfoid;
+  private Integer cashierId;
+  private Integer userId;
+  private Integer isopen;
+  private String crmcustomersinfoid;
   private String openserviceTypeid;
-  private String cashierRemark;
-  private java.sql.Timestamp createDate;
-  private java.sql.Timestamp updateDate;
-  private long deleteStatus;
+  private Date createDate;
+  private Date updateDate;
+  private Integer deleteStatus;
 
 
-  public long getCashierId() {
+  public Integer getCashierId() {
     return cashierId;
   }
 
-  public void setCashierId(long cashierId) {
+  public void setCashierId(Integer cashierId) {
     this.cashierId = cashierId;
   }
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
 
-  public long getIsopen() {
+  public Integer getIsopen() {
     return isopen;
   }
 
-  public void setIsopen(long isopen) {
+  public void setIsopen(Integer isopen) {
     this.isopen = isopen;
   }
 
 
-  public long getCrmcustomersinfoid() {
+  public String getCrmcustomersinfoid() {
     return crmcustomersinfoid;
   }
 
-  public void setCrmcustomersinfoid(long crmcustomersinfoid) {
+  public void setCrmcustomersinfoid(String crmcustomersinfoid) {
     this.crmcustomersinfoid = crmcustomersinfoid;
   }
 
@@ -59,25 +61,19 @@ public class Openservice {
   }
 
 
-  public String getCashierRemark() {
-    return cashierRemark;
-  }
-
-  public void setCashierRemark(String cashierRemark) {
-    this.cashierRemark = cashierRemark;
-  }
 
 
-  public java.sql.Timestamp getCreateDate() {
+
+  public Date getCreateDate() {
     return createDate;
   }
 
-  public void setCreateDate(java.sql.Timestamp createDate) {
+  public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
 
 
-  public java.sql.Timestamp getUpdateDate() {
+  public Date getUpdateDate() {
     return updateDate;
   }
 
@@ -86,11 +82,11 @@ public class Openservice {
   }
 
 
-  public long getDeleteStatus() {
+  public Integer getDeleteStatus() {
     return deleteStatus;
   }
 
-  public void setDeleteStatus(long deleteStatus) {
+  public void setDeleteStatus(Integer deleteStatus) {
     this.deleteStatus = deleteStatus;
   }
 

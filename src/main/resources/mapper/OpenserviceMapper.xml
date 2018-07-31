@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.OpenserviceDao">
+
+    <!--查询服务-->
+    <select id="OPENSERVICE" resultType="Openservice">
+        SELECT * FROM `openservice`
+        WHERE 1=1
+        <if test="crmcustomersinfoid !='' and crmcustomersinfoid !=null">
+            and `crmcustomersinfoid` =#{crmcustomersinfoid}
+        </if>
+    </select>
+
+    <!--客户新增服务-->
+    <insert id="insertOpenservice" parameterType="Openservice">
+        INSERT INTO `openservice` (
+     `UserId`,`isopen`, `crmcustomersinfoid`,
+     `openserviceTypeid`,
+     `CreateDate`
+     )
+VALUES
+  (
+   #{userId},
+    #{isopen},
+    #{crmcustomersinfoid},
+   #{openserviceTypeid},
+   #{createDate}
+  ) ;
+    </insert>
+    <!--删除服务-->
+    <delete id="deleteOpenservice" >
+        DELETE FROM `openservice` WHERE 1=1
+        <if test="crmcustomersinfoid !=null and crmcustomersinfoid !=''">
+          and  `crmcustomersinfoid` = #{crmcustomersinfoid} ;
+        </if>
+
+    </delete>
+</mapper>
