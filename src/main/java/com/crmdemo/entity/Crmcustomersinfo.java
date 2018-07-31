@@ -35,6 +35,18 @@ public class Crmcustomersinfo {
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
 
+   //另外加的字段
+  private Integer i;  //序号
+
+
+
+  public Integer getI() {
+    return i;
+  }
+
+  public void setI(Integer i) {
+    this.i = i;
+  }
 
   public long getId() {
     return id;

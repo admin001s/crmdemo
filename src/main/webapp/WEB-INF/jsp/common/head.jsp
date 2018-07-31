@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-table.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style" />
     <!--[if lte IE 9]>

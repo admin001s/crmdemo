@@ -233,7 +233,7 @@
             <li class="">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-tag"></i>
-                    <span class="menu-text"> 更多页面 </span>
+                    <span class="menu-text"> 服务 </span>
 
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
@@ -242,9 +242,9 @@
 
                 <ul class="submenu">
                     <li class="">
-                        <a href="profile.html">
+                        <a href="/OpenList.do">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            用户信息
+                            开通服务
                         </a>
 
                         <b class="arrow"></b>
@@ -253,7 +253,7 @@
                     <li class="">
                         <a href="pricing.html">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            售价单
+                            分配
                         </a>
 
                         <b class="arrow"></b>
@@ -262,7 +262,7 @@
                     <li class="">
                         <a href="invoice.html">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            购物车
+                            产品服务线
                         </a>
 
                         <b class="arrow"></b>
@@ -271,7 +271,7 @@
                     <li class="">
                         <a href="timeline.html">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            时间轴
+                            客户资料
                         </a>
 
                         <b class="arrow"></b>
@@ -281,7 +281,62 @@
                     <li class="">
                         <a href="login.html">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            登录注册
+                            客户服务的监控与预警
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="login.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            客服邀请其他客服加入客服团队
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="login.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            客户投诉/表扬跟进
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+
+                    <li class="">
+                        <a href="login.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            客户满意度调查(一周)
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="login.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            客户服务的监控与预警
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="login.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            客户满意度调查反馈
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="login.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            月沟通服务反馈
                         </a>
 
                         <b class="arrow"></b>
