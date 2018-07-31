@@ -3,11 +3,11 @@ package com.crmdemo.entity;
 
 public class Crmcustomersinfo {
 
-  private long id;
+  private Integer id;
   private String customersId;
   private String customersName;
   private String customersSex;
-  private long provinceId;
+  private Integer provinceId;
   private String provinceName;
   private String cityName;
   private String countryName;
@@ -16,7 +16,7 @@ public class Crmcustomersinfo {
   private String mobilephone;
   private String telephone;
   private String qq;
-  private long isVip;
+  private Integer isVip;
   private String email;
   private String fax;
   private String industryCategory;
@@ -28,9 +28,9 @@ public class Crmcustomersinfo {
   private String companydetails;
   private String customerStatus;
   private String mainproducts;
-  private long adduserId;
+  private Integer adduserId;
   private String adduserHierarchy;
-  private long deleteStatus;
+  private Integer deleteStatus;
   private String addmethod;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
@@ -48,11 +48,11 @@ public class Crmcustomersinfo {
     this.i = i;
   }
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -83,11 +83,11 @@ public class Crmcustomersinfo {
   }
 
 
-  public long getProvinceId() {
+  public Integer getProvinceId() {
     return provinceId;
   }
 
-  public void setProvinceId(long provinceId) {
+  public void setProvinceId(Integer provinceId) {
     this.provinceId = provinceId;
   }
 
@@ -164,11 +164,11 @@ public class Crmcustomersinfo {
   }
 
 
-  public long getIsVip() {
+  public Integer getIsVip() {
     return isVip;
   }
 
-  public void setIsVip(long isVip) {
+  public void setIsVip(Integer isVip) {
     this.isVip = isVip;
   }
 
@@ -272,11 +272,11 @@ public class Crmcustomersinfo {
   }
 
 
-  public long getAdduserId() {
+  public Integer getAdduserId() {
     return adduserId;
   }
 
-  public void setAdduserId(long adduserId) {
+  public void setAdduserId(Integer adduserId) {
     this.adduserId = adduserId;
   }
 
@@ -290,11 +290,11 @@ public class Crmcustomersinfo {
   }
 
 
-  public long getDeleteStatus() {
+  public Integer getDeleteStatus() {
     return deleteStatus;
   }
 
-  public void setDeleteStatus(long deleteStatus) {
+  public void setDeleteStatus(Integer deleteStatus) {
     this.deleteStatus = deleteStatus;
   }
 

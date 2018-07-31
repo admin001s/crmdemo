@@ -2,19 +2,19 @@ package com.crmdemo.entity;
 
 public class Crmmodular {
 
-  private long crmModularId;
+  private Integer crmModularId;
   private String crmProductServiceId;
   private String modularName;
-  private long serialNumber;
+  private Integer serialNumber;
   private java.sql.Timestamp updateTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getCrmModularId() {
+  public Integer getCrmModularId() {
     return crmModularId;
   }
 
-  public void setCrmModularId(long crmModularId) {
+  public void setCrmModularId(Integer crmModularId) {
     this.crmModularId = crmModularId;
   }
 
@@ -37,11 +37,11 @@ public class Crmmodular {
   }
 
 
-  public long getSerialNumber() {
+  public Integer getSerialNumber() {
     return serialNumber;
   }
 
-  public void setSerialNumber(long serialNumber) {
+  public void setSerialNumber(Integer serialNumber) {
     this.serialNumber = serialNumber;
   }
 

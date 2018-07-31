@@ -618,7 +618,15 @@
                     field: 'customerStatus',
                     title: '客户状态',
                     align : 'center'
-                }],
+                },
+                    {
+                        field : 'caozuo',
+                        title: '操作',
+                        align : 'center',
+                        formatter : function(value, row, index) {
+                            return '<i class="glyphicon glyphicon-pencil caozuo" data-id="' + row.id + '" style="cursor: pointer;" title="操作"></i>';
+                        }
+                    }],
                 onPostBody : function(data, row) {
                     container.find('.fixed-table-toolbar').hide();
                     // initButton();

@@ -3,8 +3,8 @@ package com.crmdemo.entity;
 
 public class Crmcommunicateservice {
 
-  private long id;
-  private long userId;
+  private Integer id;
+  private Integer userId;
   private String corporateName;
   private String questionOne;
   private String questionTwo;
@@ -16,20 +16,20 @@ public class Crmcommunicateservice {
   private java.sql.Timestamp createTime;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 

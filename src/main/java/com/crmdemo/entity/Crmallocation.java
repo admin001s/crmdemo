@@ -3,48 +3,48 @@ package com.crmdemo.entity;
 
 public class Crmallocation {
 
-  private long crmAllocationId;
-  private long openserviceId;
-  private long userId;
-  private long allocationStatus;
+  private Integer crmAllocationId;
+  private Integer openserviceId;
+  private Integer userId;
+  private Integer allocationStatus;
   private String levelRelationShip;
-  private long interiorOutsideId;
+  private Integer interiorOutsideId;
   private java.sql.Timestamp updateTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getCrmAllocationId() {
+  public Integer getCrmAllocationId() {
     return crmAllocationId;
   }
 
-  public void setCrmAllocationId(long crmAllocationId) {
+  public void setCrmAllocationId(Integer crmAllocationId) {
     this.crmAllocationId = crmAllocationId;
   }
 
 
-  public long getOpenserviceId() {
+  public Integer getOpenserviceId() {
     return openserviceId;
   }
 
-  public void setOpenserviceId(long openserviceId) {
+  public void setOpenserviceId(Integer openserviceId) {
     this.openserviceId = openserviceId;
   }
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
 
-  public long getAllocationStatus() {
+  public Integer getAllocationStatus() {
     return allocationStatus;
   }
 
-  public void setAllocationStatus(long allocationStatus) {
+  public void setAllocationStatus(Integer allocationStatus) {
     this.allocationStatus = allocationStatus;
   }
 
@@ -58,11 +58,11 @@ public class Crmallocation {
   }
 
 
-  public long getInteriorOutsideId() {
+  public Integer getInteriorOutsideId() {
     return interiorOutsideId;
   }
 
-  public void setInteriorOutsideId(long interiorOutsideId) {
+  public void setInteriorOutsideId(Integer interiorOutsideId) {
     this.interiorOutsideId = interiorOutsideId;
   }
 

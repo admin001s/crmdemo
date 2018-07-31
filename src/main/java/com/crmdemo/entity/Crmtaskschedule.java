@@ -3,52 +3,52 @@ package com.crmdemo.entity;
 
 public class Crmtaskschedule {
 
-  private long crmTaskScheduleId;
-  private long rmProductServiceCId;
-  private long crmModularId;
-  private long userId;
+  private Integer crmTaskScheduleId;
+  private Integer rmProductServiceCId;
+  private Integer crmModularId;
+  private Integer userId;
   private java.sql.Timestamp serviceTime;
   private String levelRelationShip;
-  private long status;
+  private Integer status;
   private String existQuest;
   private java.sql.Timestamp confirmTime;
-  private long confirmUserId;
+  private Integer confirmUserId;
   private java.sql.Timestamp updateTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getCrmTaskScheduleId() {
+  public Integer getCrmTaskScheduleId() {
     return crmTaskScheduleId;
   }
 
-  public void setCrmTaskScheduleId(long crmTaskScheduleId) {
+  public void setCrmTaskScheduleId(Integer crmTaskScheduleId) {
     this.crmTaskScheduleId = crmTaskScheduleId;
   }
 
 
-  public long getRmProductServiceCId() {
+  public Integer getRmProductServiceCId() {
     return rmProductServiceCId;
   }
 
-  public void setRmProductServiceCId(long rmProductServiceCId) {
+  public void setRmProductServiceCId(Integer rmProductServiceCId) {
     this.rmProductServiceCId = rmProductServiceCId;
   }
 
 
-  public long getCrmModularId() {
+  public Integer getCrmModularId() {
     return crmModularId;
   }
 
-  public void setCrmModularId(long crmModularId) {
+  public void setCrmModularId(Integer crmModularId) {
     this.crmModularId = crmModularId;
   }
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
@@ -71,11 +71,11 @@ public class Crmtaskschedule {
   }
 
 
-  public long getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
-  public void setStatus(long status) {
+  public void setStatus(Integer status) {
     this.status = status;
   }
 
@@ -98,11 +98,11 @@ public class Crmtaskschedule {
   }
 
 
-  public long getConfirmUserId() {
+  public Integer getConfirmUserId() {
     return confirmUserId;
   }
 
-  public void setConfirmUserId(long confirmUserId) {
+  public void setConfirmUserId(Integer confirmUserId) {
     this.confirmUserId = confirmUserId;
   }
 

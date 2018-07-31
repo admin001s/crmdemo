@@ -3,36 +3,36 @@ package com.crmdemo.entity;
 
 public class Crminvitation {
 
-  private long invitationId;
-  private long userId;
-  private long invitationStatus;
+  private Integer invitationId;
+  private Integer userId;
+  private Integer invitationStatus;
   private java.sql.Timestamp updateTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getInvitationId() {
+  public Integer getInvitationId() {
     return invitationId;
   }
 
-  public void setInvitationId(long invitationId) {
+  public void setInvitationId(Integer invitationId) {
     this.invitationId = invitationId;
   }
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
 
-  public long getInvitationStatus() {
+  public Integer getInvitationStatus() {
     return invitationStatus;
   }
 
-  public void setInvitationStatus(long invitationStatus) {
+  public void setInvitationStatus(Integer invitationStatus) {
     this.invitationStatus = invitationStatus;
   }
 

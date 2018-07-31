@@ -7,7 +7,7 @@ public class Openservice {
   private long userId;
   private long isopen;
   private long crmcustomersinfoid;
-  private long openserviceTypeid;
+  private String openserviceTypeid;
   private String cashierRemark;
   private java.sql.Timestamp createDate;
   private java.sql.Timestamp updateDate;
@@ -50,11 +50,11 @@ public class Openservice {
   }
 
 
-  public long getOpenserviceTypeid() {
+  public String getOpenserviceTypeid() {
     return openserviceTypeid;
   }
 
-  public void setOpenserviceTypeid(long openserviceTypeid) {
+  public void setOpenserviceTypeid(String openserviceTypeid) {
     this.openserviceTypeid = openserviceTypeid;
   }
 

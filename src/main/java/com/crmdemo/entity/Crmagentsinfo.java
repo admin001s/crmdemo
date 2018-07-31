@@ -3,49 +3,49 @@ package com.crmdemo.entity;
 
 public class Crmagentsinfo {
 
-  private long id;
-  private long agentsId;
-  private long agentRelationship;
+  private Integer id;
+  private Integer agentsId;
+  private Integer agentRelationship;
   private String agentaddress;
-  private long agentaccount;
+  private Integer agentaccount;
   private java.sql.Timestamp agentMessage;
-  private long reviewerId;
-  private long isdelete;
+  private Integer reviewerId;
+  private Integer isdelete;
   private String usertypelevel;
   private String agentphone;
   private String agentQq;
   private String agentName;
   private String agentemail;
-  private long agentParentid;
+  private Integer agentParentid;
   private String agentsex;
   private String agentCharacterrelationship;
   private java.sql.Timestamp addCreateTime;
   private java.sql.Timestamp updatetime;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getAgentsId() {
+  public Integer getAgentsId() {
     return agentsId;
   }
 
-  public void setAgentsId(long agentsId) {
+  public void setAgentsId(Integer agentsId) {
     this.agentsId = agentsId;
   }
 
 
-  public long getAgentRelationship() {
+  public Integer getAgentRelationship() {
     return agentRelationship;
   }
 
-  public void setAgentRelationship(long agentRelationship) {
+  public void setAgentRelationship(Integer agentRelationship) {
     this.agentRelationship = agentRelationship;
   }
 
@@ -59,11 +59,11 @@ public class Crmagentsinfo {
   }
 
 
-  public long getAgentaccount() {
+  public Integer getAgentaccount() {
     return agentaccount;
   }
 
-  public void setAgentaccount(long agentaccount) {
+  public void setAgentaccount(Integer agentaccount) {
     this.agentaccount = agentaccount;
   }
 
@@ -77,20 +77,20 @@ public class Crmagentsinfo {
   }
 
 
-  public long getReviewerId() {
+  public Integer getReviewerId() {
     return reviewerId;
   }
 
-  public void setReviewerId(long reviewerId) {
+  public void setReviewerId(Integer reviewerId) {
     this.reviewerId = reviewerId;
   }
 
 
-  public long getIsdelete() {
+  public Integer getIsdelete() {
     return isdelete;
   }
 
-  public void setIsdelete(long isdelete) {
+  public void setIsdelete(Integer isdelete) {
     this.isdelete = isdelete;
   }
 
@@ -140,11 +140,11 @@ public class Crmagentsinfo {
   }
 
 
-  public long getAgentParentid() {
+  public Integer getAgentParentid() {
     return agentParentid;
   }
 
-  public void setAgentParentid(long agentParentid) {
+  public void setAgentParentid(Integer agentParentid) {
     this.agentParentid = agentParentid;
   }
 

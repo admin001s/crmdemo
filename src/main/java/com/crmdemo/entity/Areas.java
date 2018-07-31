@@ -3,7 +3,7 @@ package com.crmdemo.entity;
 
 public class Areas {
 
-  private long id;
+  private Integer id;
   private String areaid;
   private String area;
   private String cityid;
@@ -13,7 +13,7 @@ public class Areas {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

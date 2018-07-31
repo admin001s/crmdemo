@@ -3,30 +3,30 @@ package com.crmdemo.entity;
 
 public class Crmquestions {
 
-  private long id;
-  private long questionsType;
+  private Integer id;
+  private Integer questionsType;
   private String questiontitle;
   private String questioncontent;
-  private long questiuserid;
-  private long questiuserleveid;
+  private Integer questiuserid;
+  private Integer questiuserleveid;
   private java.sql.Timestamp createTime;
-  private long responsesNum;
+  private Integer responsesNum;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getQuestionsType() {
+  public Integer getQuestionsType() {
     return questionsType;
   }
 
-  public void setQuestionsType(long questionsType) {
+  public void setQuestionsType(Integer questionsType) {
     this.questionsType = questionsType;
   }
 
@@ -49,20 +49,20 @@ public class Crmquestions {
   }
 
 
-  public long getQuestiuserid() {
+  public Integer getQuestiuserid() {
     return questiuserid;
   }
 
-  public void setQuestiuserid(long questiuserid) {
+  public void setQuestiuserid(Integer questiuserid) {
     this.questiuserid = questiuserid;
   }
 
 
-  public long getQuestiuserleveid() {
+  public Integer getQuestiuserleveid() {
     return questiuserleveid;
   }
 
-  public void setQuestiuserleveid(long questiuserleveid) {
+  public void setQuestiuserleveid(Integer questiuserleveid) {
     this.questiuserleveid = questiuserleveid;
   }
 
@@ -76,11 +76,11 @@ public class Crmquestions {
   }
 
 
-  public long getResponsesNum() {
+  public Integer getResponsesNum() {
     return responsesNum;
   }
 
-  public void setResponsesNum(long responsesNum) {
+  public void setResponsesNum(Integer responsesNum) {
     this.responsesNum = responsesNum;
   }
 

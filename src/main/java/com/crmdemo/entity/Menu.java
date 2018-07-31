@@ -3,21 +3,21 @@ package com.crmdemo.entity;
 
 public class Menu {
 
-  private long menuId;
+  private Integer menuId;
   private String menuName;
   private String subMenuRemark;
   private String menuUrl;
-  private long parentId;
-  private long isMenu;
-  private long subParentId;
+  private Integer parentId;
+  private Integer isMenu;
+  private Integer subParentId;
   private String roleValue;
 
 
-  public long getMenuId() {
+  public Integer getMenuId() {
     return menuId;
   }
 
-  public void setMenuId(long menuId) {
+  public void setMenuId(Integer menuId) {
     this.menuId = menuId;
   }
 
@@ -49,29 +49,29 @@ public class Menu {
   }
 
 
-  public long getParentId() {
+  public Integer getParentId() {
     return parentId;
   }
 
-  public void setParentId(long parentId) {
+  public void setParentId(Integer parentId) {
     this.parentId = parentId;
   }
 
 
-  public long getIsMenu() {
+  public Integer getIsMenu() {
     return isMenu;
   }
 
-  public void setIsMenu(long isMenu) {
+  public void setIsMenu(Integer isMenu) {
     this.isMenu = isMenu;
   }
 
 
-  public long getSubParentId() {
+  public Integer getSubParentId() {
     return subParentId;
   }
 
-  public void setSubParentId(long subParentId) {
+  public void setSubParentId(Integer subParentId) {
     this.subParentId = subParentId;
   }
 

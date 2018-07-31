@@ -3,7 +3,7 @@ package com.crmdemo.entity;
 
 public class Crmcustomeradddata {
 
-  private long id;
+  private Integer id;
   private String chinesename;
   private String englishname;
   private String departments;
@@ -37,8 +37,8 @@ public class Crmcustomeradddata {
   private String fax;
   private String year;
   private String characteristicProducts;
-  private long totalNumber;
-  private long grossIncome;
+  private Integer totalNumber;
+  private Integer grossIncome;
   private String zipCode;
   private String companyAddress;
   private String companyWebsite;
@@ -56,11 +56,11 @@ public class Crmcustomeradddata {
   private java.sql.Timestamp createTime;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -362,20 +362,20 @@ public class Crmcustomeradddata {
   }
 
 
-  public long getTotalNumber() {
+  public Integer getTotalNumber() {
     return totalNumber;
   }
 
-  public void setTotalNumber(long totalNumber) {
+  public void setTotalNumber(Integer totalNumber) {
     this.totalNumber = totalNumber;
   }
 
 
-  public long getGrossIncome() {
+  public Integer getGrossIncome() {
     return grossIncome;
   }
 
-  public void setGrossIncome(long grossIncome) {
+  public void setGrossIncome(Integer grossIncome) {
     this.grossIncome = grossIncome;
   }
 

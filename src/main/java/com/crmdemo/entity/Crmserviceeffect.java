@@ -3,47 +3,47 @@ package com.crmdemo.entity;
 
 public class Crmserviceeffect {
 
-  private long serviceEffectId;
-  private long exposureRate;
-  private long searchDiscRate;
-  private long interactionRate;
+  private Integer serviceEffectId;
+  private Integer exposureRate;
+  private Integer searchDiscRate;
+  private Integer interactionRate;
   private String impressionDrawing;
   private java.sql.Timestamp updateTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getServiceEffectId() {
+  public Integer getServiceEffectId() {
     return serviceEffectId;
   }
 
-  public void setServiceEffectId(long serviceEffectId) {
+  public void setServiceEffectId(Integer serviceEffectId) {
     this.serviceEffectId = serviceEffectId;
   }
 
 
-  public long getExposureRate() {
+  public Integer getExposureRate() {
     return exposureRate;
   }
 
-  public void setExposureRate(long exposureRate) {
+  public void setExposureRate(Integer exposureRate) {
     this.exposureRate = exposureRate;
   }
 
 
-  public long getSearchDiscRate() {
+  public Integer getSearchDiscRate() {
     return searchDiscRate;
   }
 
-  public void setSearchDiscRate(long searchDiscRate) {
+  public void setSearchDiscRate(Integer searchDiscRate) {
     this.searchDiscRate = searchDiscRate;
   }
 
 
-  public long getInteractionRate() {
+  public Integer getInteractionRate() {
     return interactionRate;
   }
 
-  public void setInteractionRate(long interactionRate) {
+  public void setInteractionRate(Integer interactionRate) {
     this.interactionRate = interactionRate;
   }
 

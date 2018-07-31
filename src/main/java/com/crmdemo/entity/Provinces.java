@@ -3,25 +3,25 @@ package com.crmdemo.entity;
 
 public class Provinces {
 
-  private long id;
-  private long provinceid;
+  private Integer id;
+  private Integer provinceid;
   private String province;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getProvinceid() {
+  public Integer getProvinceid() {
     return provinceid;
   }
 
-  public void setProvinceid(long provinceid) {
+  public void setProvinceid(Integer provinceid) {
     this.provinceid = provinceid;
   }
 

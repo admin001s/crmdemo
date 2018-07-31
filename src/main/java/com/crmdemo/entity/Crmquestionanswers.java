@@ -3,39 +3,39 @@ package com.crmdemo.entity;
 
 public class Crmquestionanswers {
 
-  private long id;
-  private long replyType;
-  private long replyFatherId;
+  private Integer id;
+  private Integer replyType;
+  private Integer replyFatherId;
   private String replycontent;
   private String replyuserleveid;
   private String questiuserleveid;
   private java.sql.Timestamp createTime;
-  private long replyuserId;
+  private Integer replyuserId;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getReplyType() {
+  public Integer getReplyType() {
     return replyType;
   }
 
-  public void setReplyType(long replyType) {
+  public void setReplyType(Integer replyType) {
     this.replyType = replyType;
   }
 
 
-  public long getReplyFatherId() {
+  public Integer getReplyFatherId() {
     return replyFatherId;
   }
 
-  public void setReplyFatherId(long replyFatherId) {
+  public void setReplyFatherId(Integer replyFatherId) {
     this.replyFatherId = replyFatherId;
   }
 
@@ -76,11 +76,11 @@ public class Crmquestionanswers {
   }
 
 
-  public long getReplyuserId() {
+  public Integer getReplyuserId() {
     return replyuserId;
   }
 
-  public void setReplyuserId(long replyuserId) {
+  public void setReplyuserId(Integer replyuserId) {
     this.replyuserId = replyuserId;
   }
 

@@ -3,18 +3,18 @@ package com.crmdemo.entity;
 
 public class Crmproductservice {
 
-  private long crmProductServiceId;
+  private Integer crmProductServiceId;
   private String name;
   private String detail;
   private java.sql.Timestamp updateTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getCrmProductServiceId() {
+  public Integer getCrmProductServiceId() {
     return crmProductServiceId;
   }
 
-  public void setCrmProductServiceId(long crmProductServiceId) {
+  public void setCrmProductServiceId(Integer crmProductServiceId) {
     this.crmProductServiceId = crmProductServiceId;
   }
 

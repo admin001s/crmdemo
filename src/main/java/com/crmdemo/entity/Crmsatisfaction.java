@@ -3,48 +3,48 @@ package com.crmdemo.entity;
 
 public class Crmsatisfaction {
 
-  private long id;
-  private long userId;
-  private long satisfiStatus;
-  private long satisfiReason;
+  private Integer id;
+  private Integer userId;
+  private Integer satisfiStatus;
+  private Integer satisfiReason;
   private String otherReason;
-  private long disposeStatus;
+  private Integer disposeStatus;
   private java.sql.Timestamp updateTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
 
-  public long getSatisfiStatus() {
+  public Integer getSatisfiStatus() {
     return satisfiStatus;
   }
 
-  public void setSatisfiStatus(long satisfiStatus) {
+  public void setSatisfiStatus(Integer satisfiStatus) {
     this.satisfiStatus = satisfiStatus;
   }
 
 
-  public long getSatisfiReason() {
+  public Integer getSatisfiReason() {
     return satisfiReason;
   }
 
-  public void setSatisfiReason(long satisfiReason) {
+  public void setSatisfiReason(Integer satisfiReason) {
     this.satisfiReason = satisfiReason;
   }
 
@@ -58,11 +58,11 @@ public class Crmsatisfaction {
   }
 
 
-  public long getDisposeStatus() {
+  public Integer getDisposeStatus() {
     return disposeStatus;
   }
 
-  public void setDisposeStatus(long disposeStatus) {
+  public void setDisposeStatus(Integer disposeStatus) {
     this.disposeStatus = disposeStatus;
   }
 

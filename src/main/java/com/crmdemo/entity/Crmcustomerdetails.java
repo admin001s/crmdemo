@@ -3,30 +3,30 @@ package com.crmdemo.entity;
 
 public class Crmcustomerdetails {
 
-  private long id;
-  private long crmcustomersinfoId;
+  private Integer id;
+  private Integer crmcustomersinfoId;
   private String chatrecord;
   private String customername;
-  private long followupId;
-  private long followupStatus;
+  private Integer followupId;
+  private Integer followupStatus;
   private java.sql.Timestamp followupTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getCrmcustomersinfoId() {
+  public Integer getCrmcustomersinfoId() {
     return crmcustomersinfoId;
   }
 
-  public void setCrmcustomersinfoId(long crmcustomersinfoId) {
+  public void setCrmcustomersinfoId(Integer crmcustomersinfoId) {
     this.crmcustomersinfoId = crmcustomersinfoId;
   }
 
@@ -49,20 +49,20 @@ public class Crmcustomerdetails {
   }
 
 
-  public long getFollowupId() {
+  public Integer getFollowupId() {
     return followupId;
   }
 
-  public void setFollowupId(long followupId) {
+  public void setFollowupId(Integer followupId) {
     this.followupId = followupId;
   }
 
 
-  public long getFollowupStatus() {
+  public Integer getFollowupStatus() {
     return followupStatus;
   }
 
-  public void setFollowupStatus(long followupStatus) {
+  public void setFollowupStatus(Integer followupStatus) {
     this.followupStatus = followupStatus;
   }
 

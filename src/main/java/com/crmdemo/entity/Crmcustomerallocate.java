@@ -3,36 +3,36 @@ package com.crmdemo.entity;
 
 public class Crmcustomerallocate {
 
-  private long id;
-  private long userId;
-  private long beiuserId;
+  private Integer id;
+  private Integer userId;
+  private Integer beiuserId;
   private java.sql.Timestamp distributionTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getUserId() {
+  public Integer getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(Integer userId) {
     this.userId = userId;
   }
 
 
-  public long getBeiuserId() {
+  public Integer getBeiuserId() {
     return beiuserId;
   }
 
-  public void setBeiuserId(long beiuserId) {
+  public void setBeiuserId(Integer beiuserId) {
     this.beiuserId = beiuserId;
   }
 

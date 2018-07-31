@@ -3,43 +3,43 @@ package com.crmdemo.entity;
 
 public class Crmcustomerorder {
 
-  private long id;
-  private long customersId;
-  private long signingfollowupId;
+  private Integer id;
+  private Integer customersId;
+  private Integer signingfollowupId;
   private String followupHierarchy;
-  private long signingStatus;
+  private Integer signingStatus;
   private java.sql.Timestamp signingTime;
-  private long reviewerId;
+  private Integer reviewerId;
   private String reviewerLevel;
-  private long isdelete;
-  private long signingtypeId;
+  private Integer isdelete;
+  private Integer signingtypeId;
   private java.sql.Timestamp yesSigningTime;
   private java.sql.Timestamp createTime;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getCustomersId() {
+  public Integer getCustomersId() {
     return customersId;
   }
 
-  public void setCustomersId(long customersId) {
+  public void setCustomersId(Integer customersId) {
     this.customersId = customersId;
   }
 
 
-  public long getSigningfollowupId() {
+  public Integer getSigningfollowupId() {
     return signingfollowupId;
   }
 
-  public void setSigningfollowupId(long signingfollowupId) {
+  public void setSigningfollowupId(Integer signingfollowupId) {
     this.signingfollowupId = signingfollowupId;
   }
 
@@ -53,11 +53,11 @@ public class Crmcustomerorder {
   }
 
 
-  public long getSigningStatus() {
+  public Integer getSigningStatus() {
     return signingStatus;
   }
 
-  public void setSigningStatus(long signingStatus) {
+  public void setSigningStatus(Integer signingStatus) {
     this.signingStatus = signingStatus;
   }
 
@@ -71,11 +71,11 @@ public class Crmcustomerorder {
   }
 
 
-  public long getReviewerId() {
+  public Integer getReviewerId() {
     return reviewerId;
   }
 
-  public void setReviewerId(long reviewerId) {
+  public void setReviewerId(Integer reviewerId) {
     this.reviewerId = reviewerId;
   }
 
@@ -89,20 +89,20 @@ public class Crmcustomerorder {
   }
 
 
-  public long getIsdelete() {
+  public Integer getIsdelete() {
     return isdelete;
   }
 
-  public void setIsdelete(long isdelete) {
+  public void setIsdelete(Integer isdelete) {
     this.isdelete = isdelete;
   }
 
 
-  public long getSigningtypeId() {
+  public Integer getSigningtypeId() {
     return signingtypeId;
   }
 
-  public void setSigningtypeId(long signingtypeId) {
+  public void setSigningtypeId(Integer signingtypeId) {
     this.signingtypeId = signingtypeId;
   }
 
