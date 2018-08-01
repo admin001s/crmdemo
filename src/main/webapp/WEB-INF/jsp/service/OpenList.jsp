@@ -488,7 +488,6 @@
 <script type="text/javascript">
     jQuery(function ($) {
         var container = $('#select-product-p1123');
-
         function initTable(name) {
             container.find('#table').bootstrapTable('destroy');
             var options = {
@@ -573,7 +572,6 @@
                     }],
                 onPostBody: function (data, row) {
                     container.find('.fixed-table-toolbar').hide();
-                    // initButton();
                     container.find('.bootstrap-table').height('350');
                 },
 
@@ -597,18 +595,35 @@
                 var width = table_div.parent().width();
                 table_div.height('350');
                 table_div.width(width);
-                // initTableFootWidth();
             }, 300);
         }
 
         initTable(null);
 
         $(document).on("click", ".caozuo", function () {
+            $("input[name='checkAll']:checked").prop("checked",false);
+            $("input[name='checkItem']:checked").prop("checked",false);
             $("#id").val($(this).attr("data-id"));
-                $('#modal-table').modal({
-                    show: true,
-                    keyboard: true
-                });
+            $('#modal-table').modal({
+                show: true,
+                keyboard: true
+            });
+            $.ajax({
+                url : "/yesOpenserviceService",
+                data : {
+                    crmcustomersinfoid: $("#id").val(),
+                },
+                type : "post",
+                dataType : "JSON",
+                success : function(data) {
+
+                    $(data).each(function(i,val) {
+                        $(".modal-body :checkbox[value='"+val+"']").prop("checked",true);
+                    });
+                },
+                error : function(errMsg) {}
+            });
+
             });
 
       //点击开通
@@ -659,7 +674,7 @@
             $checkAllTh.click(function(){
                 $(this).find('input').click();
             });
-            var $tbr = $('table tbody tr');
+            var $tbr = $('.modal-body table tbody tr');
             /*每一行都在最前面插入一个选中复选框的单元格*/
             /*点击每一行的选中复选框时*/
             $tbr.find('input').click(function(event){

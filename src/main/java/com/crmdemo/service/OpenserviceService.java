@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OpenserviceService {
     //查询客户开通的服务
-    Openservice selectOpenservice(String crmcustomersinfoid);
+    List<Openservice> selectOpenservice(String crmcustomersinfoid);
 
     //客户开通的服务
     Integer insertOpenservice(Openservice openservice);

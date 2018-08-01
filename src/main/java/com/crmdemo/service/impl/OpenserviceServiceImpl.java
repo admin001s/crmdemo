@@ -19,8 +19,8 @@ public class OpenserviceServiceImpl implements OpenserviceService {
     @Resource
     private OpenserviceDao openserviceDao;
     @Override
-    public Openservice selectOpenservice(String crmcustomersinfoid) {
-       Openservice openservice=null;
+    public List<Openservice> selectOpenservice(String crmcustomersinfoid) {
+        List<Openservice> openservice=null;
         try {
             openservice=openserviceDao.OPENSERVICE(crmcustomersinfoid);
             logger.debug("do selectOpenservice()------------------------------");
