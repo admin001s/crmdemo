@@ -53,7 +53,7 @@
         <!-- /section:basics/sidebar.mobile.toggle -->
         <div class="navbar-header pull-left">
             <!-- #section:basics/navbar.layout.brand -->
-            <a href="index.html" class="navbar-brand">
+            <a href="doindex.do" class="navbar-brand">
                 <small>
                     <img src="assets/avatars/logo.png" alt="" />
                 </small>
@@ -203,7 +203,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="/logout.do">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 登出
                             </a>
@@ -217,3 +217,6 @@
         <!-- /section:basics/navbar.dropdown -->
     </div><!-- /.navbar-container -->
 </div>
+<script type="text/javascript">
+
+</script>

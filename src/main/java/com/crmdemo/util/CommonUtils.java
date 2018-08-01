@@ -3,9 +3,11 @@ package com.crmdemo.util;
 
 //import com.bali.onbase.web.model.helperclass.LoginBuyerInfo;
 //import com.bali.onbase.web.vo.BuyerInfoVo;
+import com.alibaba.fastjson.JSON;
 import com.crmdemo.entity.Crminfo;
 import org.apache.commons.lang3.StringUtils;
-        import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.util.Base64Utils;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import sun.misc.BASE64Encoder;
 
 import javax.net.ssl.*;
@@ -630,41 +632,29 @@ public class CommonUtils {
     }
 
 
-//    public static Boolean saveLoginCookie(HttpServletRequest request, HttpServletResponse response, LoginBuyerInfo loginInfo) {
-//        Boolean flag = false;// 标志是否成功保存会话信息
-//        byte[] buf = null;
-//        try {
-//            loginInfo.setUserName(CommonUtils.gbEncoding(loginInfo.getUserName()));
-//            String strLoginInfoJSON = JSON.toJSONString(loginInfo);
-//            byte[] bytes = strLoginInfoJSON.getBytes();
-//            String Base64Code = Base64Utils.encodeToString(bytes);
-//            CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, Base64Code, "/", 60 * 60 * 24 * 30); //cookie保存30天
-//            flag = true;
-//        } catch (Exception ex) {
-//            flag = false;
-//        }
-//        return flag;
-//    }
+    public static Boolean saveLoginCookie(HttpServletRequest request, HttpServletResponse response, Crminfo loginInfo) {
+        Boolean flag = false;// 标志是否成功保存会话信息
+        byte[] buf = null;
+        try {
+            loginInfo.setUserName(CommonUtils.gbEncoding(loginInfo.getUserName()));
+            String strLoginInfoJSON = JSON.toJSONString(loginInfo);
+            byte[] bytes = strLoginInfoJSON.getBytes();
+            String Base64Code = Base64Utils.encodeToString(bytes);
+            CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, Base64Code, "/", 60 * 60 * 24 * 30); //cookie保存30天
+            flag = true;
+        } catch (Exception ex) {
+            flag = false;
+        }
+        return flag;
+    }
 
 
-//    public static Boolean saveLoginInfoToCookie(HttpServletRequest request, HttpServletResponse response, BuyerInfoVo buyerInfoVoAndRole) {
-//        //   CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, username, "/", 60 * 60 * 24 * 365); // 保存一年的时间
-//        boolean saveFlag = false;
-//        LoginBuyerInfo loginBuyerInfo = new LoginBuyerInfo();
-//        loginBuyerInfo.setBuyerId(buyerInfoVoAndRole.getUserid());
-//        loginBuyerInfo.setRoleId(buyerInfoVoAndRole.getRoleid());
-//        loginBuyerInfo.setEnglishname(buyerInfoVoAndRole.getEnglishname());
-//        loginBuyerInfo.setChinesename(buyerInfoVoAndRole.getChinesename());
-//        loginBuyerInfo.setUserName(buyerInfoVoAndRole.getUsername());
-//        if (buyerInfoVoAndRole.getBuyerRole() != null && buyerInfoVoAndRole.getRoleid() != null) {
-//            loginBuyerInfo.setRolelevelrelationship(buyerInfoVoAndRole.getBuyerRole().getRolelevelrelationship());
-//            loginBuyerInfo.setRights(buyerInfoVoAndRole.getBuyerRole().getRights());
-//            loginBuyerInfo.setRolename(buyerInfoVoAndRole.getBuyerRole().getRolename());
-//            loginBuyerInfo.setRoletypeid(buyerInfoVoAndRole.getBuyerRole().getRoletypeid());
-//        }
-//        saveFlag = CommonUtils.saveLoginCookie(request, response, loginBuyerInfo);
-//        return saveFlag;
-//    }
+    public static Boolean saveLoginInfoToCookie(HttpServletRequest request, HttpServletResponse response, Crminfo buyerInfoVoAndRole) {
+        //   CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, username, "/", 60 * 60 * 24 * 365); // 保存一年的时间
+        boolean saveFlag = false;
+        saveFlag = CommonUtils.saveLoginCookie(request, response, buyerInfoVoAndRole);
+        return saveFlag;
+    }
 
     public static String gbEncoding(final String gbString) {
         char[] utfBytes = gbString.toCharArray();

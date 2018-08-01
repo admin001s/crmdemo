@@ -5,7 +5,7 @@
         insert into crmcustomersinfo
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="customersId != null">
-                customersId
+                customersId,
             </if>
             <if test="customersName != null">
                 customersName,

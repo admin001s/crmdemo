@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.CrmagentsinfoDao">
+    <insert id="insertCrmagentsinfo">
+        insert into crmagentsinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="agentsId != null">
+                agentsId,
+            </if>
+            <if test="agentRelationship != null">
+                agentRelationship,
+            </if>
+            <if test="agentaddress != null">
+                agentaddress,
+            </if>
+            <if test="agentaccount != null">
+                agentaccount,
+            </if>
+            <if test="agentMessage != null">
+                agentMessage,
+            </if>
+            <if test="reviewerId != null">
+                reviewerId,
+            </if>
+            <if test="isdelete != null">
+                isdelete,
+            </if>
+            <if test="usertypelevel != null">
+                usertypelevel,
+            </if>
+            <if test="agentphone != null">
+                agentphone,
+            </if>
+            <if test="agentQq != null">
+                agentQq,
+            </if>
+            <if test="agentName != null">
+                agentName,
+            </if>
+            <if test="agentemail != null">
+                agentemail,
+            </if>
+            <if test="agentParentid != null">
+                agentParentid,
+            </if>
+            <if test="agentsex != null">
+                agentsex,
+            </if>
+            <if test="agentCharacterrelationship != null">
+                agentCharacterrelationship,
+            </if>
+            <if test="addCreateTime != null">
+                addCreateTime,
+            </if>
+            <if test="updatetime != null">
+                updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="agentsId != null">
+                #{agentsId},
+            </if>
+            <if test="agentRelationship != null">
+                #{agentRelationship},
+            </if>
+            <if test="agentaddress != null">
+                #{agentaddress},
+            </if>
+            <if test="agentaccount != null">
+                #{agentaccount},
+            </if>
+            <if test="agentMessage != null">
+                #{agentMessage},
+            </if>
+            <if test="reviewerId != null">
+                #{reviewerId},
+            </if>
+            <if test="isdelete != null">
+                #{isdelete},
+            </if>
+            <if test="usertypelevel != null">
+                #{usertypelevel},
+            </if>
+            <if test="agentphone != null">
+                #{agentphone},
+            </if>
+            <if test="agentQq != null">
+                #{agentQq},
+            </if>
+            <if test="agentName != null">
+                #{agentName},
+            </if>
+            <if test="agentemail != null">
+                #{agentemail},
+            </if>
+            <if test="agentParentid != null">
+                #{agentParentid},
+            </if>
+            <if test="agentsex != null">
+                #{agentsex},
+            </if>
+            <if test="agentCharacterrelationship != null">
+                #{agentCharacterrelationship},
+            </if>
+            <if test="addCreateTime != null">
+                #{addCreateTime},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectCrmagentsinfoList" resultType="Crmagentsinfo">
+        select * from crmagentsinfo
+        where 1=1
+        <if test="reviewerId !=null">
+            and  reviewerId=#{reviewerId}
+        </if>
+    </select>
+</mapper>

@@ -8,7 +8,7 @@ public class Crmagentsinfo {
   private Integer agentRelationship;
   private String agentaddress;
   private Integer agentaccount;
-  private java.sql.Timestamp agentMessage;
+  private String agentMessage;
   private Integer reviewerId;
   private Integer isdelete;
   private String usertypelevel;
@@ -68,11 +68,11 @@ public class Crmagentsinfo {
   }
 
 
-  public java.sql.Timestamp getAgentMessage() {
+  public String getAgentMessage() {
     return agentMessage;
   }
 
-  public void setAgentMessage(java.sql.Timestamp agentMessage) {
+  public void setAgentMessage(String agentMessage) {
     this.agentMessage = agentMessage;
   }
 

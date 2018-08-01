@@ -273,7 +273,7 @@
                 success : function(data) {
                     if (data.is) {
                         toastr.success(data.tips);
-                        window.location.href="/doindex.do";
+                        window.location.href="/index.do";
                     } else {
                         toastr.error(data.tips);
                     }
