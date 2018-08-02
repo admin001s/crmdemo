@@ -117,4 +117,68 @@
             and  reviewerId=#{reviewerId}
         </if>
     </select>
+    <update id="updateCrmcustomersinfo">
+        update crmagentsinfo
+        <set>
+            <if test="agentRelationship != null">
+                agentRelationship = #{agentRelationship},
+            </if>
+            <if test="agentaddress != null">
+                agentaddress = #{agentaddress},
+            </if>
+            <if test="agentaccount != null">
+                agentaccount = #{agentaccount},
+            </if>
+            <if test="agentMessage != null">
+                agentMessage = #{agentMessage},
+            </if>
+            <if test="reviewerId != null">
+                reviewerId = #{reviewerId},
+            </if>
+            <if test="isdelete != null">
+                isdelete = #{isdelete},
+            </if>
+            <if test="usertypelevel != null">
+                usertypelevel =
+                #{usertypelevel},
+            </if>
+            <if test="agentphone != null">
+                agentphone =
+                #{agentphone},
+            </if>
+            <if test="agentQq != null">
+                agentQq =
+                #{agentQq},
+            </if>
+            <if test="agentName != null">
+                agentName =
+                #{agentName},
+            </if>
+            <if test="agentemail != null">
+                agentemail =
+                #{agentemail},
+            </if>
+            <if test="agentParentid != null">
+                agentParentid =
+                #{agentParentid},
+            </if>
+            <if test="agentsex != null">
+                agentsex =
+                #{agentsex},
+            </if>
+            <if test="agentCharacterrelationship != null">
+                agentCharacterrelationship =
+                #{agentCharacterrelationship},
+            </if>
+            <if test="addCreateTime != null">
+                addCreateTime =
+                #{addCreateTime},
+            </if>
+            <if test="updatetime != null">
+                updatetime =
+                #{updatetime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

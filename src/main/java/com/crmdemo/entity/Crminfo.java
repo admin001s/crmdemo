@@ -11,7 +11,15 @@ public class Crminfo {
   private String chineseName;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
+  private String userArrangement;
 
+  public String getUserArrangement() {
+    return userArrangement;
+  }
+
+  public void setUserArrangement(String userArrangement) {
+    this.userArrangement = userArrangement;
+  }
 
   public Integer getUserId() {
     return userId;

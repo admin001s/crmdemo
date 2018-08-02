@@ -14,8 +14,20 @@ import java.util.List;
 @Transactional
 public class CrminfoServiceImpl implements CrminfoService {
 
+
     @Resource
     CrminfoDao crminfoDao;
+    @Override
+    public List<Crminfo> selectCrminfoList(Crminfo crminfo) {
+        List<Crminfo> crminfoList=null;
+        try {
+            crminfoList=crminfoDao.selectCrminfoList(crminfo);
+        }catch (Exception e){
+
+        }
+        return crminfoList;
+    }
+
     @Override
     public Crminfo selectLogin(Crminfo crminfo) {
         Crminfo crminfo1=null;

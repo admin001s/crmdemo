@@ -1,6 +1,8 @@
 package com.crmdemo.controller;
 
+import com.crmdemo.entity.Crminfo;
 import com.crmdemo.service.ProvincesService;
+import com.crmdemo.util.CommonUtils;
 import com.crmdemo.util.CookieUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,10 +25,11 @@ public class JspController {
      * @return
      */
     @RequestMapping("index.do")
-    public String index(HttpServletRequest request) {
+    public String index(HttpServletRequest request,HttpServletResponse response) {
         String strCookieValue = CookieUtils.getCookie(request, CookieUtils.COOKIE_NAME_LOGININFO);
         if (strCookieValue != null && !strCookieValue.equals("")) {
-            return "index";
+            request.getSession().setAttribute("user",CommonUtils.getUser(request,response));
+            return "common/left";
         } else {
             // 未登陆
             return "login";
@@ -71,8 +74,14 @@ public class JspController {
      * @return
      */
     @RequestMapping("agent.do")
-    public String agent() {
-        return "crm/agent";
+    public String agent(HttpServletRequest request,HttpServletResponse response) {
+        Crminfo crminfo=CommonUtils.getUser(request,response);
+        if(crminfo.getRoleId()!=5 && crminfo.getRoleId()!=6){
+            return "crm/agent";
+        }else {
+            return "noJurisdiction";
+        }
+
     }
 
     /**
@@ -88,7 +97,6 @@ public class JspController {
     @RequestMapping(value = "/logout.do")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
         String param = request.getParameter("param");
-
         HttpSession session = request.getSession();
         session.invalidate();
         CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, "", "/", -60 * 60 * 24 * 30);

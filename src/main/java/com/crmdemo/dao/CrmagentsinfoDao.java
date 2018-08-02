@@ -9,4 +9,5 @@ import java.util.List;
 public interface CrmagentsinfoDao {
     Integer insertCrmagentsinfo(Crmagentsinfo crmagentsinfo);
     List<Crmagentsinfo> selectCrmagentsinfoList(Crmagentsinfo crmagentsinfo);
+    Integer updateCrmcustomersinfo(Crmagentsinfo crmagentsinfo);
 }

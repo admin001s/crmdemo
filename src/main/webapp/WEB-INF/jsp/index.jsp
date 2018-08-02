@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@include file="/WEB-INF/jsp/common/head.jsp"%>
-<%@include file="/WEB-INF/jsp/common/left.jsp"%>
 
     <!-- /section:basics/sidebar -->
     <div class="main-content">
@@ -45,5 +43,3 @@
             </div><!-- /.page-content-area -->
         </div><!-- /.page-content -->
     </div><!-- /.main-content -->
-
-<%@include file="/WEB-INF/jsp/common/footer.jsp"%>

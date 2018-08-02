@@ -6,6 +6,9 @@ package com.crmdemo.util;
 import com.alibaba.fastjson.JSON;
 import com.crmdemo.entity.Crminfo;
 import org.apache.commons.lang3.StringUtils;
+import org.jasig.cas.client.authentication.AttributePrincipal;
+import org.jasig.cas.client.util.AbstractCasFilter;
+import org.jasig.cas.client.validation.Assertion;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import sun.misc.BASE64Encoder;
@@ -35,8 +38,8 @@ import java.util.zip.GZIPInputStream;
  */
 public class CommonUtils {
 
-    public static Crminfo getUser(HttpSession session){
-        return  (Crminfo)session.getAttribute("user");
+    public static Crminfo getUser(HttpServletRequest request,HttpServletResponse response){
+        return  CommonUtils.GetLoginInfo(request, response);
     }
 
     /**
@@ -288,136 +291,136 @@ public class CommonUtils {
      * @param request
      * @return
      */
-//    private static LoginBuyerInfo GetLoginInfo(HttpServletRequest request) {
-//        /*    HttpServletResponse resp = (HttpServletResponse)response;
-//        HttpSession cassession = request.getSession();
-//        String username = "AA";
-//        if (cassession != null) {
-//            Object obj = cassession.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
-//            if (obj != null) {
-//                Assertion assertion = (Assertion)obj;
-//                AttributePrincipal p= assertion.getPrincipal();
-//                username = p.getName();
-//            }  }
-//        */
-//
-//        LoginBuyerInfo info = new LoginBuyerInfo();
-//
-//        String strCookieValue = CookieUtils.getCookie(request, CookieUtils.COOKIE_NAME_LOGININFO);
-//        String strBase64Code = "";
-//
-//        try {
-//            byte[] bytes = Base64Utils.decodeFromString(strCookieValue);
-//            strBase64Code = new String(bytes);
-//            info = JSON.parseObject(strBase64Code, LoginBuyerInfo.class);
-//            if (info != null) {
-//                info.setUserName(CommonUtils.decodeUnicode(info.getUserName()));
-//            }
-//        } catch (Exception ex) {
-//            info = null;
-//        }
-//        return info;
-//    }
+    private static Crminfo GetLoginInfo(HttpServletRequest request) {
+        /*    HttpServletResponse resp = (HttpServletResponse)response;
+        HttpSession cassession = request.getSession();
+        String username = "AA";
+        if (cassession != null) {
+            Object obj = cassession.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+            if (obj != null) {
+                Assertion assertion = (Assertion)obj;
+                AttributePrincipal p= assertion.getPrincipal();
+                username = p.getName();
+            }  }
+        */
+
+        Crminfo info = new Crminfo();
+
+        String strCookieValue = CookieUtils.getCookie(request, CookieUtils.COOKIE_NAME_LOGININFO);
+        String strBase64Code = "";
+
+        try {
+            byte[] bytes = Base64Utils.decodeFromString(strCookieValue);
+            strBase64Code = new String(bytes);
+            info = JSON.parseObject(strBase64Code, Crminfo.class);
+            if (info != null) {
+                info.setUserName(CommonUtils.decodeUnicode(info.getUserName()));
+            }
+        } catch (Exception ex) {
+            info = null;
+        }
+        return info;
+    }
 
 
-//    public static LoginBuyerInfo GetLoginInfo(HttpServletRequest request, HttpServletResponse response) {
-//        LoginBuyerInfo info = new LoginBuyerInfo();
-//        HttpSession cassession = request.getSession();
-//        String username = "";
-//        //已经通过认证验证了
-//
-//        String strCookieValue = CookieUtils.getCookie(request, CookieUtils.COOKIE_NAME_LOGININFO);
-//        if (strCookieValue != null && !"".equals(strCookieValue)) {
-//            String strBase64Code = "";
-//            try {
-//                byte[] bytes = Base64Utils.decodeFromString(strCookieValue);
-//                strBase64Code = new String(bytes);
-//                info = JSON.parseObject(strBase64Code, LoginBuyerInfo.class);
-//                if (info != null) {
-//                    info.setUserName(CommonUtils.decodeUnicode(info.getUserName()));
-//
-//                }
-//            } catch (Exception ex) {
-//                info = null;
-//            }
-//        } else {
-//            Object obj = cassession.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
-//            if (obj != null) {
-//                Assertion assertion = (Assertion) obj;
-//                AttributePrincipal p = assertion.getPrincipal();
-//                username = p.getName();
-//
-//                    /*String email = "";
-//                    try {
-//                        email = String.valueOf(p.getAttributes().get("email"));
-//                    } catch (Exception ex) {
-//                        email = "";
-//                    }*/
-//
-//                long buyerid = 0L;
-//                try {
-//                    buyerid = Long.parseLong(String.valueOf(p.getAttributes().get("buyerid")));
-//                } catch (Exception ex) {
-//                    buyerid = 0;
-//                }
-//
-//
-//                String chiesename = "";
-//                try {
-//                    chiesename = String.valueOf(p.getAttributes().get("chiesename"));
-//                } catch (Exception ex) {
-//                    chiesename = "";
-//                }
-//
-//                String englishname = "";
-//                try {
-//                    englishname = String.valueOf(p.getAttributes().get("englishname"));
-//                } catch (Exception ex) {
-//                    englishname = "";
-//                }
-//
-//
-//                String userName = "";
-//                try {
-//                    userName = CommonUtils.decodeUnicode(URLDecoder.decode(String.valueOf(p.getAttributes().get("username")), "utf-8"));
-//                } catch (Exception ex) {
-//                    userName = "";
-//                }
-//
-//                String lastname = "";
-//                try {
-//                    lastname = CommonUtils.decodeUnicode(URLDecoder.decode(String.valueOf(p.getAttributes().get("lastname")), "utf-8"));
-//                } catch (Exception ex) {
-//                    lastname = "";
-//                }
-//                    /*
-//                    String telephone = "";
-//                    try {
-//                        telephone = String.valueOf(p.getAttributes().get("telephone"));
-//                    } catch (Exception ex) {
-//                        telephone = "";
-//                    }
-//
-//                    int status = 0;
-//                    try {
-//                        status = Integer.parseInt(String.valueOf(p.getAttributes().get("status")));
-//                    } catch (Exception ex) {
-//                        status = 0;
-//                    }*/
-//
-//                String ip = "";
-//                try {
-//                    ip = String.valueOf(p.getAttributes().get("ip"));
-//                } catch (Exception ex) {
-//                    ip = "";
-//                }
-//
-//                String createddate = "";
-//                try {
-//                    createddate = String.valueOf(p.getAttributes().get("createddate"));
-//                } catch (Exception ex) {
-//                    createddate = "";
-//                }
+    public static Crminfo GetLoginInfo(HttpServletRequest request, HttpServletResponse response) {
+        Crminfo info = new Crminfo();
+        HttpSession cassession = request.getSession();
+        String username = "";
+        //已经通过认证验证了
+
+        String strCookieValue = CookieUtils.getCookie(request, CookieUtils.COOKIE_NAME_LOGININFO);
+        if (strCookieValue != null && !"".equals(strCookieValue)) {
+            String strBase64Code = "";
+            try {
+                byte[] bytes = Base64Utils.decodeFromString(strCookieValue);
+                strBase64Code = new String(bytes);
+                info = JSON.parseObject(strBase64Code, Crminfo.class);
+                if (info != null) {
+                    info.setUserName(CommonUtils.decodeUnicode(info.getUserName()));
+
+                }
+            } catch (Exception ex) {
+                info = null;
+            }
+        } else {
+            Object obj = cassession.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+            if (obj != null) {
+                Assertion assertion = (Assertion) obj;
+                AttributePrincipal p = assertion.getPrincipal();
+                username = p.getName();
+
+                    /*String email = "";
+                    try {
+                        email = String.valueOf(p.getAttributes().get("email"));
+                    } catch (Exception ex) {
+                        email = "";
+                    }*/
+
+                long buyerid = 0L;
+                try {
+                    buyerid = Long.parseLong(String.valueOf(p.getAttributes().get("userId")));
+                } catch (Exception ex) {
+                    buyerid = 0;
+                }
+
+
+                String chiesename = "";
+                try {
+                    chiesename = String.valueOf(p.getAttributes().get("chineseName"));
+                } catch (Exception ex) {
+                    chiesename = "";
+                }
+
+                String englishname = "";
+                try {
+                    englishname = String.valueOf(p.getAttributes().get("englishName"));
+                } catch (Exception ex) {
+                    englishname = "";
+                }
+
+
+                String userName = "";
+                try {
+                    userName = CommonUtils.decodeUnicode(URLDecoder.decode(String.valueOf(p.getAttributes().get("userName")), "utf-8"));
+                } catch (Exception ex) {
+                    userName = "";
+                }
+
+                String lastname = "";
+                try {
+                    lastname = CommonUtils.decodeUnicode(URLDecoder.decode(String.valueOf(p.getAttributes().get("lastname")), "utf-8"));
+                } catch (Exception ex) {
+                    lastname = "";
+                }
+                    /*
+                    String telephone = "";
+                    try {
+                        telephone = String.valueOf(p.getAttributes().get("telephone"));
+                    } catch (Exception ex) {
+                        telephone = "";
+                    }
+
+                    int status = 0;
+                    try {
+                        status = Integer.parseInt(String.valueOf(p.getAttributes().get("status")));
+                    } catch (Exception ex) {
+                        status = 0;
+                    }*/
+
+                String ip = "";
+                try {
+                    ip = String.valueOf(p.getAttributes().get("ip"));
+                } catch (Exception ex) {
+                    ip = "";
+                }
+
+                String createddate = "";
+                try {
+                    createddate = String.valueOf(p.getAttributes().get("createddate"));
+                } catch (Exception ex) {
+                    createddate = "";
+                }
  /*
                     String headpicture = "";
                     try {
@@ -442,90 +445,90 @@ public class CommonUtils {
                         nickName = "";
                     }*/
 
-//                int roleid = 0;
-//                try {
-//                    roleid = Integer.parseInt(String.valueOf(p.getAttributes().get("roleid")));
-//                } catch (Exception ex) {
-//                    roleid = 0;
-//                }
-//                int roletypeid = 0;
-//                try {
-//                    roletypeid = Integer.parseInt(String.valueOf(p.getAttributes().get("roletypeid")));
-//                } catch (Exception ex) {
-//                    roletypeid = 0;
-//                }
-//                String roleLevelrelationship = "";
-//                try {
-//                    roleLevelrelationship = String.valueOf(p.getAttributes().get("roleLevelrelationship"));
-//                } catch (Exception ex) {
-//                    roleLevelrelationship = "";
-//                }
-//                String rights = "";
-//                try {
-//                    rights = String.valueOf(p.getAttributes().get("rights"));
-//                } catch (Exception ex) {
-//                    rights = "";
-//                }
-//
-//
-//                info.setBuyerId(buyerid);
-//                info.setRoleId(roleid);
-//                info.setUserName(userName);
-//
-//                    /*if (usertype == LoginInfo.LOGINFO_USERTYPE_BUYER) {
-//                        info.setOwnerId(buyerid);
-//                        info.setUserType(LoginInfo.LOGINFO_USERTYPE_BUYER);
-//                    } else if (usertype == LoginInfo.LOGINFO_USERTYPE_SELLER) {
-//                        info.setOwnerId(sellerid);
-//                        info.setUserType(LoginInfo.LOGINFO_USERTYPE_SELLER);
-//                    } else if (usertype == LoginInfo.LOGINFO_USERTYPE_MANUFACTURE) {
-//                        info.setOwnerId(manufactureid);
-//                        info.setUserType(LoginInfo.LOGINFO_USERTYPE_MANUFACTURE);
-//                    }
-//                    if (headpicture != null && !"".equals(headpicture)) {
-//                        info.setHeadpicture(CommonUtils.GetImageUrl(request, headpicture.replace("\\", "/"), CommonUtils.IMAGESIZE_200x200));
-//                    } else {
-//                        info.setHeadpicture(CommonUtils.GetSiteContentUrl("/asset/images/default/default-user-200X200.png", request));
-//                    }
-//                    info.setIsadmin(LoginInfo.LOGINFO_ISADMIN_NO);
-//                    */
-//
-//                if (roleid == 0) {
-//                    info.setRights("");
-//                    info.setRolelevelrelationship("");
-//                    info.setRoletypeid(0);
-//                } else {
-//                    info.setRights(rights);
-//                    info.setRolelevelrelationship(roleLevelrelationship);
-//                    info.setRoletypeid(roletypeid);
-//                }
-//
-//                    /*if (logo != null && !"".equals(logo)) {
-//                        info.setStorelogo(CommonUtils.GetImageUrl(request, logo.replace("\\", "/"), CommonUtils.IMAGESIZE_200x200));
-//                    } else {
-//                        info.setStorelogo(CommonUtils.GetSiteContentUrl("/asset/images/default/default-user-500X500.png", request));
-//                    }*/
-//
-//                saveLoginCookie(request, response, info);
-//                info.setChinesename(chiesename);
-//                info.setEnglishname(englishname);
-//            } else {
-//                info = null;
-//            }
+                int roleid = 0;
+                try {
+                    roleid = Integer.parseInt(String.valueOf(p.getAttributes().get("roleid")));
+                } catch (Exception ex) {
+                    roleid = 0;
+                }
+                int roletypeid = 0;
+                try {
+                    roletypeid = Integer.parseInt(String.valueOf(p.getAttributes().get("roletypeid")));
+                } catch (Exception ex) {
+                    roletypeid = 0;
+                }
+                String roleLevelrelationship = "";
+                try {
+                    roleLevelrelationship = String.valueOf(p.getAttributes().get("roleLevelrelationship"));
+                } catch (Exception ex) {
+                    roleLevelrelationship = "";
+                }
+                String rights = "";
+                try {
+                    rights = String.valueOf(p.getAttributes().get("rights"));
+                } catch (Exception ex) {
+                    rights = "";
+                }
+
+
+                info.setUserId((int)buyerid);
+                info.setRoleId(roleid);
+                info.setUserName(userName);
+
+                    /*if (usertype == LoginInfo.LOGINFO_USERTYPE_BUYER) {
+                        info.setOwnerId(buyerid);
+                        info.setUserType(LoginInfo.LOGINFO_USERTYPE_BUYER);
+                    } else if (usertype == LoginInfo.LOGINFO_USERTYPE_SELLER) {
+                        info.setOwnerId(sellerid);
+                        info.setUserType(LoginInfo.LOGINFO_USERTYPE_SELLER);
+                    } else if (usertype == LoginInfo.LOGINFO_USERTYPE_MANUFACTURE) {
+                        info.setOwnerId(manufactureid);
+                        info.setUserType(LoginInfo.LOGINFO_USERTYPE_MANUFACTURE);
+                    }
+                    if (headpicture != null && !"".equals(headpicture)) {
+                        info.setHeadpicture(CommonUtils.GetImageUrl(request, headpicture.replace("\\", "/"), CommonUtils.IMAGESIZE_200x200));
+                    } else {
+                        info.setHeadpicture(CommonUtils.GetSiteContentUrl("/asset/images/default/default-user-200X200.png", request));
+                    }
+                    info.setIsadmin(LoginInfo.LOGINFO_ISADMIN_NO);
+                    */
+
+                /*if (roleid == 0) {
+                    info.setRights("");
+                    info.setRolelevelrelationship("");
+                    info.setRoletypeid(0);
+                } else {
+                    info.setRights(rights);
+                    info.setRolelevelrelationship(roleLevelrelationship);
+                    info.setRoletypeid(roletypeid);
+                }*/
+
+                    /*if (logo != null && !"".equals(logo)) {
+                        info.setStorelogo(CommonUtils.GetImageUrl(request, logo.replace("\\", "/"), CommonUtils.IMAGESIZE_200x200));
+                    } else {
+                        info.setStorelogo(CommonUtils.GetSiteContentUrl("/asset/images/default/default-user-500X500.png", request));
+                    }*/
+
+                saveLoginCookie(request, response, info);
+                info.setChineseName(chiesename);
+                info.setEnglishName(englishname);
+            } else {
+                info = null;
+            }
+        }
+        // 当前没有通过验证，那么删除本地Cookie
+        //     CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, "", "/", -60 * 60 * 24 * 30);
+         /*   if (GetPropertityValue(request, "domain.url").indexOf("localhost") > 0) {// 本地
+                CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, "", "/", -60 * 60 * 24 * 30);
+            } else {
+             //   CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, "", "/", GetPropertityValue(request, "websitename").equals(ConfigInfo.WEBSITENAME_HIWIY) ? ".ve.life" : ".yyuber.com",  -60 * 60 * 24 * 30); // cookie保存30天
+            }*/
+        //     request.getSession().invalidate();          //set session invalid
+
+//            info = null;
 //        }
-//        // 当前没有通过验证，那么删除本地Cookie
-//        //     CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, "", "/", -60 * 60 * 24 * 30);
-//         /*   if (GetPropertityValue(request, "domain.url").indexOf("localhost") > 0) {// 本地
-//                CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, "", "/", -60 * 60 * 24 * 30);
-//            } else {
-//             //   CookieUtils.addCookie(response, CookieUtils.COOKIE_NAME_LOGININFO, "", "/", GetPropertityValue(request, "websitename").equals(ConfigInfo.WEBSITENAME_HIWIY) ? ".ve.life" : ".yyuber.com",  -60 * 60 * 24 * 30); // cookie保存30天
-//            }*/
-//        //     request.getSession().invalidate();          //set session invalid
-//
-////            info = null;
-////        }
-//        return info;
-//    }
+        return info;
+    }
 
 
     /**
