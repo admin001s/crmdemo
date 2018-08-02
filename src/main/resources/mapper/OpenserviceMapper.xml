@@ -28,11 +28,37 @@ VALUES
   ) ;
     </insert>
     <!--删除服务-->
-    <delete id="deleteOpenservice" >
+    <delete id="deleteOpenservice">
         DELETE FROM `openservice` WHERE 1=1
         <if test="crmcustomersinfoid !=null and crmcustomersinfoid !=''">
-          and  `crmcustomersinfoid` = #{crmcustomersinfoid} ;
+            and `crmcustomersinfoid` = #{crmcustomersinfoid} ;
         </if>
 
     </delete>
+    <!--查询已开通服务的客户-->
+    <select id="selectALlOpen" resultType="com.crmdemo.vop.Openservicevop">
+        SELECT (@i:=@i+1) AS i,j.*,u.`name` as cuname FROM (SELECT o.*,GROUP_CONCAT(p.`Name`) AS
+        openserviceTypeall,c.`customersName`
+        FROM (SELECT @i:=0) AS it , `openservice` o,`crmcustomersinfo` c,`crmproductservice` p
+        WHERE o.`DeleteStatus`=0 AND o.`crmcustomersinfoid`=c.`customersId` AND
+        p.`CRMProductServiceId`=o.`openserviceTypeid`
+        <if test="fen == 'yi'">
+            AND o.`customerservice`  IN (SELECT `id` FROM `customerservice`)
+        </if>
+        <if test="fen == 'wei'">
+            AND o.`customerservice`  NOT IN (SELECT id FROM `customerservice`)
+        </if>
+        GROUP BY `crmcustomersinfoid`) j
+        LEFT JOIN `customerservice` u ON j.`customerservice`=u.`id`
+    </select>
+
+    <!--为客户添加服务人员-->
+    <update id="updateOpenservice">
+        UPDATE `openservice`
+        <set>
+                `customerservice` = #{customerservice}
+        </set>
+        WHERE `crmcustomersinfoid` =#{id};
+    </update>
+
 </mapper>

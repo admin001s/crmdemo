@@ -14,7 +14,30 @@ public class Openservice {
   private Date createDate;
   private Date updateDate;
   private Integer deleteStatus;
+  private String customerservice;
+  private Integer i;
 
+
+
+  public void setUpdateDate(Date updateDate) {
+    this.updateDate = updateDate;
+  }
+
+  public String getCustomerservice() {
+    return customerservice;
+  }
+
+  public void setCustomerservice(String customerservice) {
+    this.customerservice = customerservice;
+  }
+
+  public Integer getI() {
+    return i;
+  }
+
+  public void setI(Integer i) {
+    this.i = i;
+  }
 
   public Integer getCashierId() {
     return cashierId;

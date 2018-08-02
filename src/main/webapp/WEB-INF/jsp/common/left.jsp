@@ -102,7 +102,7 @@
                     </li>
 
                     <li class="">
-                        <a href="pricing.html">
+                        <a href="/AllocationOneLlist.do">
                             <i class="menu-icon fa fa-caret-right"></i>
                             分配
                         </a>

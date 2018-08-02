@@ -1,10 +1,9 @@
 package com.crmdemo.service.impl;
 
-import com.crmdemo.dao.CrmproductserviceDao;
 import com.crmdemo.dao.OpenserviceDao;
-import com.crmdemo.entity.Crmproductservice;
 import com.crmdemo.entity.Openservice;
 import com.crmdemo.service.OpenserviceService;
+import com.crmdemo.vop.Openservicevop;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +49,30 @@ public class OpenserviceServiceImpl implements OpenserviceService {
             logger.debug("do deleteOpenservice()------------------------------");
         }catch (Exception e){
             logger.debug("do deleteOpenservice()------------------------------"+e.getMessage());
+        }
+        return i;
+    }
+
+    @Override
+    public List<Openservicevop> selectALlOpen(String fen) {
+        List<Openservicevop> openservice=null;
+        try {
+            openservice=openserviceDao.selectALlOpen(fen);
+            logger.debug("do selectALlOpen()------------------------------");
+        }catch (Exception e){
+            logger.debug("do selectALlOpen()------------------------------"+e.getMessage());
+        }
+        return openservice;
+    }
+
+    @Override
+    public Integer updateOpenservice(String customerservice, String id) {
+        Integer i =0;
+        try {
+            i=openserviceDao.updateOpenservice(customerservice,id);
+            logger.debug("do updateOpenservice()------------------------------");
+        }catch (Exception e){
+            logger.debug("do updateOpenservice()------------------------------"+e.getMessage());
         }
         return i;
     }

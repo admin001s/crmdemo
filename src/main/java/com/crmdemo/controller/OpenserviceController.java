@@ -5,6 +5,7 @@ import com.crmdemo.entity.Crmproductservice;
 import com.crmdemo.entity.Openservice;
 import com.crmdemo.entity.Provinces;
 import com.crmdemo.service.impl.OpenserviceServiceImpl;
+import com.crmdemo.vop.Openservicevop;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
 import java.util.*;
 
 @Controller
@@ -56,5 +56,25 @@ public class OpenserviceController {
                    strings.add(ope.getOpenserviceTypeid());
             }
         return strings;
+    }
+
+    //查询所有开通服务的客户
+    @ResponseBody
+    @RequestMapping("/yesOpenserviceall")
+    public  List<Openservicevop> yesOpenserviceall(@RequestParam(value = "fen",required = false) String fen) {
+        List<Openservicevop> list = openserviceService.selectALlOpen(fen);
+        return list;
+    }
+
+    //为客户添加服务人员
+    @ResponseBody
+    @RequestMapping("/updateOpenserService")
+    public boolean updateOpenserService(String customerservice,String id) {
+       boolean sf=false;
+       Integer i =openserviceService.updateOpenservice(customerservice,id);
+       if(i>0){
+           sf=true;
+       }
+        return sf;
     }
 }

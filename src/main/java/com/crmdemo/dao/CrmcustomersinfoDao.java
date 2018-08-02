@@ -9,6 +9,4 @@ public interface CrmcustomersinfoDao {
     Integer insertCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo);
     //查询客户
     List<Crmcustomersinfo> selectcrmcustomersinfo();
-
-    List<Crmcustomersinfo> selectCrmcustomersinfoList(Crmcustomersinfo crmcustomersinfo);
 }
