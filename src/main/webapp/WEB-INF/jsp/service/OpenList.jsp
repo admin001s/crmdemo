@@ -1,7 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%@include file="/WEB-INF/jsp/common/head.jsp" %>
-<%@include file="/WEB-INF/jsp/common/left.jsp" %>
 
 
 <!-- /section:basics/sidebar -->
@@ -474,8 +472,6 @@
 </div>
 <!-- /.main-content -->
 
-
-<%@include file="/WEB-INF/jsp/common/footer.jsp" %>
 
 <link rel="stylesheet" href="assets/toastr/toastr.min.css"/>
 <script src="assets/js/jquery.dataTables.min.js"></script>

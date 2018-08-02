@@ -14,11 +14,23 @@ public class CrmagentsinfoServiceImpl implements CrmagentsinfoService {
     CrmagentsinfoDao crmagentsinfoDao;
 
     @Override
-    public List<Crmagentsinfo> selectCrmagentsinfoList(Crmagentsinfo crmagentsinfo) {
-        List<Crmagentsinfo> crmagentsinfoList=null;
+    public boolean updateCrmcustomersinfo(Crmagentsinfo crmagentsinfo) {
         try {
-            crmagentsinfoList=crmagentsinfoDao.selectCrmagentsinfoList(crmagentsinfo);
-        }catch (Exception e){
+            if (crmagentsinfoDao.updateCrmcustomersinfo(crmagentsinfo) > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+
+    @Override
+    public List<Crmagentsinfo> selectCrmagentsinfoList(Crmagentsinfo crmagentsinfo) {
+        List<Crmagentsinfo> crmagentsinfoList = null;
+        try {
+            crmagentsinfoList = crmagentsinfoDao.selectCrmagentsinfoList(crmagentsinfo);
+        } catch (Exception e) {
 
         }
         return crmagentsinfoList;
@@ -27,10 +39,10 @@ public class CrmagentsinfoServiceImpl implements CrmagentsinfoService {
     @Override
     public boolean insertCrmagentsinfo(Crmagentsinfo crmagentsinfo) {
         try {
-            if(crmagentsinfoDao.insertCrmagentsinfo(crmagentsinfo)>0){
-                return  true;
+            if (crmagentsinfoDao.insertCrmagentsinfo(crmagentsinfo) > 0) {
+                return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return false;

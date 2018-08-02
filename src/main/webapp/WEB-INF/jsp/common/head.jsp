@@ -179,7 +179,7 @@
                         <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
                         <span class="user-info">
 									欢迎您<br />
-									陈子昂
+									${user.chineseName}
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>

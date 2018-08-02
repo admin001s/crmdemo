@@ -7,4 +7,14 @@
             and crminfo.UserName=#{userName}
         </if>
     </select>
+
+    <select id="selectCrminfoList" resultType="Crminfo">
+        select * from crminfo where 1=1
+        <if test="roleId !=null">
+            and roleId=#{roleId}
+        </if>
+        <if test="userArrangement !=null">
+            and userArrangement like '%${userArrangement}%'
+        </if>
+    </select>
 </mapper>

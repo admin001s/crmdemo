@@ -248,6 +248,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    var container=$("#modal-demo");
     function add() {
         $.ajax({
             url: "addCrmcustomersinfo.do",
@@ -278,6 +279,8 @@
             success: function (data) {
                 if (data) {
                     alert("新增成功！");
+                    container.parent().modal('hide');
+                    $('#select-product-p1123').find('#table').bootstrapTable('refresh');
                 } else {
                     alert("新增失败！");
                 }

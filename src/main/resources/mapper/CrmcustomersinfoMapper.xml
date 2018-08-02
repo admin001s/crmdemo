@@ -191,4 +191,10 @@
     <select id="selectcrmcustomersinfo" resultType="Crmcustomersinfo">
       SELECT   (@i:=@i+1)   AS   i,c.*   FROM   crmcustomersinfo c,(SELECT   @i:=0)   AS   it WHERE `deleteStatus`=0
     </select>
+    <select id="selectCrmcustomersinfoList" resultType="Crmcustomersinfo">
+        select  * from crmcustomersinfo where 1=1
+        <if test="adduserId !=null">
+           and adduserId=#{adduserId}
+        </if>
+    </select>
 </mapper>

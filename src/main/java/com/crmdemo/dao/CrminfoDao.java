@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface CrminfoDao {
     List<Crminfo> selectcrmByName(Crminfo crminfo);
+
+    List<Crminfo> selectCrminfoList(Crminfo crminfo);
 }

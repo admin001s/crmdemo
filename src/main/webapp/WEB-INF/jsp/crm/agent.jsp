@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
-<%@include file="/WEB-INF/jsp/common/head.jsp" %>
-<%@include file="/WEB-INF/jsp/common/left.jsp" %>
 <!-- /section:basics/sidebar -->
 <div class="main-content">
     <!-- #section:basics/content.breadcrumbs -->
@@ -33,17 +31,21 @@
 <div class="modal fade bs-example-modal-lg" id="reserveModal"></div>
 
 <!-- /.main-content -->
-<%@include file="/WEB-INF/jsp/common/footer.jsp" %>
+
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/jquery.dataTables.bootstrap.js"></script>
 <script src="assets/js/bootstrap-table.js"></script>
 <script src="assets/js/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("#breadcrumbs").find("#add").on("click", function () {
+        /*$("#breadcrumbs").find("#add").on("click", function () {
             $('#reserveModal').load("addAgent.do", {}, function (a, b, c) {
                 $('#reserveModal').modal('show');
             });
+        });*/
+
+        $("#add").click(function(){
+            $('#workstation').load("addAgent.do");
         });
     });
 
@@ -86,11 +88,7 @@
                 showExport: true,
                 exportDataType: 'all',
                 //     exportTypes : [ 'excel' ], //导出文件类型
-                columns: [{
-                    field: 'id',
-                    title: '序号',
-                    align: 'center'
-                }, {
+                columns: [ {
                     field: 'agentsId',
                     title: '代理商编号',
                     align: 'center'
@@ -127,15 +125,21 @@
                     field: 'agentemail',
                     title: '邮箱',
                     align: 'center'
-                },
-                    {
-                        field: 'caozuo',
-                        title: '操作',
-                        align: 'center',
-                        formatter: function (value, row, index) {
-                            return '<i class="glyphicon glyphicon-pencil caozuo" data-id="' + row.id + '" style="cursor: pointer;" title="操作"></i>';
-                        }
-                    }],
+                }, {
+                    field : 'updates',
+                    title : '',
+                    align : 'center',
+                    formatter : function(value, row, index) {
+                        return '<i class="glyphicon glyphicon-pencil bianji" data-id="' + row.id + '" style="cursor: pointer;" title="修改"></i>';
+                    }
+                }, {
+                    field : 'del',
+                    title : '',
+                    align : 'center',
+                    formatter : function(value, row, index) {
+                        return '<i class="glyphicon glyphicon-trash shanchu" data-id="' + row.id +  '" style="cursor: pointer;" title="删除 "></i>';
+                    }
+                }],
                 onPostBody: function (data, row) {
                     container.find('.fixed-table-toolbar').hide();
                     // initButton();

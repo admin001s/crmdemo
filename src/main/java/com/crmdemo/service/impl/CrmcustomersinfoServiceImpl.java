@@ -13,6 +13,19 @@ public class CrmcustomersinfoServiceImpl implements CrmcustomersinfoService {
     private Logger logger=Logger.getLogger(CrmcustomersinfoServiceImpl.class);
     @Resource
     CrmcustomersinfoDao crmcustomersinfoDao;
+
+    @Override
+    public List<Crmcustomersinfo> selectCrmcustomersinfoList(Crmcustomersinfo crmcustomersinfo) {
+        List<Crmcustomersinfo> crmcustomersinfoList=null;
+        try {
+            crmcustomersinfoList=crmcustomersinfoDao.selectCrmcustomersinfoList(crmcustomersinfo);
+            logger.debug("do selectcrmcustomersinfo()------------------------------");
+        }catch (Exception e){
+            logger.debug("do selectcrmcustomersinfo()------------------------------"+e.getMessage());
+        }
+        return crmcustomersinfoList;
+    }
+
     @Override
     public boolean addCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo) {
         try {

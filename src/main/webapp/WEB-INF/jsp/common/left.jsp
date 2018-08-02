@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!-- /section:basics/navbar.layout -->
+<%@include file="/WEB-INF/jsp/common/head.jsp" %>
 <div class="main-container" id="main-container">
 
     <!-- #section:basics/sidebar -->
@@ -7,72 +8,35 @@
 
 
         <ul class="nav nav-list">
-            <li class="active">
-                <a href="doindex.do">
+            <li class="active one"data-url="doindex.do">
+                <a href="javascript:;">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> 首页 </span>
                 </a>
-
                 <b class="arrow"></b>
             </li>
-
-            <li class="">
-                <a href="agent.do">
-                    <i class="menu-icon fa fa-desktop"></i>
-                    <span class="menu-text"> 代理商管理 </span>
-                </a>
-            </li>
-
-            <li class="">
-                <a href="customer.do">
-                    <i class="menu-icon fa fa-users"></i>
-                    <span class="menu-text"> 客户</span>
-                </a>
-
-            </li>
-
             <li class="">
                 <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-pencil-square-o"></i>
-                    <span class="menu-text"> 表单 </span>
-
+                    <i class="menu-icon fa fa-bar-chart-o"></i>
+                    <span class="menu-text"> 销售管理 </span>
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
 
                 <b class="arrow"></b>
-
                 <ul class="submenu">
-                    <li class="">
-                        <a href="form-elements.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            表单组件
+                    <li class="one" data-url="agent.do">
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            代理商
                         </a>
 
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="">
-                        <a href="form-wizard.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            向导提示 &amp; 验证
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="wysiwyg.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            编辑器
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="dropzone.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            文件上传
+                    <li class="one" data-url="customer.do">
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-users"></i>
+                            客户
                         </a>
 
                         <b class="arrow"></b>
@@ -128,8 +92,8 @@
                 <b class="arrow"></b>
 
                 <ul class="submenu">
-                    <li class="">
-                        <a href="/OpenList.do">
+                    <li class="one" data-url="OpenList.do">
+                        <a href="javascript:;">
                             <i class="menu-icon fa fa-caret-right"></i>
                             开通服务
                         </a>
@@ -302,7 +266,17 @@
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
             <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
-
     </div>
-
+    <section style="height: calc(100% - 50px); overflow: auto;"
+            id="workstation" class="min-view-section"> </section>
+    <%@include file="/WEB-INF/jsp/common/footer.jsp" %>
+<script>
+    $(function(){
+        $('#workstation').load("doindex.do");
+        $(".one").click(function(){
+            var url=$(this).attr("data-url");
+            $('#workstation').load(url);
+        });
+    });
+</script>
     <!-- /section:basics/sidebar -->
