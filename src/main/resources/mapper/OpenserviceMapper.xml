@@ -35,7 +35,7 @@ VALUES
         </if>
 
     </delete>
-    <!--查询已开通服务的客户-->
+    <!--&lt;!&ndash;查询已开通服务的客户&ndash;&gt;
     <select id="selectALlOpen" resultType="com.crmdemo.vop.Openservicevop">
         SELECT (@i:=@i+1) AS i,j.*,u.`name` as cuname FROM (SELECT o.*,GROUP_CONCAT(p.`Name`) AS
         openserviceTypeall,c.`customersName`
@@ -50,7 +50,7 @@ VALUES
         </if>
         GROUP BY `crmcustomersinfoid`) j
         LEFT JOIN `customerservice` u ON j.`customerservice`=u.`id`
-    </select>
+    </select>-->
 
     <!--为客户添加服务人员-->
     <update id="updateOpenservice">

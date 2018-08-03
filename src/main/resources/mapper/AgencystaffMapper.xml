@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.AgencystaffDao">
+    <select id="selectAgencystaffList" resultType="Agencystaff">
+        select * from agencystaff where agencystaff.isdelete=0
+        <if test="agentStaffCharacterrelationship !=null">
+            and  agentStaffCharacterrelationship like '%${agentStaffCharacterrelationship}%'
+        </if>
+    </select>
+
+    <select id="selectAgencystaffCount" resultType="java.lang.Integer">
+        selecct count(1) from agencystaff where isdelete=0
+        <if test="agentsStaffId !=null">
+            and agentsStaffId=#{agentsStaffId}
+        </if>
+        <if test="agentStaffphone !=null">
+            and agentStaffphone=#{agentStaffphone}
+        </if>
+    </select>
+    <insert id="insertAgencystaff">
+        insert into agencystaff
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="agentsStaffId != null">
+                agentsStaffId,
+            </if>
+            <if test="agentStaffRelationship != null">
+                agentStaffRelationship,
+            </if>
+            <if test="agentStaffaddress != null">
+                agentStaffaddress,
+            </if>
+            <if test="agentStaffaccount != null">
+                agentStaffaccount,
+            </if>
+            <if test="agentStaffMessage != null">
+                agentStaffMessage,
+            </if>
+            <if test="reviewerId != null">
+                reviewerId,
+            </if>
+            <if test="isdelete != null">
+                isdelete,
+            </if>
+            <if test="usertypelevel != null">
+                usertypelevel,
+            </if>
+            <if test="agentStaffphone != null">
+                agentStaffphone,
+            </if>
+            <if test="agentStaffQq != null">
+                agentStaffQq,
+            </if>
+            <if test="agentStaffName != null">
+                agentStaffName,
+            </if>
+            <if test="agentStaffemail != null">
+                agentStaffemail,
+            </if>
+            <if test="agentStaffParentid != null">
+                agentStaffParentid,
+            </if>
+            <if test="agentStaffsex != null">
+                agentStaffsex,
+            </if>
+            <if test="agentStaffCharacterrelationship != null">
+                agentStaffCharacterrelationship,
+            </if>
+            <if test="addCreateTime != null">
+                addCreateTime,
+            </if>
+            <if test="updatetime != null">
+                updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="agentsStaffId != null">
+                #{agentsStaffId},
+            </if>
+            <if test="agentStaffRelationship != null">
+                #{agentStaffRelationship},
+            </if>
+            <if test="agentStaffaddress != null">
+                #{agentStaffaddress},
+            </if>
+            <if test="agentStaffaccount != null">
+                #{agentStaffaccount},
+            </if>
+            <if test="agentStaffMessage != null">
+                #{agentStaffMessage},
+            </if>
+            <if test="reviewerId != null">
+                #{reviewerId},
+            </if>
+            <if test="isdelete != null">
+                #{isdelete},
+            </if>
+            <if test="usertypelevel != null">
+                #{usertypelevel},
+            </if>
+            <if test="agentStaffphone != null">
+                #{agentStaffphone},
+            </if>
+            <if test="agentStaffQq != null">
+                #{agentStaffQq},
+            </if>
+            <if test="agentStaffName != null">
+                #{agentStaffName},
+            </if>
+            <if test="agentStaffemail != null">
+                #{agentStaffemail},
+            </if>
+            <if test="agentStaffParentid != null">
+                #{agentStaffParentid},
+            </if>
+            <if test="agentStaffsex != null">
+                #{agentStaffsex},
+            </if>
+            <if test="agentStaffCharacterrelationship != null">
+                #{agentStaffCharacterrelationship},
+            </if>
+            <if test="addCreateTime != null">
+                #{addCreateTime},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateAgencystaff">
+        update agencystaff
+        <set>
+            <if test="agentStaffRelationship != null">
+                agentStaffRelationship = #{agentStaffRelationship},
+            </if>
+            <if test="agentStaffaddress != null">
+                agentStaffaddress = #{agentStaffaddress},
+            </if>
+            <if test="agentStaffaccount != null">
+                agentStaffaccount = #{agentStaffaccount},
+            </if>
+            <if test="agentStaffMessage != null">
+                agentStaffMessage = #{agentStaffMessage},
+            </if>
+            <if test="reviewerId != null">
+                reviewerId = #{reviewerId},
+            </if>
+            <if test="isdelete != null">
+                isdelete = #{isdelete},
+            </if>
+            <if test="usertypelevel != null">
+                usertypelevel =
+                #{usertypelevel},
+            </if>
+            <if test="agentStaffphone != null">
+                agentStaffphone =
+                #{agentStaffphone},
+            </if>
+            <if test="agentStaffQq != null">
+                agentStaffQq =
+                #{agentStaffQq},
+            </if>
+            <if test="agentStaffName != null">
+                agentStaffName =
+                #{agentStaffName},
+            </if>
+            <if test="agentStaffemail != null">
+                agentStaffemail =
+                #{agentStaffemail},
+            </if>
+            <if test="agentStaffParentid != null">
+                agentStaffParentid =
+                #{agentStaffParentid},
+            </if>
+            <if test="agentStaffsex != null">
+                agentStaffsex =
+                #{agentStaffsex},
+            </if>
+            <if test="agentStaffCharacterrelationship != null">
+                agentStaffCharacterrelationship =
+                #{agentStaffCharacterrelationship},
+            </if>
+            <if test="addCreateTime != null">
+                addCreateTime =
+                #{addCreateTime},
+            </if>
+            <if test="updatetime != null">
+                updatetime =
+                #{updatetime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

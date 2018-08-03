@@ -158,7 +158,7 @@ public class JspController {
      */
     @RequestMapping("toagencyStaffadd.do")
     public String toagencyStaffadd(HttpServletRequest request, HttpServletResponse response){
-        if(CommonUtils.getUser(request,response).getRoleId()==5){
+        if(CommonUtils.getUser(request,response).getRoleId()==5 || CommonUtils.getUser(request,response).getRoleId()==1){
             return "crm/agencyStaff_add";
         }else {
             return "noJurisdiction";
