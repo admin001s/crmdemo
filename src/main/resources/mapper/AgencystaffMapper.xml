@@ -6,6 +6,9 @@
         <if test="agentStaffCharacterrelationship !=null">
             and  agentStaffCharacterrelationship like '%${agentStaffCharacterrelationship}%'
         </if>
+        <if test="id !=null">
+            and id =#{id}
+        </if>
     </select>
 
     <select id="selectAgencystaffCount" resultType="java.lang.Integer">

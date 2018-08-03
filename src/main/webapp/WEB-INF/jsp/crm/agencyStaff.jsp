@@ -213,7 +213,7 @@
         });
         function del(id){
             $.ajax({
-                url: "delAgents.do",
+                url: "deleteAgencystaff.do",
                 data: {
                     id: id
                 },
@@ -233,7 +233,7 @@
         }
         function init(){
             $(".bianji").unbind().click(function(){
-                $('#reserveModal').load('agentUpdate.do', {id:$(this).attr("data-id")}, function(a, b, c) {
+                $('#reserveModal').load('agencyStaffupdate.do', {id:$(this).attr("data-id")}, function(a, b, c) {
                     $('#reserveModal').modal('show');
                 });
             });

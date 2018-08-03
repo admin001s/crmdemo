@@ -1,7 +1,9 @@
 package com.crmdemo.controller;
 
+import com.crmdemo.entity.Agencystaff;
 import com.crmdemo.entity.Crmagentsinfo;
 import com.crmdemo.entity.Crminfo;
+import com.crmdemo.service.AgencystaffService;
 import com.crmdemo.service.CrmagentsinfoService;
 import com.crmdemo.service.ProvincesService;
 import com.crmdemo.util.CommonUtils;
@@ -22,6 +24,8 @@ public class JspController {
     ProvincesService provincesService;
     @Resource
     CrmagentsinfoService crmagentsinfoService;
+    @Resource
+    AgencystaffService agencystaffService;
 
     /**
      * 登录页面
@@ -160,6 +164,24 @@ public class JspController {
     public String toagencyStaffadd(HttpServletRequest request, HttpServletResponse response){
         if(CommonUtils.getUser(request,response).getRoleId()==5 || CommonUtils.getUser(request,response).getRoleId()==1){
             return "crm/agencyStaff_add";
+        }else {
+            return "noJurisdiction";
+        }
+    }
+
+    /**
+     * 代理商员工修改页面
+     * @param request
+     * @param response
+     * @param agencystaff
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("agencyStaffupdate.do")
+    public String agencyStaffupdate(HttpServletRequest request, HttpServletResponse response, Agencystaff agencystaff,ModelMap modelMap){
+        if(CommonUtils.getUser(request,response).getRoleId()==5 || CommonUtils.getUser(request,response).getRoleId()==1){
+            modelMap.put("agencystaff",agencystaffService.selectAgencystaffById(agencystaff));
+            return "crm/agencyStaff_update";
         }else {
             return "noJurisdiction";
         }

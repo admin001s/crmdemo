@@ -112,9 +112,12 @@
     </insert>
     <select id="selectCrmagentsinfoList" resultType="Crmagentsinfo">
         select * from crmagentsinfo
-        where 1=1
+        where isdelete=0
         <if test="reviewerId !=null">
             and  reviewerId=#{reviewerId}
+        </if>
+        <if test="id !=null">
+            and  id=#{id}
         </if>
     </select>
     <update id="updateCrmcustomersinfo">

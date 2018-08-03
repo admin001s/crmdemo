@@ -10,4 +10,5 @@ public interface AgencystaffService {
     boolean insertAgencystaff(Agencystaff agencystaff);
     boolean updateAgencystaff(Agencystaff agencystaff);
     boolean deleteAgencystaff(Agencystaff agencystaff);
+    Agencystaff selectAgencystaffById(Agencystaff agencystaff);
 }

@@ -14,6 +14,19 @@ public class AgencystaffServiceImpl implements AgencystaffService {
     AgencystaffDao agencystaffDao;
 
     @Override
+    public Agencystaff selectAgencystaffById(Agencystaff agencystaff) {
+        Agencystaff agencystaff1=null;
+        Agencystaff agencystaff2=new Agencystaff();
+        agencystaff2.setId(agencystaff.getId());
+        try {
+            agencystaff1=agencystaffDao.selectAgencystaffList(agencystaff2).get(0);
+        }catch (Exception e){
+
+        }
+        return agencystaff1;
+    }
+
+    @Override
     public boolean deleteAgencystaff(Agencystaff agencystaff) {
         Agencystaff agencystaff1=new Agencystaff();
         agencystaff1.setId(agencystaff.getId());

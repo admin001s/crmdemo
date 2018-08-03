@@ -238,4 +238,19 @@ public class JsonController {
         }
         return false;
     }
+
+    /**
+     * 修改代理商员工信息
+     * @param agencystaff
+     * @return
+     */
+    @RequestMapping("updateAgencystaff.do")
+    public Object updateAgencystaff(Agencystaff agencystaff){
+        return agencystaffService.updateAgencystaff(agencystaff);
+    }
+
+    @RequestMapping("deleteAgencystaff.do")
+    public Object deleteAgencystaff(Agencystaff agencystaff){
+        return agencystaffService.deleteAgencystaff(agencystaff);
+    }
 }
