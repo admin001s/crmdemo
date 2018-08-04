@@ -108,8 +108,8 @@
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="">
-                        <a href="pricing.html">
+                    <li class="one" data-url="/AllocationOneLlist.do">
+                        <a href="javascript:;">
                             <i class="menu-icon fa fa-caret-right"></i>
                             分配
                         </a>
