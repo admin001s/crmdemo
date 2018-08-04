@@ -1,6 +1,8 @@
 package com.crmdemo.entity;
 
 
+import java.sql.Timestamp;
+
 public class Crmcustomersinfo {
 
   private Integer id;
@@ -34,8 +36,17 @@ public class Crmcustomersinfo {
   private String addmethod;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
+  private java.sql.Timestamp beOverdue;
 
-   //另外加的字段
+  public Timestamp getBeOverdue() {
+    return beOverdue;
+  }
+
+  public void setBeOverdue(Timestamp beOverdue) {
+    this.beOverdue = beOverdue;
+  }
+
+  //另外加的字段
   private Integer i;  //序号
 
 

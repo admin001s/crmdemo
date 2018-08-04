@@ -113,11 +113,11 @@
     <select id="selectCrmagentsinfoList" resultType="Crmagentsinfo">
         select * from crmagentsinfo
         where isdelete=0
-        <if test="reviewerId !=null">
-            and  reviewerId=#{reviewerId}
+        <if test="agentRelationship !=null">
+            and  agentRelationship like '%${agentRelationship}%'
         </if>
-        <if test="id !=null">
-            and  id=#{id}
+        <if test="id!=null">
+            and id=#{id}
         </if>
     </select>
     <update id="updateCrmcustomersinfo">
@@ -184,4 +184,14 @@
         </set>
         where id = #{id}
     </update>
+    <select id="selectCrmagentsinfoCount" resultType="java.lang.Integer">
+        select count(1) from crmagentsinfo
+        where isdelete=0
+        <if test="agentsId !=null and agentsId !=''">
+            and agentsId=#{agentsId}
+        </if>
+        <if test="agentphone !=null and agentphone !=''">
+            and  agentphone=#{agentphone}
+        </if>
+    </select>
 </mapper>

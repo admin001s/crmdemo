@@ -61,7 +61,9 @@ public class JsonController {
     @RequestMapping("addCrmcustomersinfo.do")
     public Object addCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo, HttpServletResponse response, HttpServletRequest request) {
         crmcustomersinfo.setAdduserId(CommonUtils.getUser(request, response).getUserId());
+        crmcustomersinfo.setDeleteStatus(0);
         crmcustomersinfo.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        crmcustomersinfo.setAdduserHierarchy(CommonUtils.getUser(request, response).getUserArrangement());
         if (crmcustomersinfoService.addCrmcustomersinfo(crmcustomersinfo)) {
             return true;
         }
@@ -70,7 +72,6 @@ public class JsonController {
 
     /**
      * 新增代理商
-     *
      * @param crmagentsinfo
      * @param response
      * @return
@@ -220,7 +221,7 @@ public class JsonController {
      */
     @RequestMapping("addAgencystaff.do")
     public Object addAgencystaff(Agencystaff agencystaff, Crminfo crminfo, HttpServletRequest request, HttpServletResponse response) {
-        if (CommonUtils.getUser(request, response).getRoleId() == 5) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 5 || CommonUtils.getUser(request, response).getRoleId() == 1 ) {
             crminfo.setRoleId(6);
             crminfo.setUserId(crminfoService.selectMaxId() + 1);
             crminfo.setUserArrangement(CommonUtils.getUser(request, response).getUserArrangement() + "/" + crminfo.getUserId());
@@ -249,8 +250,23 @@ public class JsonController {
         return agencystaffService.updateAgencystaff(agencystaff);
     }
 
+    /**
+     * 删除代理商信息
+     * @param agencystaff
+     * @return
+     */
     @RequestMapping("deleteAgencystaff.do")
     public Object deleteAgencystaff(Agencystaff agencystaff){
         return agencystaffService.deleteAgencystaff(agencystaff);
+    }
+
+    /**
+     * 判断客户关键信息是否重复
+     * @param crmcustomersinfo
+     * @return
+     */
+    @RequestMapping("isCustomerffrepeat.do")
+    public Object isCustomerffrepeat(Crmcustomersinfo crmcustomersinfo){
+        return crmcustomersinfoService.isrepeat(crmcustomersinfo);
     }
 }

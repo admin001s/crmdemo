@@ -15,6 +15,18 @@ public class CrmcustomersinfoServiceImpl implements CrmcustomersinfoService {
     CrmcustomersinfoDao crmcustomersinfoDao;
 
     @Override
+    public boolean isrepeat(Crmcustomersinfo crmcustomersinfo) {
+        try {
+            if(crmcustomersinfoDao.selectCrmcustomersinfoCount(crmcustomersinfo)>0){
+                return false;
+            }
+        }catch (Exception e){
+
+        }
+        return true;
+    }
+
+    @Override
     public List<Crmcustomersinfo> selectCrmcustomersinfoList(Crmcustomersinfo crmcustomersinfo) {
         List<Crmcustomersinfo> crmcustomersinfoList=null;
         try {

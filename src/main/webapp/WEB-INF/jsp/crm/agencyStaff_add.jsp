@@ -323,16 +323,22 @@
 
 
         $("#index").click(function () {
-            $('#workstation').load("agent.do");
+            $('#workstation').load("toagencyStaff.do");
         });
 
         function isadd() {
+            var iss=true;
             if ($("#agentsStaffId").val() != '' && $("#agentsStaffId").val() != null) {
-                return isrepeat($("#agentsStaffId").val(), null, null);
+                if(!isrepeat($("#agentsStaffId").val(), null, null) ){
+                    return false;
+                }
             }
             if ($("#agentStaffphone").val() != '' && $("#agentStaffphone").val() != null) {
-                return isrepeat(null, $("#agentStaffphone").val(), null);
+                if(!isrepeat(null, $("#agentStaffphone").val(), null)){
+                    return false;
+                }
             }
+            return iss;
         }
 
         var $validation = false;
@@ -390,10 +396,8 @@
                         }
                     });
                 }
-
-
             }).on('stepclick', function (e) {
-            e.preventDefault();//this will prevent clicking and selecting steps
+            //e.preventDefault();//this will prevent clicking and selecting steps
         });
     })
 </script>

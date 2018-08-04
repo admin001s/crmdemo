@@ -41,10 +41,7 @@
 <script type="text/javascript">
     $(function(){
         $("#breadcrumbs").find("#add").on("click",function(){
-            $('#reserveModal').load("addcustomer.do", {
-            }, function(a, b, c) {
-                $('#reserveModal').modal('show');
-            });
+            $('#workstation').load("addcustomer.do");
         });
     });
 

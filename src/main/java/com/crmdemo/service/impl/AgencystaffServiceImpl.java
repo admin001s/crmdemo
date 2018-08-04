@@ -19,7 +19,7 @@ public class AgencystaffServiceImpl implements AgencystaffService {
         Agencystaff agencystaff2=new Agencystaff();
         agencystaff2.setId(agencystaff.getId());
         try {
-            agencystaff1=agencystaffDao.selectAgencystaffList(agencystaff2).get(0);
+           agencystaff1= agencystaffDao.selectAgencystaffList(agencystaff2).get(0);
         }catch (Exception e){
 
         }

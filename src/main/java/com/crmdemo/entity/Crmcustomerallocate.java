@@ -1,6 +1,8 @@
 package com.crmdemo.entity;
 
 
+import java.sql.Timestamp;
+
 public class Crmcustomerallocate {
 
   private Integer id;
@@ -8,7 +10,33 @@ public class Crmcustomerallocate {
   private Integer beiuserId;
   private java.sql.Timestamp distributionTime;
   private java.sql.Timestamp createTime;
+  private Integer customerId;
+  private java.sql.Timestamp updateTime;
+  private Integer isRelation;
 
+  public Integer getIsRelation() {
+    return isRelation;
+  }
+
+  public void setIsRelation(Integer isRelation) {
+    this.isRelation = isRelation;
+  }
+
+  public Integer getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(Integer customerId) {
+    this.customerId = customerId;
+  }
+
+  public Timestamp getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Timestamp updateTime) {
+    this.updateTime = updateTime;
+  }
 
   public Integer getId() {
     return id;

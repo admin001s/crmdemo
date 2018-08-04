@@ -413,6 +413,11 @@
                     }
                 });
             } else {
+                var _html = '<option value="0">------------</option>';
+                $("#jl select").empty();
+                $("#jl select").append(_html);
+                $("#zy select").empty();
+                $("#zy select").append(_html);
                 $("#jl").hide();
                 $("#zy").hide();
             }
@@ -440,20 +445,29 @@
                     }
                 });
             } else {
+                var _html = '<option value="0">------------</option>';
+                $("#zy select").empty();
+                $("#zy select").append(_html);
                 $("#zy").hide();
             }
         });
 
         function isadd() {
+            var iss=true;
             if ($("#agentsId").val() != '' && $("#agentsId").val() != null) {
-                return isrepeat($("#agentsId").val(), null, null);
+                if(!isrepeat($("#agentsId").val(), null, null)){
+                    return false;
+                }
             }
             if ($("#agentphone").val() != '' && $("#agentphone").val() != null) {
-                return isrepeat(null, $("#agentphone").val(), null);
+                if(!isrepeat(null, $("#agentphone").val(), null)){
+                    return false;
+                }
             }
             /*if ($("#agentName").val() != '' && $("#agentName").val() != null) {
                 return isrepeat(null, null, $("#agentName").val());
             }*/
+            return iss;
         }
 
         var $validation = false;
@@ -557,7 +571,7 @@
 
 
             }).on('stepclick', function (e) {
-            e.preventDefault();//this will prevent clicking and selecting steps
+            //e.preventDefault();//this will prevent clicking and selecting steps
         });
     })
 </script>

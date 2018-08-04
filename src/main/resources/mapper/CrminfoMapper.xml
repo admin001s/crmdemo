@@ -17,4 +17,74 @@
             and userArrangement like '%${userArrangement}%'
         </if>
     </select>
+    <select id="selectCrminfoCount" resultType="java.lang.Integer">
+        select Count(1) from crminfo where 1=1
+        <if test="userName !=null">
+            and userName=#{userName}
+        </if>
+    </select>
+    <select id="selectMaxId" resultType="java.lang.Integer">
+        select max(userId) from crminfo
+    </select>
+    <insert id="insertCrminfo">
+        insert into crminfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="userName != null">
+                userName,
+            </if>
+            <if test="passWord != null and passWord != ''">
+                passWord,
+            </if>
+            <if test="roleId != null">
+                roleId,
+            </if>
+            <if test="englishName != null and englishName != ''">
+                englishName,
+            </if>
+            <if test="chineseName != null and chineseName != ''">
+                chineseName,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="updateTime != null">
+                updateTime,
+            </if>
+            <if test="userArrangement != null">
+                userArrangement,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="userName != null">
+                #{userName},
+            </if>
+            <if test="passWord != null ">
+                #{passWord},
+            </if>
+            <if test="roleId != null ">
+                #{roleId},
+            </if>
+            <if test="englishName != null ">
+                #{englishName},
+            </if>
+            <if test="chineseName != null ">
+                #{chineseName},
+            </if>
+            <if test="createTime != null ">
+                #{createTime},
+            </if>
+            <if test="updateTime != null ">
+                #{updateTime},
+            </if>
+            <if test="userArrangement != null ">
+                #{userArrangement},
+            </if>
+        </trim>
+    </insert>
 </mapper>

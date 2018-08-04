@@ -14,4 +14,6 @@ public interface CrmcustomersinfoService {
     List<Crmcustomersinfo> selectcrmcustomersinfo();
     boolean addCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo);
     List<Crmcustomersinfo> selectCrmcustomersinfoList(Crmcustomersinfo crmcustomersinfo);
+
+    boolean isrepeat(Crmcustomersinfo crmcustomersinfo);
 }

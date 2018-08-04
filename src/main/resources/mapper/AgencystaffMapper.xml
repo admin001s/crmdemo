@@ -7,17 +7,17 @@
             and  agentStaffCharacterrelationship like '%${agentStaffCharacterrelationship}%'
         </if>
         <if test="id !=null">
-            and id =#{id}
+            and id=#{id}
         </if>
     </select>
 
     <select id="selectAgencystaffCount" resultType="java.lang.Integer">
-        selecct count(1) from agencystaff where isdelete=0
-        <if test="agentsStaffId !=null">
-            and agentsStaffId=#{agentsStaffId}
+        select count(1) from `agencystaff` where `isdelete`=0
+        <if test="agentsStaffId !=null and agentsStaffId != ''">
+            and `agentsStaffId`=#{agentsStaffId}
         </if>
-        <if test="agentStaffphone !=null">
-            and agentStaffphone=#{agentStaffphone}
+        <if test="agentStaffphone !=null and agentStaffphone != ''">
+            and `agentStaffphone`=#{agentStaffphone}
         </if>
     </select>
     <insert id="insertAgencystaff">

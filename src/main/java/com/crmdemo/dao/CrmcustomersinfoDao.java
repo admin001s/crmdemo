@@ -11,4 +11,6 @@ public interface CrmcustomersinfoDao {
     List<Crmcustomersinfo> selectcrmcustomersinfo();
 
     List<Crmcustomersinfo> selectCrmcustomersinfoList(Crmcustomersinfo crmcustomersinfo);
+
+    Integer selectCrmcustomersinfoCount(Crmcustomersinfo crmcustomersinfo);
 }
