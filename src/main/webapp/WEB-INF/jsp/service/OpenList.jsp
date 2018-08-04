@@ -74,7 +74,7 @@
                                             <c:forEach var="fff" items="${crmproductserviceList}">
                                                 <tr>
                                                     <td><input type="checkbox" name="checkItem" value="${fff.crmProductServiceId}"/></td>
-                                                    <td>${fff.crmProductServiceId}</td>
+                                                    <td>${fff.i}</td>
                                                     <td>${fff.name}</td>
                                                     <td>${fff.detail}</td>
                                                 </tr>

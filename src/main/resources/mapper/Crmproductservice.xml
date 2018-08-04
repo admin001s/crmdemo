@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.CrmproductserviceDao">
+
+    <!--查询-->
     <select id="CRMPRODUCTSERVICE_LIST" resultType="Crmproductservice">
-        select * from crmproductservice;
+        SELECT (@i:=@i+1)   AS   i,c.* FROM `crmproductservice` c, (SELECT   @i:=0)   AS   it
+        WHERE 1=1
+        <if test="id !=null">
+          and   c.`CRMProductServiceId`=#{id}
+        </if>
+
     </select>
+
+    <!--//更新产品服务-->
+    <update id="updateCrmproductservice" parameterType="Crmproductservice">
+             UPDATE  `crmproductservice`
+             <set>
+                 <if test="name != null">
+                     `Name` = #{name},
+                 </if>
+                 <if test="detail != null">
+                     `Detail` = #{detail},
+                 </if>
+                 <if test="updateTime != null">
+                     `UpdateTime` = #{updateTime},
+                 </if>
+             </set>
+             WHERE `CRMProductServiceId` = #{crmProductServiceId} ;
+    </update>
+    <!--//删除产品服务-->
+    <delete id="delCrmproductservice">
+           DELETE FROM `crmproductservice` WHERE `CRMProductServiceId` = #{id} ;
+    </delete>
+
+    <!--//增加产品服务-->
+    <insert id="addCrmproductservice" parameterType="Crmproductservice">
+        insert into crmproductservice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `Name`,
+            </if>
+            <if test="detail != null">
+                `Detail`,
+            </if>
+            <if test="createTime">
+                `CreateTime`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="detail != null">
+                #{detail},
+            </if>
+            <if test="createTime != null ">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
 </mapper>

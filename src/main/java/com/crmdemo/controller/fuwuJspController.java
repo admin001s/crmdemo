@@ -27,7 +27,7 @@ public class fuwuJspController {
     //服务
     @RequestMapping("/OpenList.do")
     public String index(HttpServletRequest request) {
-        List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice();
+        List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
         request.setAttribute("crmproductserviceList", crmproductserviceList);
         return "service/OpenList";
     }
@@ -37,4 +37,11 @@ public class fuwuJspController {
     public String AllocationOneLlist() {
         return "service/AllocationOneLlist";
     }
+
+    //产品服务线
+    @RequestMapping("/servicelist.do")
+    public String servicelist() {
+        return "service/servicelist";
+    }
+
 }
