@@ -52,10 +52,10 @@ public class CrmcustomersinfoServiceImpl implements CrmcustomersinfoService {
 
 
     @Override
-    public List<Crmcustomersinfo> selectcrmcustomersinfo() {
+    public List<Crmcustomersinfo> selectcrmcustomersinfo(String open) {
         List<Crmcustomersinfo> crmcustomersinfoList=null;
         try {
-            crmcustomersinfoList=crmcustomersinfoDao.selectcrmcustomersinfo();
+            crmcustomersinfoList=crmcustomersinfoDao.selectcrmcustomersinfo(open);
             logger.debug("do selectcrmcustomersinfo()------------------------------");
         }catch (Exception e){
             logger.debug("do selectcrmcustomersinfo()------------------------------"+e.getMessage());

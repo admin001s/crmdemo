@@ -1,7 +1,9 @@
 package com.crmdemo.controller;
 
 import com.crmdemo.entity.Crmproductservice;
+import com.crmdemo.entity.Customerservice;
 import com.crmdemo.service.impl.CrmproductserviceServiceImpl;
+import com.crmdemo.service.impl.CustomerserviceServiceImpl;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,29 +21,20 @@ import java.util.Map;
 public class fuwuJspController {
     @Resource
     private CrmproductserviceServiceImpl crmproductserviceService;
+    @Resource
+    private CustomerserviceServiceImpl customerserviceServiceimpl;
+
     //服务
     @RequestMapping("/OpenList.do")
-    public String index(HttpServletRequest request){
-//        Map<String,Object> map=new HashMap<String,Object>();
-        List<Crmproductservice> crmproductserviceList=crmproductserviceService.selectCrmproductservice();
-        request.setAttribute("crmproductserviceList",crmproductserviceList);
-//        map.put("crmproductserviceList",crmproductserviceList);
-        return  "service/OpenList";
+    public String index(HttpServletRequest request) {
+        List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice();
+        request.setAttribute("crmproductserviceList", crmproductserviceList);
+        return "service/OpenList";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //分配
+    @RequestMapping("/AllocationOneLlist.do")
+    public String AllocationOneLlist() {
+        return "service/AllocationOneLlist";
+    }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.CustomerserviceDao">
+    <select id="customerservicelist" resultType="Customerservice">
+       SELECT  (@i:=@i+1) as i,c.* FROM `customerservice` c,(SELECT   @i:=0)   AS   it
+        WHERE 1=1
+       <if test="name !=null and name !=''">
+            and  `name` LIKE '%${name}%'
+       </if>
+    </select>
+
+    <!--添加客服-->
+    <insert id="customerserviceAdd" >
+        INSERT INTO `customerservice` ( `name`) VALUES  (#{name}) ;
+    </insert>
+    <!--删除客服-->
+    <delete id="delcustomerservice" >
+        DELETE FROM`customerservice` WHERE `id` = #{id} ;
+    </delete>
+</mapper>
