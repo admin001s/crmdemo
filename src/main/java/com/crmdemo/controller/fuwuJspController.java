@@ -44,4 +44,12 @@ public class fuwuJspController {
         return "service/servicelist";
     }
 
+    //模块
+    @RequestMapping("/modularlist.do")
+    public String modularlist(HttpServletRequest request) {
+        List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
+        request.setAttribute("crmproductList", crmproductserviceList);
+        return "service/modularlist";
+    }
+
 }

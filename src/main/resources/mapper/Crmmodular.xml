@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.CrmmodularDao">
+
+    <!--查询-->
+    <select id="selectcrmmodular" resultType="com.crmdemo.vop.Crmmodularvop">
+        SELECT (@i:=@i+1)   AS   i,c.*,p.`Name` proname FROM `crmmodular` c,`crmproductservice` p,(SELECT   @i:=0)   AS   it
+        WHERE 1=1 AND c.`CRMProductServiceId`=p.`CRMProductServiceId`
+        <if test="id !=null">
+          and   c.`CRMModularId`=#{id}
+        </if>
+
+    </select>
+
+    <!--//更新产品服务-->
+    <update id="updatecrmmodular" parameterType="Crmmodular">
+             UPDATE  `crmmodular`
+             <set>
+                 <if test="modularName != null">
+                     `ModularName` = #{modularName},
+                 </if>
+                 <if test="crmProductServiceId != null">
+                     `CRMProductServiceId` = #{crmProductServiceId},
+                 </if>
+                 <if test="updateTime != null">
+                     `UpdateTime` = #{updateTime},
+                 </if>
+             </set>
+             WHERE `CRMModularId` = #{crmModularId} ;
+    </update>
+    <!--//删除产品服务-->
+    <delete id="delcrmmodular">
+           DELETE FROM `crmmodular` WHERE `CRMModularId` = #{id} ;
+    </delete>
+
+    <!--//增加产品服务-->
+    <insert id="addcrmmodular" parameterType="Crmmodular">
+        insert into crmmodular
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modularName != null">
+                `ModularName`,
+            </if>
+            <if test="crmProductServiceId != null">
+                `CRMProductServiceId`,
+            </if>
+            <if test="createTime !=null">
+                `CreateTime`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modularName != null">
+                #{modularName},
+            </if>
+            <if test="crmProductServiceId != null">
+                #{crmProductServiceId},
+            </if>
+            <if test="createTime != null ">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

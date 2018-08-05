@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 <!-- /section:basics/sidebar -->
 <div class="main-content">
@@ -38,7 +37,8 @@
 
                             </table>
                         </div><!-- /.span -->
-                    </div><!-- /.row -->
+                    </div>
+                    <!-- /.row -->
 
 
                     <div id="modal-table" class="modal fade" tabindex="-1">
@@ -49,7 +49,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                             <span class="white">&times;</span>
                                         </button>
-                                        添加产品
+                                        添加模板
                                     </div>
                                 </div>
 
@@ -57,15 +57,21 @@
                                 <div style="padding: 50px 50px 10px;">
                                     <form class="bs-example bs-example-form" role="form">
                                         <div class="input-group input-group-lg">
-                                            <span class="input-group-addon">产品姓名：</span>
-                                            <input type="text" class="form-control" id="productName" value="" placeholder="请输入产品姓名">
+                                            <span class="input-group-addon">模板姓名：</span>
+                                            <input type="text" class="form-control" id="modularName" value=""
+                                                   placeholder="请输入模板姓名">
                                         </div>
                                         <br>
                                         <div class="input-group input-group-lg">
-                                            <span class="input-group-addon">产品描述：</span>
+                                            <span class="input-group-addon">选择产品：</span>
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="3"
-                                                          placeholder="产品描述..." id="productDetail"></textarea>
+                                                <select class="form-control" style="height: 50px" id="crmProductServiceId">
+                                                    <option value="0" >--请选择--</option>
+                                                    <c:forEach var="fff" items="${crmproductList}">
+                                                        <option value="${fff.crmProductServiceId}" >${fff.name}</option>
+                                                    </c:forEach>
+
+                                                </select>
                                             </div>
                                         </div>
                                         <br>
@@ -111,7 +117,7 @@
         function initTable() {
             container.find('#table').bootstrapTable('destroy');
             var options = {
-                url: '/getCustomerservicelist.do', //请求后台的URL（*）
+                url: '/selectcrmmodular.do', //请求后台的URL（*）
                 method: 'post', //请求方式（*）
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json", //数据类型
@@ -119,9 +125,7 @@
                 pagination: false, //是否显示分页（*）
                 queryParamsType: '',
                 queryParams: function (param) {
-                    var params = {
-
-                    };
+                    var params = {};
                     return params;
                 },
 
@@ -143,18 +147,18 @@
                 uniqueId: "", //每一行的唯一标识，一般为主键列
                 showExport: true,
                 exportDataType: 'all',
-                //     exportTypes : [ 'excel' ], //导出文件类型
+                // exportTypes : [ 'excel' ], //导出文件类型
                 columns: [{
                     field: 'i',
                     title: '序号',
                     align: 'center'
                 }, {
-                    field: 'name',
-                    title: '产品名字',
+                    field: 'modularName',
+                    title: '模板名称',
                     align: 'center'
                 }, {
-                    field: 'detail',
-                    title: '详细',
+                    field: 'proname',
+                    title: '产品名称',
                     align: 'center'
                 },
                     {
@@ -162,7 +166,7 @@
                         title: '修改',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            return '<i class="glyphicon glyphicon-pencil caozuo"  data-id="' + row.crmProductServiceId + '" style="cursor: pointer;" title="修改"></i>';
+                            return '<i class="glyphicon glyphicon-pencil caozuo" data-id="' + row.crmModularId + '" style="cursor: pointer;" title="修改"></i>';
                         }
                     },
                     {
@@ -170,7 +174,7 @@
                         title: '删除',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            return '<i class="glyphicon glyphicon-remove del"  data-id="' + row.crmProductServiceId + '" style="cursor: pointer;" title="操作"></i>';
+                            return '<i class="glyphicon glyphicon-remove del" data-id="' + row.crmModularId + '" style="cursor: pointer;" title="操作"></i>';
                         }
                     }],
                 onPostBody: function (data, row) {
@@ -194,16 +198,16 @@
             var id = $(this).attr("data-id");
             $('#modal-table').modal("show");
             $.ajax({
-                url: "/getCustomerservicelist.do",
+                url: "/selectcrmmodular.do",
                 data: {
                     id: id
                 },
                 type: "post",
                 dataType: "JSON",
                 success: function (data) {
-                        $("#productName").val(data[0].name);
-                        $("#productDetail").val(data[0].detail);
-                        $("#submit").val(data[0].crmProductServiceId);
+                    $("#modularName").val(data[0].modularName);
+                    $("#crmProductServiceId").val(data[0].crmProductServiceId);
+                    $("#submit").val(data[0].crmModularId);
                 },
                 error: function (errMsg) {
                 }
@@ -213,16 +217,15 @@
         //添加产品
         $(".addService").click(function () {
             $('#modal-table').modal("show");
-            $("#productName").val("");
-            $("#productDetail").val("");
+            $("#modularName").val("");
+            $("#crmProductServiceId").val("0");
             $("#submit").val("0");
         });
         //删除客服人员
         $(document).on("click", ".del", function () {
             var id = $(this).attr("data-id");
-
             $.ajax({
-                url: "/deleCustomerservice.do",
+                url: "/delcrmmodular.do",
                 data: {
                     id: id
                 },
@@ -240,54 +243,32 @@
                 }
             });
         });
-        //为客户删除客服人员
-        $(document).on("click", ".delfu", function () {
-            var id = $(this).attr("data-id");
-            var customerservice = '';
-            $.ajax({
-                url: "/updateOpenserService",
-                data: {
-                    customerservice: customerservice,
-                    id: id
-                },
-                type: "post",
-                dataType: "JSON",
-                success: function (data) {
-                    if (data) {
-                        $('#modal-table').modal('hide');
-                        initTable();
-                        toastr.success("删除成功！");
 
-                    } else {
-                        toastr.error("删除失败！");
-                    }
-                },
-                error: function (errMsg) {
-                }
-            });
-
-        });
         //添加产品
         $("#submit").click(function () {
-            var productName = $("#productName").val();
-            if(productName==''){
-                toastr.error("请输入产品名字！");
+            var modularName = $("#modularName").val();
+             if(modularName==''){
+                 toastr.error("请输入模板名字！");
+                 return false;
+             }
+            var crmProductServiceId = $("#crmProductServiceId").val();
+            if(crmProductServiceId=="0"){
+                toastr.error("请选择产品！");
                 return false;
             }
-            var productDetail=$("#productDetail").val();
-           var submit =$("#submit").val();
+            var submit = $("#submit").val();
             var url;
-            if(submit =="0"){
-                url="/addCustomerservicelist.do";
-            }else{
-                url="/updateCustomerservice.do";
+            if (submit == "0") {
+                url = "/addcrmmodular.do";
+            } else {
+                url = "/updatecrmmodular.do";
             }
             $.ajax({
                 url: url,
                 data: {
-                    crmProductServiceId:submit,
-                    name: productName,
-                    detail:productDetail
+                    crmModularId: submit,
+                    modularName: modularName,
+                    crmProductServiceId: crmProductServiceId
                 },
                 type: "post",
                 dataType: "JSON",
@@ -297,7 +278,7 @@
                         initTable();
                         toastr.success("操作成功！");
                     } else {
-                        toastr.error("产品已存在！");
+                        toastr.error("模板已存在！");
                     }
                 },
                 error: function (errMsg) {

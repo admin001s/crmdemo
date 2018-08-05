@@ -140,35 +140,13 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="hsub">
-                                <a href="#" class="dropdown-toggle">
+                            <li class="one"  data-url="/modularlist.do">
+                                <a href="javascript:;">
                                     <i class="menu-icon fa fa-pencil orange"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-
-                                    第四级
-                                </font></font><b class="arrow fa fa-angle-down"></b>
-                                </a>
+                                    模板管理
+                                </font></font></a>
 
                                 <b class="arrow"></b>
-
-                                <ul class="submenu">
-                                    <li class="">
-                                        <a href="#">
-                                            <i class="menu-icon fa fa-plus purple"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                            添加商品
-                                        </font></font></a>
-
-                                        <b class="arrow"></b>
-                                    </li>
-
-                                    <li class="">
-                                        <a href="#">
-                                            <i class="menu-icon fa fa-eye pink"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                            查看商品
-                                        </font></font></a>
-
-                                        <b class="arrow"></b>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </li>
