@@ -19,14 +19,50 @@ public class CrmproductserviceServiceImpl implements CrmproductserviceService {
     private CrmproductserviceDao crmproductserviceDao;
 
     @Override
-    public List<Crmproductservice> selectCrmproductservice() {
+    public List<Crmproductservice> selectCrmproductservice(String id) {
         List<Crmproductservice> Crmproductservice=null;
         try {
-            Crmproductservice=crmproductserviceDao.CRMPRODUCTSERVICE_LIST();
+            Crmproductservice=crmproductserviceDao.CRMPRODUCTSERVICE_LIST(id);
             logger.debug("do crmproductserviceDao()------------------------------");
         }catch (Exception e){
             logger.debug("do crmproductserviceDao()------------------------------"+e.getMessage());
         }
         return Crmproductservice;
+    }
+
+    @Override
+    public Integer updateCrmproductservice(Crmproductservice crmproductservice) {
+       Integer i=0;
+        try {
+            i=crmproductserviceDao.updateCrmproductservice(crmproductservice);
+            logger.debug("do updateCrmproductservice()------------------------------");
+        }catch (Exception e){
+            logger.debug("do updateCrmproductservice()------------------------------"+e.getMessage());
+        }
+        return i;
+    }
+
+    @Override
+    public Integer delCrmproductservice(String id) {
+        Integer i=0;
+        try {
+            i=crmproductserviceDao.delCrmproductservice(id);
+            logger.debug("do delCrmproductservice()------------------------------");
+        }catch (Exception e){
+            logger.debug("do delCrmproductservice()------------------------------"+e.getMessage());
+        }
+        return i;
+    }
+
+    @Override
+    public Integer addCrmproductservice(Crmproductservice crmproductservice) {
+        Integer i=0;
+        try {
+            i=crmproductserviceDao.addCrmproductservice(crmproductservice);
+            logger.debug("do addCrmproductservice()------------------------------");
+        }catch (Exception e){
+            logger.debug("do addCrmproductservice()------------------------------"+e.getMessage());
+        }
+        return i;
     }
 }

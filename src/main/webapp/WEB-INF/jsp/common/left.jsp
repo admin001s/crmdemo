@@ -117,13 +117,46 @@
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="">
-                        <a href="invoice.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
+
+
+
+
+                    <li class="hsub open">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                             产品服务线
+                        </font></font><b class="arrow fa fa-angle-down"></b>
                         </a>
 
                         <b class="arrow"></b>
+
+                        <ul class="submenu nav-show " style="display: block;">
+                            <li class="one"  data-url="/servicelist.do">
+                                <a href="javascript:;">
+                                    <i class="menu-icon fa fa-leaf green"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                    产品管理
+                                </font></font></a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="one"  data-url="/modularlist.do">
+                                <a href="javascript:;">
+                                    <i class="menu-icon fa fa-pencil orange"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                    模板管理
+                                </font></font></a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="one"  data-url="/TaskSchedule.do">
+                                <a href="javascript:;">
+                                    <i class="menu-icon fa fa-gavel blue"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                    模块任务
+                                </font></font></a>
+
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="">

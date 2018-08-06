@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.CrmtaskscheduleDao">
+
+    <select id="selectCrmtaskschedulevop" resultType="com.crmdemo.vop.Crmtaskschedulevop">
+
+  SELECT f.*,u.`UserName` uname FROM (SELECT (@i:=@i+1)   AS   i,t.*,p.`Name` pname,m.`ModularName` mname,b.`customersName` bname
+  FROM (SELECT   @i:=0)   AS   it,`crmtaskschedule` t, `crmproductservice` p,`crmmodular` m,`crmcustomersinfo` b
+  WHERE t.`CRMModularId`=m.`CRMModularId` AND t.`RMProductServiceCId`=p.`CRMProductServiceId` AND t.`UserId`=b.`id`) f
+  LEFT JOIN `crminfo` u ON f.`ConfirmUserId`=u.`UserId`
+
+    </select>
+
+    <insert id="addCrmtaskschedule" parameterType="Crmtaskschedule">
+        INSERT INTO crmtaskschedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rmProductServiceCId != null">
+                `RMProductServiceCId`,
+            </if>
+            <if test="crmModularId !=null">
+                `CRMModularId`,
+            </if>
+            <if test="userId != null">
+                `UserId`,
+            </if>
+            <if test="serviceTime != null">
+                `ServiceTime`,
+            </if>
+            <if test="levelRelationShip !=null">
+                `LevelRelationShip`,
+            </if>
+            <if test="status != null">
+                `Status`,
+            </if>
+            <if test="existQuest != null">
+                `ExistQuest`,
+            </if>
+            <if test="confirmTime !=null">
+                `ConfirmTime`,
+            </if>
+            <if test="confirmUserId != null">
+                `ConfirmUserId`,
+            </if>
+            <if test="updateTime != null">
+                `UpdateTime`,
+            </if>
+            <if test="createTime !=null">
+                `CreateTime`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rmProductServiceCId != null">
+                #{rmProductServiceCId},
+            </if>
+            <if test="crmModularId != null">
+                #{crmModularId},
+            </if>
+            <if test="userId != null ">
+                #{userId},
+            </if>
+            <if test="serviceTime != null">
+                #{serviceTime},
+            </if>
+            <if test="levelRelationShip != null">
+                #{levelRelationShip},
+            </if>
+            <if test="status != null ">
+                #{status},
+            </if>
+            <if test="existQuest != null">
+                #{existQuest},
+            </if>
+            <if test="confirmTime != null">
+                #{confirmTime},
+            </if>
+            <if test="confirmUserId != null ">
+                #{confirmUserId},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateCrmtaskschedule" parameterType="Crmtaskschedule">
+               UPDATE `crmtaskschedule`
+             <set>
+                 <if test="status !=null">
+                     `Status` = #{status},
+                 </if>
+                 <if test="confirmTime !=null">
+                     `ConfirmTime` = #{confirmTime},
+                 </if>
+                 <if test="confirmUserId !=null">
+                     `ConfirmUserId` = #{confirmUserId},
+                 </if>
+                 <if test="updateTime !=null">
+                     `UpdateTime` = #{updateTime},
+                 </if>
+             </set>
+                WHERE `CRMTaskScheduleId` = #{crmTaskScheduleId} ;
+
+    </update>
+</mapper>
