@@ -7,4 +7,8 @@
             and provinceid=#{provinceid}
         </if>
     </select>
+
+    <select id="selectCitiesByid" resultType="Cities">
+        select  * from  cities where cityid=#{cityid}
+    </select>
 </mapper>

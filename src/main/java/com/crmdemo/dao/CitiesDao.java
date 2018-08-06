@@ -7,4 +7,5 @@ import java.util.List;
 @Mapper
 public interface CitiesDao {
     List<Cities> selectCitiesListByProvinceid(Cities cities);
+    Cities selectCitiesByid(Cities cities);
 }

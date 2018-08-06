@@ -5,6 +5,7 @@ import com.crmdemo.entity.Crmagentsinfo;
 import com.crmdemo.entity.Crminfo;
 import com.crmdemo.service.AgencystaffService;
 import com.crmdemo.service.CrmagentsinfoService;
+import com.crmdemo.service.CrmcustomersinfoService;
 import com.crmdemo.service.ProvincesService;
 import com.crmdemo.util.CommonUtils;
 import com.crmdemo.util.CookieUtils;
@@ -26,7 +27,8 @@ public class JspController {
     CrmagentsinfoService crmagentsinfoService;
     @Resource
     AgencystaffService agencystaffService;
-
+    @Resource
+    CrmcustomersinfoService crmcustomersinfoService;
     /**
      * 登录页面
      *
@@ -185,6 +187,44 @@ public class JspController {
         }else {
             return "noJurisdiction";
         }
+    }
+
+    /**
+     * 客户分配页面
+     * @param id
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("toChoice.do")
+    public String toChoice(String id,ModelMap modelMap){
+        modelMap.put("id",id);
+        return "crm/choice";
+    }
+
+    /**
+     * 新增跟进页面
+     * @param id
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("followup.do")
+    public String followup(String id,ModelMap modelMap,String customersName){
+        modelMap.put("customerId",id);
+        modelMap.put("customersName",customersName);
+        return "crm/follow_up";
+    }
+
+    /**
+     * 客户修改页面
+     * @param id
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("updateCustomer.do")
+    public String updateCustomer(Integer id,ModelMap modelMap){
+        modelMap.put("customer",crmcustomersinfoService.selectCrmcustomersinfoById(id));
+        modelMap.put("provinces", provincesService.selectProList());
+        return "crm/customer_update";
     }
 }
 

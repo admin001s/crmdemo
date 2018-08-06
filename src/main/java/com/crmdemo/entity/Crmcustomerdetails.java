@@ -11,7 +11,24 @@ public class Crmcustomerdetails {
   private Integer followupStatus;
   private java.sql.Timestamp followupTime;
   private java.sql.Timestamp createTime;
+  private String remarks;
+  private String followMethod;
 
+  public String getFollowMethod() {
+    return followMethod;
+  }
+
+  public void setFollowMethod(String followMethod) {
+    this.followMethod = followMethod;
+  }
+
+  public String getRemarks() {
+    return remarks;
+  }
+
+  public void setRemarks(String remarks) {
+    this.remarks = remarks;
+  }
 
   public Integer getId() {
     return id;

@@ -6,15 +6,14 @@
         <ul class="breadcrumb col-lg-12">
             <li class="col-lg-12">
                 <div class="col-lg-8">
-                <i class="ace-icon fa fa-user home-icon"></i>
-                <a href="javascript:;">客户</a></div>
+                    <i class="ace-icon fa fa-user home-icon"></i>
+                    <a href="javascript:;">客户</a></div>
                 <div class="col-lg-3">
                 <span>
 												<button class="btn btn-sm btn-success" id="add">添加客户</button>
 											</span></div>
             </li>
         </ul><!-- /.breadcrumb -->
-
 
 
         <!-- /section:basics/content.searchbox -->
@@ -39,8 +38,8 @@
 <script src="assets/js/bootstrap-table.js"></script>
 <script src="assets/js/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript">
-    $(function(){
-        $("#breadcrumbs").find("#add").on("click",function(){
+    $(function () {
+        $("#breadcrumbs").find("#add").on("click", function () {
             $('#workstation').load("addcustomer.do");
         });
     });
@@ -56,7 +55,7 @@
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json", //数据类型
                 striped: false, //是否显示行间隔色
-                pagination: false, //是否显示分页（*）
+                pagination: true, //是否显示分页（*）
                 queryParamsType: '',
                 queryParams: function (param) {
                     var params = {
@@ -70,24 +69,22 @@
                 pagination: true,//是否开启分页（*）
                 locale: 'zh-CN',//中文支持
                 pageNumber: 1,//初始化加载第一页，默认第一页
-                pageSize: 3,//每页的记录行数（*）
-                pageList: [2, 3, 4],//可供选择的每页的行数（*）
+                pageSize: 20,//每页的记录行数（*）
+                pageList: [],//可供选择的每页的行数（*）
                 sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
-                showRefresh: true,//刷新按钮
-                search: true,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+                showRefresh: false,//刷新按钮
+                search: false,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
                 // sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
                 // pageSize : 20,
                 // pageList : [ 10, 20, 50 ], //可供选择的每页的行数（*）
-                clickToSelect: true, //是否启用点击选中行
-// 				height : 400, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                clickToSelect: false, //是否启用点击选中行
+                height: 600, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "", //每一行的唯一标识，一般为主键列
                 showExport: true,
                 exportDataType: 'all',
                 //     exportTypes : [ 'excel' ], //导出文件类型
                 columns: [{
-                    field: 'id',
-                    title: '序号',
-                    align: 'center'
+                    checkbox: true
                 }, {
                     field: 'customersId',
                     title: '用户编号',
@@ -95,8 +92,11 @@
                 }, {
                     field: 'customersName',
                     title: '用户名称',
-                    align: 'center'
-                },{
+                    align: 'center',
+                    formatter: function (value) {
+                        return '<a href="#">' + value + '</a>';
+                    }
+                }, {
                     field: 'customersSex',
                     title: '性别',
                     align: 'center',
@@ -110,9 +110,13 @@
                         return sex;
                     }
                 }, {
-                    field: 'companywebsite',
-                    title: '地址',
-                    align: 'center'
+                    field: 'provinceName',
+                    title: '地区',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var provinceName = row.provinceName + "-" + row.cityName + "-" + row.mainsalesarea;
+                        return provinceName;
+                    }
                 }, {
                     field: 'telephone',
                     title: '电话号码',
@@ -124,34 +128,187 @@
                 }, {
                     field: 'customerStatus',
                     title: '客户状态',
-                    align: 'center'
-                }, {
-                    field: 'department',
-                    title: '所属部门',
-                    align: 'center'
-                }, {
-                    field : 'updates',
-                    title : '',
-                    align : 'center',
-                    formatter : function(value, row, index) {
-                        return '<i class="glyphicon glyphicon-pencil bianji" data-id="' + row.id +  '" style="cursor: pointer;" title="修改"></i>';
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (value == "1") {
+                            return '未分配<button class="btn btn-sm btn-primary fp" id="fp" data-id="' + row.id + '">分配</button>';
+                        } else if (value == "2") {
+                            return "已分配";
+                        }
                     }
                 }, {
-                    field : 'del',
-                    title : '',
-                    align : 'center',
-                    formatter : function(value, row, index) {
+                    field: 'crminfo.chineseName',
+                    title: '跟进人',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.customerStatus == "1") {
+                            return "暂无分配"
+                        } else {
+                            return row.crminfo.chineseName;
+                        }
+                    }
+                }, {
+                    field: 'crmcustomerdetailsList',
+                    title: '最新跟进记录',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.crmcustomerdetailsList[0] != null) {
+                            return '<i class="gj" data-id="' + row.id + '">' + row.crmcustomerdetailsList[0].remarks + '<button class="btn btn-sm btn-primary gja" data-name="' + row.customersName + '" data-id="' + row.id + '">+写跟进</button></i>';
+                        } else {
+                            return '<i class="gj" data-id="' + row.id + '">暂无跟进记录<button class="btn btn-sm btn-primary gja" data-name="' + row.customersName + '"  data-id="' + row.id + '">+写跟进</button></i>';
+                        }
+                    }
+                }, {
+                    field: 'crmcustomerdetailsList',
+                    title: '跟进状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.crmcustomerdetailsList[0] != null) {
+                            if (row.crmcustomerdetailsList[0].followupStatus == "1") {
+                                return "初步接触";
+                            } else if (row.crmcustomerdetailsList[0].followupStatus == "2") {
+                                return "意向客户";
+                            } else if (row.crmcustomerdetailsList[0].followupStatus == "3") {
+                                return "报价客户";
+                            } else if (row.crmcustomerdetailsList[0].followupStatus == "4") {
+                                return "成交客户";
+                            } else if (row.crmcustomerdetailsList[0].followupStatus == "5") {
+                                return "搁置客户";
+                            }
+                        } else {
+                            return "暂无跟进记录";
+                        }
+                    }
+                }, {
+                    field: 'isVip',
+                    title: '用户类型',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (value == "0") {
+                            return "黄金VIP";
+                        } else if (value == "1") {
+                            return "普通用户";
+                        }
+                    }
+                }, {
+                    field: 'email',
+                    title: '联系邮箱',
+                    align: 'center'
+                }, {
+                    field: 'customerSource',
+                    title: '客户来源',
+                    align: 'center'
+                }, {
+                    field: 'customerUrlSource',
+                    title: '客户网址来源',
+                    align: 'center'
+                }, {
+                    field: 'companywebsite',
+                    title: '公司名称',
+                    align: 'center'
+                }, {
+                    field: 'companyAddress',
+                    title: '公司地址',
+                    align: 'center'
+                }, {
+                    field: 'companydetails',
+                    title: '公司详情',
+                    align: 'center'
+                }, {
+                    field: 'createTime',
+                    title: '创建时间',
+                    align: 'center'
+                }, {
+                    field: 'updates',
+                    title: '',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return '<i class="glyphicon glyphicon-pencil bianji" data-id="' + row.id + '" style="cursor: pointer;" title="修改"></i>';
+                    }
+                }, {
+                    field: 'del',
+                    title: '',
+                    align: 'center',
+                    formatter: function (value, row, index) {
                         return '<i class="glyphicon glyphicon-trash shanchu" data-id="' + row.id + '" style="cursor: pointer;" title="删除"></i>';
                     }
                 }],
                 onPostBody: function (data, row) {
                     container.find('.fixed-table-toolbar').hide();
-                    // initButton();
+
                     container.find('.bootstrap-table').height('350');
-                },
+                }, onPostHeader: function (data) {
+
+                }, onPostBody: function (data) {
+                    initButton();
+                }
 
             }
             container.find('#table').bootstrapTable(options);
+
+            function initButton() {
+                if (${user.roleId} == "1" || ${user.roleId} == "2" || ${user.roleId} == "3" || ${user.roleId} == "4"
+            )
+                {
+                    $(".bianji").on("click", function () {
+                        $('#reserveModal').load("updateCustomer.do", {
+                            id: $(this).attr("data-id")
+                        }, function (a, b, c) {
+                            $('#reserveModal').modal('show');
+                        });
+                    });
+                }
+                ;
+                $(".shanchu").on("click", function () {
+                    if (${user.roleId} == "1" || ${user.roleId} == "2" || ${user.roleId} == "3" || ${user.roleId} == "4"
+                )
+                    {
+                        $.ajax({
+                            url: "deleteCustomer.do",
+                            data: {
+                                id: $(this).attr("data-id")
+                            },
+                            type: "post",
+                            dataType: "JSON",
+                            success: function (data) {
+                                if(data){
+                                    container.find('#table').bootstrapTable('refresh');
+                                }
+                            },
+                            error: function (errMsg) {
+                            }
+                        });
+                    }
+                });
+                $(".gja").hide();
+                gj();
+                $(".fp").unbind().on("click", function () {
+                    alert($(this).attr("data-name"));
+                    $('#reserveModal').load("toChoice.do", {
+                        id: $(this).attr("data-id")
+                    }, function (a, b, c) {
+                        $('#reserveModal').modal('show');
+                    });
+                });
+
+                $(".gj").unbind().hover(function () {
+                    $(this).children(".gja").show();
+                }, function () {
+                    $(this).children(".gja").hide();
+                })
+            }
+
+            function gj() {
+                $(".gja").unbind().click(function () {
+                    $('#reserveModal').load("followup.do", {
+                        id: $(this).attr("data-id"),
+                        customersName: $(this).attr("data-name")
+                    }, function (a, b, c) {
+                        $('#reserveModal').modal('show');
+                    });
+                    $(this).children(".gja").hide();
+                });
+            }
 
             function countFoot(value, field) {
                 var count = 0;

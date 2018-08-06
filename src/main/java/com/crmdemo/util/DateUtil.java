@@ -1,5 +1,6 @@
 package com.crmdemo.util;
-import java.text.ParseException;  
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;  
 import java.util.Calendar;  
 import java.util.Date;  
@@ -25,7 +26,9 @@ public class DateUtil {
     public final static SimpleDateFormat g_SimpleDateFormat_II = new SimpleDateFormat(  
             "yyyyMM");  
     public final static SimpleDateFormat sdfDateTimeFormat = new SimpleDateFormat(  
-            "yyyy-MM-dd HH:mm:ss");  
+            "yyyy-MM-dd HH:mm:ss");
+    public final static SimpleDateFormat sdfDateTimeFormat1 = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm");
     public final static SimpleDateFormat sdfDateTimeFormat_I = new SimpleDateFormat(  
             "yyyyMMddHHmmss");  
     public final static SimpleDateFormat sdfDateTimeFormat_IIII = new SimpleDateFormat(  
@@ -36,8 +39,36 @@ public class DateUtil {
     "yyyy/MM/dd HH:mm:ss");  
       
     public final static SimpleDateFormat xISO_dateTimeFormat = new SimpleDateFormat(  
-            "yyyy/MM/dd HH:mm:ss Z");  
-  
+            "yyyy/MM/dd HH:mm:ss Z");
+
+    /**
+     * 将String字符串转换为java.sql.Timestamp格式日期,用于数据库保存
+     * @param strDate
+     *            表示日期的字符
+     * @return java.sql.Timestamp类型日期对象（如果转换失败则返回null）
+     */
+    public static java.sql.Timestamp strToSqlDate(String strDate) {
+        java.util.Date date = null;
+        try {
+            date = sdfDateTimeFormat1.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Timestamp dateSQL = new java.sql.Timestamp(date.getTime());
+        return dateSQL;
+    }
+    /**
+     * 将java.sql.Timestamp对象转化为String字符串
+     * @param time
+     *            要格式的java.sql.Timestamp对象
+     * @param strFormat
+     *            输出的String字符串格式的限定（如："yyyy-MM-dd HH:mm:ss"）
+     * @return 表示日期的字符串
+     */
+    public static String dateToStr(java.sql.Timestamp time) {
+        String str = sdfDateTimeFormat.format(time);
+        return str;
+    }
     /** 
      * 获取当前日期 
      *  

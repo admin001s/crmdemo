@@ -7,4 +7,7 @@
             and areas.cityid=#{cityid}
         </if>
     </select>
+    <select id="selectAreasById" resultType="Areas">
+        select  * from  areas where areaid=#{areaid}
+    </select>
 </mapper>

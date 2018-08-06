@@ -4,7 +4,7 @@ package com.crmdemo.entity;
 public class Provinces {
 
   private Integer id;
-  private Integer provinceid;
+  private String provinceid;
   private String province;
 
 
@@ -17,14 +17,13 @@ public class Provinces {
   }
 
 
-  public Integer getProvinceid() {
+  public String getProvinceid() {
     return provinceid;
   }
 
-  public void setProvinceid(Integer provinceid) {
+  public void setProvinceid(String provinceid) {
     this.provinceid = provinceid;
   }
-
 
   public String getProvince() {
     return province;

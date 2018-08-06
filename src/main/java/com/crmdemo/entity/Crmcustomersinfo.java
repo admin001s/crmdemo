@@ -1,6 +1,8 @@
 package com.crmdemo.entity;
 
 
+import com.crmdemo.util.DateUtil;
+
 import java.sql.Timestamp;
 
 public class Crmcustomersinfo {
@@ -28,7 +30,7 @@ public class Crmcustomersinfo {
   private String companywebsite;
   private String companyAddress;
   private String companydetails;
-  private String customerStatus;
+  private Integer customerStatus;
   private String mainproducts;
   private Integer adduserId;
   private String adduserHierarchy;
@@ -265,14 +267,13 @@ public class Crmcustomersinfo {
   }
 
 
-  public String getCustomerStatus() {
+  public Integer getCustomerStatus() {
     return customerStatus;
   }
 
-  public void setCustomerStatus(String customerStatus) {
+  public void setCustomerStatus(Integer customerStatus) {
     this.customerStatus = customerStatus;
   }
-
 
   public String getMainproducts() {
     return mainproducts;
@@ -319,8 +320,8 @@ public class Crmcustomersinfo {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
-    return createTime;
+  public String getCreateTime() {
+    return DateUtil.dateToStr(createTime);
   }
 
   public void setCreateTime(java.sql.Timestamp createTime) {

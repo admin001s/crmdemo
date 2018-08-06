@@ -4,4 +4,8 @@
     <select id="selectProvincesList" resultType="Provinces">
         select * from provinces
     </select>
+    <select id="selectProvicesById" resultType="Provinces">
+        select * from provinces where provinceid=#{provinceid}
+    </select>
+
 </mapper>

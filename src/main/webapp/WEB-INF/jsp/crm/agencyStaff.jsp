@@ -85,8 +85,8 @@
                 pagination: true,//是否开启分页（*）
                 locale: 'zh-CN',//中文支持
                 pageNumber: 1,//初始化加载第一页，默认第一页
-                pageSize: 3,//每页的记录行数（*）
-                pageList: [2, 3, 4],//可供选择的每页的行数（*）
+                pageSize: 20,//每页的记录行数（*）
+                pageList: [],//可供选择的每页的行数（*）
                 sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
                 showRefresh: true,//刷新按钮
                 search: true,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
@@ -100,6 +100,8 @@
                 exportDataType: 'all',
                 //     exportTypes : [ 'excel' ], //导出文件类型
                 columns: [ {
+                    checkbox: true
+                },{
                     field: 'agentsStaffId',
                     title: '代理员工编号',
                     align: 'center'

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.CrmcustomerallocateDao">
+    <insert id="insertCrmcustomerallocate">
+        insert into crmcustomerallocate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="beiuserId != null">
+                beiuserId,
+            </if>
+            <if test="distributionTime != null">
+                distributionTime,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="customerId != null">
+                customerId,
+            </if>
+            <if test="updateTime != null">
+                updateTime,
+            </if>
+            <if test="isRelation != null">
+                isRelation,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="beiuserId != null">
+                #{beiuserId},
+            </if>
+            <if test="distributionTime != null">
+                #{distributionTime},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="customerId != null">
+                #{customerId},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="isRelation != null">
+                #{isRelation},
+            </if>
+
+        </trim>
+    </insert>
+</mapper>

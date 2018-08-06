@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.CrmcustomersinfoDao">
+    <resultMap id="crmcustomersinfoVop" type="com.crmdemo.vop.CrmcustomersinfoVop">
+        <id property="id" column="id"/>
+        <association property="crminfo" javaType="com.crmdemo.entity.Crminfo">
+            <id property="userId" column="userId"/>
+        </association>
+        <collection property="crmcustomerdetailsList"
+                    ofType="com.crmdemo.entity.Crmcustomerdetails">
+            <id property="id" column="c_id"/>
+            <result property="createTime" column="c_createTime"/>
+        </collection>
+    </resultMap>
     <insert id="insertCrmcustomersinfo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            select last_insert_id()
+        </selectKey>
         insert into crmcustomersinfo
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="customersId != null">
@@ -190,27 +204,42 @@
     </insert>
 
     <select id="selectcrmcustomersinfo" resultType="Crmcustomersinfo">
-        SELECT   (@i:=@i+1)   AS   i,c.*   FROM   (SELECT   @i:=0)   AS   it ,crmcustomersinfo c
+        SELECT (@i:=@i+1) AS i,c.* FROM (SELECT @i:=0) AS it ,crmcustomersinfo c
         WHERE `deleteStatus`=0
         <if test="open=='yi'">
-            AND  c.`customersId`  IN(SELECT `crmcustomersinfoid` FROM openservice)
+            AND c.`customersId` IN(SELECT `crmcustomersinfoid` FROM openservice)
         </if>
         <if test="open=='wei'">
-            AND  c.`customersId` NOT IN(SELECT `crmcustomersinfoid` FROM openservice)
+            AND c.`customersId` NOT IN(SELECT `crmcustomersinfoid` FROM openservice)
         </if>
 
     </select>
-    <select id="selectCrmcustomersinfoList" resultType="Crmcustomersinfo">
-        select  * from crmcustomersinfo where deleteStatus=0
-        <if test="adduserId !=null">
-           and adduserId=#{adduserId}
-        </if>
+    <select id="selectCrmcustomersinfoList" resultMap="crmcustomersinfoVop">
+        SELECT a.* FROM ((SELECT crmcustomersinfo.*,`crminfo`.`ChineseName`,`crminfo`.`RoleId`,`crminfo`.`userArrangement`,`crminfo`.`UserId`,`crminfo`.`UserName`,crmcustomerdetails.`id` AS
+        c_id,crmcustomerdetails.`followupTime`,crmcustomerdetails.`remarks`,crmcustomerdetails.`followupStatus`
+        FROM crmcustomersinfo
+        INNER JOIN `crmcustomerallocate` ON crmcustomersinfo.`id`=crmcustomerallocate.`customerId`
+        INNER JOIN crminfo ON crminfo.`UserId`=crmcustomerallocate.`beiuserId`
+        LEFT JOIN `crmcustomerdetails` ON `crmcustomerdetails`.`crmcustomersinfoID`=`crmcustomersinfo`.`id`
+        WHERE `crmcustomersinfo`.`customerStatus`!=1 and crmcustomersinfo.deleteStatus=0
         <if test="adduserHierarchy !=null">
-            and adduserHierarchy like '%${adduserHierarchy}%'
-        </if>
+            AND crminfo.`userArrangement` LIKE '%${adduserHierarchy}%'
+        </if>)
+        UNION ALL
+        (SELECT crmcustomersinfo.*,`crminfo`.`ChineseName`,`crminfo`.`RoleId`,`crminfo`.`userArrangement`,`crminfo`.`UserId`,`crminfo`.`UserName`,crmcustomerdetails.`id` AS
+        c_id,crmcustomerdetails.`followupTime`,crmcustomerdetails.`remarks`,crmcustomerdetails.`followupStatus`
+        FROM crmcustomersinfo
+        LEFT JOIN `crmcustomerallocate` ON crmcustomersinfo.`id`=crmcustomerallocate.`customerId`
+        LEFT JOIN crminfo ON crminfo.`UserId`=crmcustomerallocate.`beiuserId`
+        LEFT JOIN `crmcustomerdetails` ON `crmcustomerdetails`.`crmcustomersinfoID`=`crmcustomersinfo`.`id`
+        WHERE `crmcustomersinfo`.`customerStatus`=1 and crmcustomersinfo.deleteStatus=0
+        <if test="adduserHierarchy !=null">
+            AND `crmcustomersinfo`.`adduserHierarchy` LIKE '%${adduserHierarchy}%'
+        </if>)) AS a
+        ORDER BY TIMESTAMP(a.createtime),TIMESTAMP(a.`followupTime`) DESC
     </select>
     <select id="selectCrmcustomersinfoCount" resultType="java.lang.Integer">
-        select  count(1) from crmcustomersinfo where deleteStatus=0
+        select count(1) from crmcustomersinfo where deleteStatus=0
         <if test="customersId !=null and  customersId !=''">
             and customersId=#{customersId}
         </if>
@@ -221,4 +250,100 @@
             and companywebsite=#{companywebsite}
         </if>
     </select>
+    <select id="selectCrmcustomersinfoById" resultType="Crmcustomersinfo">
+        select * from crmcustomersinfo where id =#{id}
+    </select>
+    <update id="updateCrmcustomersinfo">
+        update crmcustomersinfo
+        <set>
+            <if test="customersName != null">
+                customersName = #{customersName},
+            </if>
+            <if test="customersSex != null">
+                customersSex = #{customersSex},
+            </if>
+            <if test="provinceId != null">
+                provinceId = #{provinceId},
+            </if>
+            <if test="provinceName != null">
+                provinceName = #{provinceName},
+            </if>
+            <if test="cityName != null">
+                cityName = #{cityName},
+            </if>
+            <if test="countryName != null">
+                countryName = #{countryName},
+            </if>
+            <if test="department != null">
+                department = #{department},
+            </if>
+            <if test="mainsalesarea != null">
+                mainsalesarea = #{mainsalesarea},
+            </if>
+            <if test="mobilephone != null">
+                mobilephone = #{mobilephone},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone},
+            </if>
+            <if test="qq != null">
+                qq = #{qq},
+            </if>
+            <if test="isVip != null">
+                isVip = #{isVip},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="fax != null">
+                fax = #{fax},
+            </if>
+            <if test="industryCategory != null">
+                industryCategory = #{industryCategory},
+            </if>
+            <if test="industrySubclass != null">
+                industrySubclass = #{industrySubclass},
+            </if>
+            <if test="customerSource != null">
+                customerSource = #{customerSource},
+            </if>
+            <if test="customerUrlSource != null">
+                customerUrlSource = #{customerUrlSource},
+            </if>
+            <if test="companywebsite != null">
+                companywebsite = #{companywebsite},
+            </if>
+            <if test="companyAddress != null">
+                companyAddress = #{companyAddress},
+            </if>
+            <if test="companydetails != null">
+                companydetails = #{companydetails},
+            </if>
+            <if test="customerStatus != null">
+                customerStatus = #{customerStatus},
+            </if>
+            <if test="mainproducts != null">
+                mainproducts = #{mainproducts},
+            </if>
+            <if test="adduserId != null">
+                adduserId = #{adduserId},
+            </if>
+            <if test="adduserHierarchy != null">
+                adduserHierarchy = #{adduserHierarchy},
+            </if>
+            <if test="deleteStatus != null">
+                deleteStatus = #{deleteStatus},
+            </if>
+            <if test="addmethod != null">
+                addmethod = #{addmethod},
+            </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime},
+            </if>
+            <if test="beOverdue != null">
+                beOverdue = #{beOverdue},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

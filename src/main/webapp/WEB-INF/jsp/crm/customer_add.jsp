@@ -278,6 +278,14 @@
                                     </div>
 
                                     <div class="step-pane" id="step2">
+                                        <div class="alert alert-warning">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                                <i class="ace-icon fa fa-times"></i>
+                                            </button>
+                                            <strong>提示</strong>
+                                            如果您未将此用户分配到代理商或代理商员工，将跳过此操作！
+                                            <br />
+                                        </div>
                                         <div>
                                             <div class="form-group" id="zj">
                                                 <label class="col-lg-1">渠道总监：</label>
@@ -318,7 +326,8 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div><div class="form-group" id="yg">
+                                            </div>
+                                            <div class="form-group" id="yg">
                                             <label class="col-lg-1">代理商员工：</label>
                                             <div class="col-lg-3 col-sm-2">
                                                 <div class="pos-rel">
@@ -328,6 +337,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         </div>
                                     </div>
 
@@ -354,12 +364,6 @@
                                         下一步
                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                     </button>
-
-                                    <button class="btn btn-next" id="tiao">
-                                        <i class="ace-icon fa"></i>
-                                        跳过
-                                    </button>
-
                                     <!-- /section:plugins/fuelux.wizard.buttons -->
                                 </div>
 
@@ -443,6 +447,13 @@
             return iss;
         }
         function add() {
+            var isex;
+            var fp;
+            if($("#yg select").val()!="0"){
+                fp=$("#yg select").val();
+            }else if($("#dls select").val()!="0"){
+                fp=$("#dls select").val();
+            }
             $.ajax({
                 url: "addCrmcustomersinfo.do",
                 data: {
@@ -465,20 +476,23 @@
                     companydetails: $("#companydetails").val(),
                     mainproducts: $("#mainproducts").val(),
                     customerUrlSource: $("#customerUrlSource").val(),
-                    qq: $("#qq").val()
+                    qq: $("#qq").val(),
+                    fp:fp
                 },
+                async: false,
                 type: "post",
                 dataType: "JSON",
                 success: function (data) {
                     if (data) {
-                        alert("新增成功！");
+                        isex=true;
                     } else {
-                        alert("新增失败！");
+                        isex=false;
                     }
                 },
                 error: function (errMsg) {
                 }
             });
+            return isex;
         }
 
 
@@ -532,8 +546,19 @@
                     }
                 });
             } else {
+                var _html = '<option value="0">------------</option>';
                 $("#jl").hide();
                 $("#zy").hide();
+                $("#dls").hide();
+                $("#yg").hide();
+                $("#jl select").empty();
+                $("#jl select").append(_html);
+                $("#zy select").empty();
+                $("#zy select").append(_html);
+                $("#dls select").empty();
+                $("#dls select").append(_html);
+                $("#yg select").empty();
+                $("#yg select").append(_html);
             }
         });
         $("#jl select").change(function () {
@@ -559,10 +584,79 @@
                     }
                 });
             } else {
+                var _html = '<option value="0">------------</option>';
                 $("#zy").hide();
+                $("#dls").hide();
+                $("#yg").hide();
+                $("#zy select").empty();
+                $("#zy select").append(_html);
+                $("#dls select").empty();
+                $("#dls select").append(_html);
+                $("#yg select").empty();
+                $("#yg select").append(_html);
             }
         });
-
+        $("#zy select").change(function () {
+            if ($(this).val() != '0') {
+                $("#dls").show();
+                $.ajax({
+                    url: "getCusinfo.do",
+                    data: {
+                        roleId: 5,
+                        userArrangement: $(this).val()
+                    },
+                    type: "post",
+                    dataType: "JSON",
+                    success: function (data) {
+                        var _html = '<option value="0">------------</option>';
+                        $(data).each(function () {
+                            _html += '<option value="' + this.userArrangement + '">' + this.chineseName + '</option>';
+                        });
+                        $("#dls select").empty();
+                        $("#dls select").append(_html);
+                    },
+                    error: function (errMsg) {
+                    }
+                });
+            } else {
+                var _html = '<option value="0">------------</option>';
+                $("#dls").hide();
+                $("#yg").hide();
+                $("#dls select").empty();
+                $("#dls select").append(_html);
+                $("#yg select").empty();
+                $("#yg select").append(_html);
+            }
+        });
+        $("#dls select").change(function () {
+            if ($(this).val() != '0') {
+                $("#yg").show();
+                $.ajax({
+                    url: "getCusinfo.do",
+                    data: {
+                        roleId: 6,
+                        userArrangement: $(this).val()
+                    },
+                    type: "post",
+                    dataType: "JSON",
+                    success: function (data) {
+                        var _html = '<option value="0">------------</option>';
+                        $(data).each(function () {
+                            _html += '<option value="' + this.userArrangement + '">' + this.chineseName + '</option>';
+                        });
+                        $("#yg select").empty();
+                        $("#yg select").append(_html);
+                    },
+                    error: function (errMsg) {
+                    }
+                });
+            } else {
+                var _html = '<option value="0">------------</option>';
+                $("#yg").hide();
+                $("#yg select").empty();
+                $("#yg select").append(_html);
+            }
+        });
 
 
         var $validation = false;
@@ -583,32 +677,10 @@
                     }
                 }
                 if (info.step == 2) {
-
+                    $("#tiao").hide();
                 }
-                if (info.step == 3) {
-                    var is1;
-                    $.ajax({
-                        url: "isUserRepeat.do",
-                        data: {
-                            userName: $("#userName").val()
-                        },
-                        async: false,
-                        type: "post",
-                        dataType: "JSON",
-                        success: function (data) {
-                            is1 = data;
-
-                        },
-                        error: function (errMsg) {
-                        }
-                    });
-                    return is1;
-                }
-
                 if (info.step == 1 && is) {
-
-
-                    if (${user.roleId}==1
+                    if (${user.roleId}==1  && is
                 )
                     {
                         $("#zj").show();
@@ -661,7 +733,7 @@
                             }
                         }
                     });
-                    $('#workstation').load("agent.do");
+                    $('#workstation').load("customer.do");
                 } else {
                     bootbox.dialog({
                         message: "添加失败！",
