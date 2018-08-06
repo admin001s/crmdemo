@@ -1,9 +1,14 @@
 package com.crmdemo.controller;
 
+import com.crmdemo.entity.Crmcustomersinfo;
+import com.crmdemo.entity.Crmmodular;
 import com.crmdemo.entity.Crmproductservice;
 import com.crmdemo.entity.Customerservice;
+import com.crmdemo.service.impl.CrmcustomersinfoServiceImpl;
+import com.crmdemo.service.impl.CrmmodularServiceImpl;
 import com.crmdemo.service.impl.CrmproductserviceServiceImpl;
 import com.crmdemo.service.impl.CustomerserviceServiceImpl;
+import com.crmdemo.vop.Crmmodularvop;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +28,10 @@ public class fuwuJspController {
     private CrmproductserviceServiceImpl crmproductserviceService;
     @Resource
     private CustomerserviceServiceImpl customerserviceServiceimpl;
+    @Resource
+    private CrmmodularServiceImpl crmmodularService;
+    @Resource
+    private CrmcustomersinfoServiceImpl crmcustomersinfoService;
 
     //服务
     @RequestMapping("/OpenList.do")
@@ -52,4 +61,19 @@ public class fuwuJspController {
         return "service/modularlist";
     }
 
+    //模块任务
+    @RequestMapping("/TaskSchedule.do")
+    public String TaskSchedule(HttpServletRequest request) {
+        //查询产品
+        List<Crmproductservice> crmproductall = crmproductserviceService.selectCrmproductservice(null);
+        request.setAttribute("crmproductall", crmproductall);
+        //查询模板
+        List<Crmmodularvop> crmmodulars = crmmodularService.selectcrmmodular(null);
+        request.setAttribute("crmmodulars", crmmodulars);
+        //客户
+        List<Crmcustomersinfo> crmcustomersinfo = crmcustomersinfoService.selectcrmcustomersinfo(null);
+        request.setAttribute("crmcustomersinfo", crmcustomersinfo);
+
+        return "service/TaskSchedule";
+    }
 }

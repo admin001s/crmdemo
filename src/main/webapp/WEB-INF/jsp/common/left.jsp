@@ -148,6 +148,14 @@
 
                                 <b class="arrow"></b>
                             </li>
+                            <li class="one"  data-url="/TaskSchedule.do">
+                                <a href="javascript:;">
+                                    <i class="menu-icon fa fa-gavel blue"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                    模块任务
+                                </font></font></a>
+
+                                <b class="arrow"></b>
+                            </li>
                         </ul>
                     </li>
 

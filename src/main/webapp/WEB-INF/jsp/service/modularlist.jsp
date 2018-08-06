@@ -13,7 +13,7 @@
                 产品服务线
             </li>
             <li>
-                产品管理
+                模块管理
             </li>
         </ul><!-- /.breadcrumb -->
     </div>
@@ -196,7 +196,7 @@
         //查看服务
         $(document).on("click", ".caozuo", function () {
             var id = $(this).attr("data-id");
-            $('#modal-table').modal("show");
+            $('#modal-table').modal({show:true, keyboard:false});
             $.ajax({
                 url: "/selectcrmmodular.do",
                 data: {

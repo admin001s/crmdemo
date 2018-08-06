@@ -192,7 +192,7 @@
         //查看服务
         $(document).on("click", ".caozuo", function () {
             var id = $(this).attr("data-id");
-            $('#modal-table').modal("show");
+            $('#modal-table').modal({show:true, keyboard:false});
             $.ajax({
                 url: "/getCustomerservicelist.do",
                 data: {
@@ -212,7 +212,7 @@
         });
         //添加产品
         $(".addService").click(function () {
-            $('#modal-table').modal("show");
+            $('#modal-table').modal({show:true, keyboard:false});
             $("#productName").val("");
             $("#productDetail").val("");
             $("#submit").val("0");
