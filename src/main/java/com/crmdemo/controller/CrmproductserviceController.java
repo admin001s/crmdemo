@@ -33,6 +33,11 @@ public class CrmproductserviceController {
     public boolean addCustomerservicelist(Crmproductservice crmproductservice) {
         boolean sf=false;
         List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
+        if(crmproductserviceList.size()==0){
+            crmproductservice.setCreateTime(new Date());
+            crmproductserviceService.addCrmproductservice(crmproductservice);
+            return true;
+        }
         for (Crmproductservice crm:crmproductserviceList){
             if(!crm.getName().equals(crmproductservice.getName())){
                 int i=0;

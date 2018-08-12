@@ -38,7 +38,7 @@ public class fuwuJspController {
     //服务
     @RequestMapping("/OpenList.do")
     public String index(HttpServletRequest request, HttpServletResponse response) {
-        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8 || CommonUtils.getUser(request, response).getRoleId() == 1) {
             List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
             request.setAttribute("crmproductserviceList", crmproductserviceList);
             return "service/OpenList";
@@ -52,7 +52,7 @@ public class fuwuJspController {
     //分配
     @RequestMapping("/AllocationOneLlist.do")
     public String AllocationOneLlist(HttpServletRequest request, HttpServletResponse response) {
-        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8 || CommonUtils.getUser(request, response).getRoleId() == 1) {
             return "service/AllocationOneLlist";
         } else {
             return "noJurisdiction";
@@ -63,7 +63,7 @@ public class fuwuJspController {
     //产品服务线
     @RequestMapping("/servicelist.do")
     public String servicelist(HttpServletRequest request, HttpServletResponse response) {
-        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8 || CommonUtils.getUser(request, response).getRoleId() == 1) {
             return "service/servicelist";
         } else {
             return "noJurisdiction";
@@ -73,7 +73,7 @@ public class fuwuJspController {
     //模块
     @RequestMapping("/modularlist.do")
     public String modularlist(HttpServletRequest request, HttpServletResponse response) {
-        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8 || CommonUtils.getUser(request, response).getRoleId() == 1) {
             List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
             request.setAttribute("crmproductList", crmproductserviceList);
             return "service/modularlist";
@@ -85,7 +85,7 @@ public class fuwuJspController {
     //模块任务
     @RequestMapping("/TaskSchedule.do")
     public String TaskSchedule(HttpServletRequest request, HttpServletResponse response) {
-        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8 || CommonUtils.getUser(request, response).getRoleId() == 1) {
             //查询产品
             List<Crmproductservice> crmproductall = crmproductserviceService.selectCrmproductservice(null);
             request.setAttribute("crmproductall", crmproductall);

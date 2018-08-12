@@ -61,6 +61,11 @@ public class CrmmodularController {
     public boolean addcrmmodular(Crmmodular crmmodular) {
         boolean sf = false;
         List<Crmmodularvop> crmmodularDaos =crmmodularService.selectcrmmodular(null);
+        if(crmmodularDaos.size()==0){
+            crmmodular.setCreateTime(new Date());
+            crmmodularService.addcrmmodular(crmmodular);
+            return true;
+        }
         for (Crmmodularvop crm:crmmodularDaos){
             if(!crm.getModularName().equals(crmmodular.getModularName())){
                 crmmodular.setCreateTime(new Date());

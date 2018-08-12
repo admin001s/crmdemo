@@ -27,6 +27,9 @@ public class CrmtaskscheduleController {
     @RequestMapping("/getCrmtaskschedulevop.do")
     public List<Crmtaskschedulevop> getCrmtaskschedulevop() {
         List<Crmtaskschedulevop> crmtaskschedulevops =crmtaskscheduleService.selectCrmtaskschedulevop();
+        if(crmtaskschedulevops.size()==0){
+            return null;
+        }
         for (Crmtaskschedulevop crm:crmtaskschedulevops){
             if(crm.getConfirmTime()!=null){
                 crm.setConfirmTime(java.sql.Date.valueOf(DateUtil.getDateTime_I(crm.getConfirmTime())));

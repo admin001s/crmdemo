@@ -337,8 +337,8 @@ public class Crmcustomersinfo {
     this.updateTime = updateTime;
   }
 
-  public Timestamp getCreateTime() {
-    return createTime;
+  public String getCreateTime() {
+    return DateUtil.dateToStr(createTime);
   }
 
   public void setCreateTime(Timestamp createTime) {

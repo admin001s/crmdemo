@@ -27,6 +27,10 @@ public class CustomerserviceController {
     public boolean insertCustomerservice(String name) {
         boolean sf = false;
         List<Customerservice> customerservices = customerserviceServiceimpl.selectcustomerservice(null);
+        if(customerservices.size()==0){
+            customerserviceServiceimpl.Insertcustomerservice(name);
+            return true;
+        }
         for (Customerservice cu : customerservices) {
             if (cu.getName().equals(name)) {
                 return sf;
