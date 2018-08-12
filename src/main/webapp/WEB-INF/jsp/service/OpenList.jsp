@@ -117,6 +117,7 @@
 <script src="assets/toastr/toastr.min.js"></script>
 
 
+
 <script type="text/javascript">
     jQuery(function ($) {
         var container = $('#select-product-p1123');
@@ -139,62 +140,55 @@
                 },
 
                 clickToSelect: true,
-                undefinedText: "",
                 pagination: true,//是否开启分页（*）
                 locale: 'zh-CN',//中文支持
                 pageNumber: 1,//初始化加载第一页，默认第一页
                 pageSize: 10,//每页的记录行数（*）
                 pageList: [5, 10, 20],//可供选择的每页的行数（*）
                 sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
-                showRefresh: true,//刷新按钮
                 search: true,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
-                // sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
-                // pageSize : 20,
-                // pageList : [ 10, 20, 50 ], //可供选择的每页的行数（*）
                 clickToSelect: true, //是否启用点击选中行
                 height : 650, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "", //每一行的唯一标识，一般为主键列
-                showExport: true,
-                exportDataType: 'all',
                 //     exportTypes : [ 'excel' ], //导出文件类型
                 columns: [{
                     field: 'i',
                     title: '序号',
                     align: 'center'
                 }, {
-                    field: 'customersId',
-                    title: '客户编号',
-                    align: 'center'
-                }, {
-                    field: 'customersName',
-                    title: '客户姓名',
-                    align: 'center'
-                }, {
-                    field: 'customersSex',
-                    title: '性别',
-                    align: 'center',
-                    formatter: function (value) {
-                        var sex = null;
-                        if (value == "0") {
-                            sex = "男";
-                        } else if (value == "1") {
-                            sex = "女";
+                        field: 'customersId',
+                        title: '客户编号',
+                        align: 'center'
+                    }, {
+                        field: 'customersName',
+                        title: '客户姓名',
+                        align: 'center'
+                    }, {
+                        field: 'customersSex',
+                        title: '性别',
+                        align: 'center',
+                        formatter: function (value) {
+                            var sex = null;
+                            if (value == "0") {
+                                sex = "男";
+                            } else if (value == "1") {
+                                sex = "女";
+                            }
+                            return sex;
                         }
-                        return sex;
-                    }
-                }, {
-                    field: 'provinceName',
-                    title: '省名',
-                    align: 'center'
-                }, {
-                    field: 'mobilephone',
-                    title: '手机号码',
-                    align: 'center'
-                }, {
-                    field: 'customerStatus',
-                    title: '客户状态',
-                    align: 'center'
-                },
+                    }, {
+                        field: 'provinceName',
+                        title: '省名',
+                        align: 'center'
+                    }, {
+                        field: 'mobilephone',
+                        title: '手机号码',
+                        align: 'center'
+                    }, {
+                        field: 'customerStatus',
+                        title: '客户状态',
+                        align: 'center'
+                    },
                     {
                         field: 'caozuo',
                         title: '操作',

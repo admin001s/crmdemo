@@ -320,13 +320,13 @@ public class Crmcustomersinfo {
   }
 
 
-  public String getCreateTime() {
-    return DateUtil.dateToStr(createTime);
-  }
-
-  public void setCreateTime(java.sql.Timestamp createTime) {
-    this.createTime = createTime;
-  }
+//  public String getCreateTime() {
+//    return DateUtil.dateToStr(createTime);
+//  }
+//
+//  public void setCreateTime(java.sql.Timestamp createTime) {
+//    this.createTime = createTime;
+//  }
 
 
   public java.sql.Timestamp getUpdateTime() {
@@ -337,4 +337,11 @@ public class Crmcustomersinfo {
     this.updateTime = updateTime;
   }
 
+  public Timestamp getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Timestamp createTime) {
+    this.createTime = createTime;
+  }
 }
