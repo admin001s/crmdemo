@@ -204,12 +204,12 @@
     </insert>
 
     <select id="selectcrmcustomersinfo" resultType="Crmcustomersinfo">
-        SELECT (@i:=@i+1) AS i,c.* FROM (SELECT @i:=0) AS it ,crmcustomersinfo c
-        WHERE `deleteStatus`=0
-        <if test="open=='yi'">
+        SELECT (@i:=@i+1) AS i,c.* FROM (SELECT @i:=0) AS it ,`crmcustomersinfo` c
+        WHERE c.`deleteStatus` = 0
+        <if test="open == 'yi'">
             AND c.`customersId` IN(SELECT `crmcustomersinfoid` FROM openservice)
         </if>
-        <if test="open=='wei'">
+        <if test="open == 'wei'">
             AND c.`customersId` NOT IN(SELECT `crmcustomersinfoid` FROM openservice)
         </if>
 

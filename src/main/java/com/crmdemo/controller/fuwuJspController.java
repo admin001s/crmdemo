@@ -8,6 +8,7 @@ import com.crmdemo.service.impl.CrmcustomersinfoServiceImpl;
 import com.crmdemo.service.impl.CrmmodularServiceImpl;
 import com.crmdemo.service.impl.CrmproductserviceServiceImpl;
 import com.crmdemo.service.impl.CustomerserviceServiceImpl;
+import com.crmdemo.util.CommonUtils;
 import com.crmdemo.vop.Crmmodularvop;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -35,45 +37,68 @@ public class fuwuJspController {
 
     //服务
     @RequestMapping("/OpenList.do")
-    public String index(HttpServletRequest request) {
-        List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
-        request.setAttribute("crmproductserviceList", crmproductserviceList);
-        return "service/OpenList";
+    public String index(HttpServletRequest request, HttpServletResponse response) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+            List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
+            request.setAttribute("crmproductserviceList", crmproductserviceList);
+            return "service/OpenList";
+        } else {
+            return "noJurisdiction";
+        }
+
+
     }
 
     //分配
     @RequestMapping("/AllocationOneLlist.do")
-    public String AllocationOneLlist() {
-        return "service/AllocationOneLlist";
+    public String AllocationOneLlist(HttpServletRequest request, HttpServletResponse response) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+            return "service/AllocationOneLlist";
+        } else {
+            return "noJurisdiction";
+        }
+
     }
 
     //产品服务线
     @RequestMapping("/servicelist.do")
-    public String servicelist() {
-        return "service/servicelist";
+    public String servicelist(HttpServletRequest request, HttpServletResponse response) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+            return "service/servicelist";
+        } else {
+            return "noJurisdiction";
+        }
     }
 
     //模块
     @RequestMapping("/modularlist.do")
-    public String modularlist(HttpServletRequest request) {
-        List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
-        request.setAttribute("crmproductList", crmproductserviceList);
-        return "service/modularlist";
+    public String modularlist(HttpServletRequest request, HttpServletResponse response) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+            List<Crmproductservice> crmproductserviceList = crmproductserviceService.selectCrmproductservice(null);
+            request.setAttribute("crmproductList", crmproductserviceList);
+            return "service/modularlist";
+        } else {
+            return "noJurisdiction";
+        }
     }
 
     //模块任务
     @RequestMapping("/TaskSchedule.do")
-    public String TaskSchedule(HttpServletRequest request) {
-        //查询产品
-        List<Crmproductservice> crmproductall = crmproductserviceService.selectCrmproductservice(null);
-        request.setAttribute("crmproductall", crmproductall);
-        //查询模板
-        List<Crmmodularvop> crmmodulars = crmmodularService.selectcrmmodular(null);
-        request.setAttribute("crmmodulars", crmmodulars);
-        //客户
-        List<Crmcustomersinfo> crmcustomersinfo = crmcustomersinfoService.selectcrmcustomersinfo(null);
-        request.setAttribute("crmcustomersinfo", crmcustomersinfo);
+    public String TaskSchedule(HttpServletRequest request, HttpServletResponse response) {
+        if (CommonUtils.getUser(request, response).getRoleId() == 7 || CommonUtils.getUser(request, response).getRoleId() == 8) {
+            //查询产品
+            List<Crmproductservice> crmproductall = crmproductserviceService.selectCrmproductservice(null);
+            request.setAttribute("crmproductall", crmproductall);
+            //查询模板
+            List<Crmmodularvop> crmmodulars = crmmodularService.selectcrmmodular(null);
+            request.setAttribute("crmmodulars", crmmodulars);
+            //客户
+            List<Crmcustomersinfo> crmcustomersinfo = crmcustomersinfoService.selectcrmcustomersinfo(null);
+            request.setAttribute("crmcustomersinfo", crmcustomersinfo);
 
-        return "service/TaskSchedule";
+            return "service/TaskSchedule";
+        } else {
+            return "noJurisdiction";
+        }
     }
 }

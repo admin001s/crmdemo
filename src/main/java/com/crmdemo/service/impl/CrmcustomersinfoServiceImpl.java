@@ -7,6 +7,7 @@ import com.crmdemo.util.CommonUtils;
 import com.crmdemo.vop.CrmcustomersinfoVop;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 import java.util.List;
 @Service
+@Transactional
 public class CrmcustomersinfoServiceImpl implements CrmcustomersinfoService {
     private Logger logger=Logger.getLogger(CrmcustomersinfoServiceImpl.class);
     @Resource
@@ -108,6 +110,7 @@ public class CrmcustomersinfoServiceImpl implements CrmcustomersinfoService {
             crmcustomersinfoList=crmcustomersinfoDao.selectcrmcustomersinfo(open);
             logger.debug("do selectcrmcustomersinfo()------------------------------");
         }catch (Exception e){
+            System.out.println("++++++++++++++++++++++++++++"+e.getMessage());
             logger.debug("do selectcrmcustomersinfo()------------------------------"+e.getMessage());
         }
         return crmcustomersinfoList;
