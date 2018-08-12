@@ -226,15 +226,7 @@
                                                            class="col-xs-10 col-sm-5" autocomplete="off"/>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-3 col-sm-3 control-label no-padding-right"
-                                                       for="customerUrlSource"> 客户网址来源：</label>
 
-                                                <div class="col-lg-9 col-sm-9">
-                                                    <input type="text" id="customerUrlSource" placeholder="输入客户网址来源"
-                                                           class="col-xs-10 col-sm-5" autocomplete="off"/>
-                                                </div>
-                                            </div>
 
                                             <div class="form-group">
                                                 <label class="col-lg-3 col-sm-3 control-label no-padding-right"
@@ -255,7 +247,15 @@
                                                            class="col-xs-10 col-sm-5" autocomplete="off"/>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-sm-3 control-label no-padding-right"
+                                                       for="customerUrlSource"> 公司网址：</label>
 
+                                                <div class="col-lg-9 col-sm-9">
+                                                    <input type="text" id="customerUrlSource" placeholder="输入客户网址来源"
+                                                           class="col-xs-10 col-sm-5" autocomplete="off"/>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label no-padding-right" for="companydetails">公司详情：</label>
                                                 <div class="col-sm-9">
@@ -283,7 +283,7 @@
                                                 <i class="ace-icon fa fa-times"></i>
                                             </button>
                                             <strong>提示</strong>
-                                            如果您未将此用户分配到代理商或代理商员工，将跳过此操作！
+                                            如果您未将此用户分配到代理商或代理商员工，此操作将无效！
                                             <br />
                                         </div>
                                         <div>

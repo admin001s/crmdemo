@@ -2,14 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.CrminfoDao">
     <select id="selectcrmByName" resultType="Crminfo">
-        select * from crminfo where 1=1
+        select * from crminfo where isavailable=0
         <if test="userName !=null">
             and crminfo.UserName=#{userName}
         </if>
     </select>
-
+    <select id="selectCrminfoById" resultType="Crminfo">
+        select * from crminfo where UserId=#{userId}
+    </select>
     <select id="selectCrminfoList" resultType="Crminfo">
-        select * from crminfo where 1=1
+        select * from crminfo where isavailable=0
         <if test="roleId !=null">
             and roleId=#{roleId}
         </if>
@@ -18,7 +20,7 @@
         </if>
     </select>
     <select id="selectCrminfoCount" resultType="java.lang.Integer">
-        select Count(1) from crminfo where 1=1
+        select Count(1) from crminfo where isavailable=0
         <if test="userName !=null">
             and userName=#{userName}
         </if>
@@ -56,6 +58,9 @@
             <if test="userArrangement != null">
                 userArrangement,
             </if>
+            <if test="isavailable != null">
+                isavailable,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -85,6 +90,39 @@
             <if test="userArrangement != null ">
                 #{userArrangement},
             </if>
+            <if test="isavailable != null ">
+                #{isavailable},
+            </if>
         </trim>
     </insert>
+    <update id="updateCrminfo">
+            update crminfo
+            <set>
+                <if test="userName != null">
+                    userName =
+                    #{userName},
+                </if>
+                <if test="passWord != null">
+                    passWord =
+                    #{passWord},
+                </if>
+                <if test="roleId != null">
+                    roleId =
+                    #{roleId},
+                </if>
+                <if test="chineseName != null">
+                    chineseName =
+                    #{chineseName},
+                </if>
+                <if test="userArrangement != null">
+                    userArrangement =
+                    #{userArrangement},
+                </if>
+                <if test="isavailable != null">
+                    isavailable =
+                    #{isavailable},
+                </if>
+            </set>
+            where userid = #{userId}
+    </update>
 </mapper>

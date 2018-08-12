@@ -4,7 +4,7 @@ package com.crmdemo.entity;
 public class Crmagentsinfo {
 
   private Integer id;
-  private Integer agentsId;
+  private String agentsId;
   private String agentRelationship;
   private String agentaddress;
   private Integer agentaccount;
@@ -32,14 +32,13 @@ public class Crmagentsinfo {
   }
 
 
-  public Integer getAgentsId() {
+  public String getAgentsId() {
     return agentsId;
   }
 
-  public void setAgentsId(Integer agentsId) {
+  public void setAgentsId(String agentsId) {
     this.agentsId = agentsId;
   }
-
 
   public String getAgentRelationship() {
     return agentRelationship;

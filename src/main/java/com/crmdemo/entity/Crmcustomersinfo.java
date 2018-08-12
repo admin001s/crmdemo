@@ -329,8 +329,8 @@ public class Crmcustomersinfo {
   }
 
 
-  public java.sql.Timestamp getUpdateTime() {
-    return updateTime;
+  public String getUpdateTime() {
+    return DateUtil.dateToStr(updateTime);
   }
 
   public void setUpdateTime(java.sql.Timestamp updateTime) {

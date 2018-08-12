@@ -20,7 +20,64 @@
     <div class="page-content-area">
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
-            <div class="row">
+            <div class="row" style="margin-top: 20px">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#home">
+                                    <i class="green ace-icon fa fa-home bigger-120"></i>
+                                    代理商员工管理
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content col-lg-12">
+                            <div id="home" class="tab-pane fade in active col-lg-12">
+                                <ol>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-4">代理商员工编号：</label><input type="text" class="col-lg-6"
+                                                                                         autocomplete="off"
+                                                                                         id="agentsStaffId"/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-4">联系人名称：</label><input type="text" class="col-lg-6"
+                                                                                         autocomplete="off"
+                                                                                         id="agentStaffName"/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-4">电话号码：</label><input type="text" class="col-lg-6"
+                                                                                        autocomplete="off"
+                                                                                        id="agentStaffphone"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 20px">
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-4">QQ号：</label><input type="text" class="col-lg-6"
+                                                                                       autocomplete="off" id="agentStaffQq"/>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-4">负责人：</label><input type="text" class="col-lg-6"
+                                                                                       autocomplete="off"
+                                                                                       id="agentStaffMessage"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 20px">
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-6">已选<span style="color: #0000FF" id="size">0</span>位代理商员工</label>
+                                            <button class="btn btn-sm btn-light col-lg-3" id="transfer"><i
+                                                    class="fa fa-mail-forward"></i>转移
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px">
                 <div class="col-xs-12" id="select-product-p1123">
                     <table id="table" style="text-align: center;">
                     </table>
@@ -62,7 +119,21 @@
 
     jQuery(function ($) {
         var container = $('#select-product-p1123');
-
+        $("#home input").keyup(function () {
+            container.find('#table').bootstrapTable('refresh');
+        });
+        $("#transfer").click(function () {
+            var agents = container.find('#table').bootstrapTable('getSelections');
+            if (agents.length > 0) {
+                var arr = [];
+                $(agents).each(function () {
+                    arr.push(this.id);
+                });
+                $('#reserveModal').load('toTransferAgencyStaff.do', {id:arr}, function (a, b, c) {
+                    $('#reserveModal').modal('show');
+                });
+            }
+        });
         function initTable(name) {
             container.find('#table').bootstrapTable('destroy');
             var options = {
@@ -75,7 +146,11 @@
                 queryParamsType: '',
                 queryParams: function (param) {
                     var params = {
-                        productName: name
+                        agentsStaffId: $("#agentsStaffId").val(),
+                        agentStaffphone: $("#agentStaffphone").val(),
+                        agentStaffQq: $("#agentStaffQq").val(),
+                        agentStaffName: $("#agentStaffName").val(),
+                        agentStaffMessage: $("#agentStaffMessage").val()
                     };
                     return params;
                 },
@@ -88,12 +163,12 @@
                 pageSize: 20,//每页的记录行数（*）
                 pageList: [],//可供选择的每页的行数（*）
                 sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
-                showRefresh: true,//刷新按钮
-                search: true,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
-                // sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
-                // pageSize : 20,
+                showRefresh: false,//刷新按钮
+                search: false,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+                sidePagination : "client", //分页方式：client客户端分页，server服务端分页（*）
+                pageSize : 20,
                 // pageList : [ 10, 20, 50 ], //可供选择的每页的行数（*）
-                clickToSelect: true, //是否启用点击选中行
+                clickToSelect: false, //是否启用点击选中行
 // 				height : 400, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "", //每一行的唯一标识，一般为主键列
                 showExport: true,
@@ -122,6 +197,10 @@
                         }
                         return sex;
                     }
+                }, {
+                    field: 'agentName',
+                    title: '负责人',
+                    align: 'center'
                 }, {
                     field: 'agentStaffaddress',
                     title: '地址',
@@ -157,7 +236,19 @@
                     container.find('.fixed-table-toolbar').hide();
                     init();
                     container.find('.bootstrap-table').height('350');
-                },
+                }, onCheck: function () {
+                    var agents = container.find('#table').bootstrapTable('getSelections');
+                    $("#size").text(agents.length);
+                }, onUncheck: function () {
+                    var agents = container.find('#table').bootstrapTable('getSelections');
+                    $("#size").text(agents.length);
+                }, onCheckAll: function () {
+                    var agents = container.find('#table').bootstrapTable('getSelections');
+                    $("#size").text(agents.length);
+                }, onUncheckAll: function () {
+                    var agents = container.find('#table').bootstrapTable('getSelections');
+                    $("#size").text(agents.length);
+                }
 
             }
             container.find('#table').bootstrapTable(options);
@@ -250,33 +341,52 @@
             }));
             $(".shanchu").unbind().click(function(e){
                 var _this=$(this);
-                e.preventDefault();
-                $( "#dialog-confirm" ).removeClass('hide').dialog({
-                    resizable: false,
-                    modal: true,
-                    title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i>提示</h4></div>",
-                    title_html: true,
-                    buttons: [
-                        {
-                            html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; 删除",
-                            "class" : "btn btn-danger btn-xs",
-                            click: function() {
-                                del(_this.attr("data-id"));
-                                $( this ).dialog( "close" );
-                                $('#select-product-p1123').find('#table').bootstrapTable('refresh');
-                            }
+                $.ajax({
+                    url: "isSubordinateRepeatAsstaff.do",
+                    data: {
+                        id: $(this).attr("data-id")
+                    },
+                    async: false,
+                    type: "post",
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data) {
+                            e.preventDefault();
+                            $( "#dialog-confirm" ).removeClass('hide').dialog({
+                                resizable: false,
+                                modal: true,
+                                title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i>提示</h4></div>",
+                                title_html: true,
+                                buttons: [
+                                    {
+                                        html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; 删除",
+                                        "class" : "btn btn-danger btn-xs",
+                                        click: function() {
+                                            del(_this.attr("data-id"));
+                                            $( this ).dialog( "close" );
+                                            $('#select-product-p1123').find('#table').bootstrapTable('refresh');
+                                        }
+                                    }
+                                    ,
+                                    {
+                                        html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+                                        "class" : "btn btn-xs",
+                                        click: function() {
+                                            $( this ).dialog( "close" );
+                                        }
+                                    }
+                                ]
+                            });
+                        } else {
+                            $('#reserveModal').load('torotaationAgentStaff.do', {id: _this.attr("data-id")}, function (a, b, c) {
+                                $('#reserveModal').modal('show');
+                            });
                         }
-                        ,
-                        {
-                            html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                            "class" : "btn btn-xs",
-                            click: function() {
-                                $( this ).dialog( "close" );
-                            }
-                        }
-                    ]
+                    },
+                    error: function (errMsg) {
+                    }
                 });
-            });
+               });
         }
     })
 </script>

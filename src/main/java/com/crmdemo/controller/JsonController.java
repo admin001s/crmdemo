@@ -4,6 +4,7 @@ import com.crmdemo.entity.*;
 import com.crmdemo.service.*;
 import com.crmdemo.util.CommonUtils;
 import com.crmdemo.util.DateUtil;
+import com.crmdemo.vop.CrmcustomerdetailsVop;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 
 import org.apache.commons.io.FilenameUtils;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -117,6 +119,7 @@ public class JsonController {
         crminfo.setUserId(crminfoService.selectMaxId() + 1);
         crminfo.setUserArrangement(character + "/" + crminfo.getUserId());
         crminfo.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        crminfo.setIsavailable(0);
         if (crminfoService.insertCrminfo(crminfo)) {
             crmagentsinfo.setAddCreateTime(new Timestamp(System.currentTimeMillis()));
             crmagentsinfo.setAgentRelationship(character);
@@ -133,7 +136,6 @@ public class JsonController {
 
     /**
      * 查询代理商信息
-     *
      * @param crmagentsinfo
      * @param response
      * @return
@@ -141,7 +143,7 @@ public class JsonController {
     @RequestMapping("getAgentList.do")
     public Object getAgentList(Crmagentsinfo crmagentsinfo, HttpServletResponse response, HttpServletRequest request) {
         crmagentsinfo.setAgentRelationship(CommonUtils.getUser(request, response).getUserArrangement());
-        return crmagentsinfoService.selectCrmagentsinfoList(crmagentsinfo);
+        return crmagentsinfoService.selectCrmagentsinfoListByCondition(crmagentsinfo);
     }
 
     /**
@@ -204,7 +206,7 @@ public class JsonController {
      */
     @RequestMapping("updateAgents.do")
     public Object updateAgents(Crmagentsinfo crmagentsinfo) {
-        if (crmagentsinfoService.updateCrmcustomersinfo(crmagentsinfo)) {
+        if (crmagentsinfoService.updateCrmagentsinfo(crmagentsinfo)) {
             return true;
         }
         return false;
@@ -218,7 +220,7 @@ public class JsonController {
      */
     @RequestMapping("delAgents.do")
     public Object delAgents(Crmagentsinfo crmagentsinfo) {
-        if (crmagentsinfoService.deleteCrmcustomersinfo(crmagentsinfo)) {
+        if (crmagentsinfoService.deleteCrmagentsinfo(crmagentsinfo)) {
             return true;
         }
         return false;
@@ -233,7 +235,7 @@ public class JsonController {
     @RequestMapping("getAgencystaffList.do")
     public Object getAgencystaffList(Agencystaff agencystaff, HttpServletResponse response, HttpServletRequest request) {
         agencystaff.setAgentStaffCharacterrelationship(CommonUtils.getUser(request, response).getUserArrangement());
-        return agencystaffService.selectAgencystaffList(agencystaff);
+        return agencystaffService.selectAgencystaffListByCondition(agencystaff);
     }
 
     /**
@@ -261,10 +263,13 @@ public class JsonController {
             crminfo.setUserId(crminfoService.selectMaxId() + 1);
             crminfo.setUserArrangement(CommonUtils.getUser(request, response).getUserArrangement() + "/" + crminfo.getUserId());
             crminfo.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            crminfo.setIsavailable(0);
             if (crminfoService.insertCrminfo(crminfo)) {
                 agencystaff.setAddCreateTime(new Timestamp(System.currentTimeMillis()));
                 String[] strs = CommonUtils.getUser(request, response).getUserArrangement().split("/");
-                agencystaff.setAgentStaffParentid(Integer.parseInt(strs[strs.length - 1]));
+                Crmagentsinfo crmagentsinfo=new Crmagentsinfo();
+                crmagentsinfo.setAgentCharacterrelationship(CommonUtils.getUser(request, response).getUserArrangement());
+                agencystaff.setAgentStaffParentid(crmagentsinfoService.selectCrmagentsinfoList(crmagentsinfo).get(0).getId());
                 agencystaff.setAgentStaffCharacterrelationship(crminfo.getUserArrangement());
                 agencystaff.setIsdelete(0);
                 if (agencystaffService.insertAgencystaff(agencystaff)) {
@@ -353,7 +358,7 @@ public class JsonController {
             return map;
         }
         StringBuffer idPicPath = new StringBuffer();
-        String path = request.getSession().getServletContext().getRealPath("static" + File.separator + "uploadfiles");
+        String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "uploadfiles");
         for (int i = 0; i < test.length; i++) {
             MultipartFile attach = test[i];
             String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000, 99999999) + "_Personal.jpg";
@@ -396,6 +401,11 @@ public class JsonController {
         return false;
     }
 
+    /**
+     * 修改客户信息
+     * @param crmcustomersinfo
+     * @return
+     */
     @RequestMapping("toupdateCustomer.do")
     public Object toupdateCustomer(Crmcustomersinfo crmcustomersinfo) {
         if(crmcustomersinfoService.updateCrmcustomersinfo(crmcustomersinfo)){
@@ -403,4 +413,113 @@ public class JsonController {
         }
         return false;
     }
+
+    /**
+     * 转移代理商
+     * @param beiuserId
+     * @param request
+     * @return
+     */
+    @RequestMapping("transferAgentList.do")
+    public Object transferAgentList(String beiuserId,HttpServletRequest request){
+        String[] id=request.getParameterValues("id[]");
+        if(crmagentsinfoService.updateAgentsTransfer(id,beiuserId)){
+            return true;
+        }
+        return  false;
+    }
+
+    /**
+     * 检查代理商下是否有资源
+     * @param id
+     * @return
+     */
+    @RequestMapping("isSubordinateRepeat.do")
+    public Object isSubordinateRepeat(Integer id){
+        return crmagentsinfoService.isSubordinateRepeat(id);
+    }
+
+    /**
+     * 删除代理商并且转移资源
+     * @param id
+     * @param beiuserId
+     * @return
+     */
+    @RequestMapping("rotaationAgent.do")
+    public Object rotaationAgent(String id,String beiuserId, HttpServletResponse response, HttpServletRequest request){
+        return crmagentsinfoService.deleteCrmagentsinfoAndTransfer(id,beiuserId,response,request);
+    }
+
+    /**
+     * 转移代理商员工
+     * @param beiuserId
+     * @param request
+     * @return
+     */
+    @RequestMapping("transferAgencyStaffList.do")
+    public Object transferAgencyStaffList(String beiuserId,HttpServletRequest request){
+        String[] id=request.getParameterValues("id[]");
+        return agencystaffService.updateAgentstaffTransfer(id,beiuserId);
+    }
+
+    /**
+     * 检查代理商员工下是否有资源
+     * @param id
+     * @return
+     */
+    @RequestMapping("isSubordinateRepeatAsstaff.do")
+    public Object isSubordinateRepeatAsstaff(Integer id){
+        return agencystaffService.isSubordinateRepeat(id);
+    }
+
+    /**
+     * 删除并转移资源
+     * @param id
+     * @param beiuserId
+     * @return
+     */
+    @RequestMapping("rotaationAgentStaff.do")
+    public Object rotaationAgentStaff(String id,String beiuserId, HttpServletResponse response, HttpServletRequest request){
+        return agencystaffService.deleteAgentstaffAndTransfer(id,beiuserId,response,request);
+    }
+
+    /**
+     * 转移客户
+     * @param request
+     * @param response
+     * @param beiuserId
+     * @return
+     */
+    @RequestMapping("transferCustomer.do")
+    public Object  transferCustomer(HttpServletRequest request,HttpServletResponse response,String beiuserId){
+        String[] id=request.getParameterValues("id[]");
+        return crmcustomersinfoService.updateCustomersTransfer(id,beiuserId,request,response);
+    }
+
+    /**
+     * 分配客户
+     * @param request
+     * @param response
+     * @param beiuserId
+     * @return
+     */
+    @RequestMapping("customerRotation.do")
+    public Object customerRotation(HttpServletRequest request,HttpServletResponse response,String beiuserId){
+        String[] id=request.getParameterValues("id[]");
+        return crmcustomersinfoService.rotationCustomers(id,beiuserId,request,response);
+    }
+
+    /**
+     * 跟进记录
+     * @param request
+     * @param response
+     * @param id
+     * @return
+     */
+    @RequestMapping("responsible.do")
+    public Object responsible(HttpServletRequest request,HttpServletResponse response,Integer id){
+        List<CrmcustomerdetailsVop> crmcustomerdetailsVops=crmcustomerdetailsService.selectCrmcustomerdetailsVopList(id,request,response);
+        return crmcustomerdetailsVops;
+    }
+
 }

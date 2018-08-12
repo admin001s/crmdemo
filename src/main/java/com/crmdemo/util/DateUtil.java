@@ -66,7 +66,10 @@ public class DateUtil {
      * @return 表示日期的字符串
      */
     public static String dateToStr(java.sql.Timestamp time) {
-        String str = sdfDateTimeFormat.format(time);
+        String str=null;
+        if(null != time) {
+            str = sdfDateTimeFormat.format(time);
+        }
         return str;
     }
     /** 

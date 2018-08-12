@@ -13,4 +13,6 @@ public interface CrminfoService {
     boolean insertCrminfo(Crminfo crminfo);
 
     Integer selectMaxId();
+
+    Crminfo selectCrminfoById(Integer userId);
 }

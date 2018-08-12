@@ -6,12 +6,21 @@ public class Crminfo {
   private Integer userId;
   private String userName;
   private String passWord;
-  private long roleId;
+  private Integer roleId;
   private String englishName;
   private String chineseName;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
   private String userArrangement;
+  private Integer isavailable;
+
+  public Integer getIsavailable() {
+    return isavailable;
+  }
+
+  public void setIsavailable(Integer isavailable) {
+    this.isavailable = isavailable;
+  }
 
   public String getUserArrangement() {
     return userArrangement;
@@ -47,14 +56,13 @@ public class Crminfo {
   }
 
 
-  public long getRoleId() {
+  public Integer getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(long roleId) {
+  public void setRoleId(Integer roleId) {
     this.roleId = roleId;
   }
-
 
   public String getEnglishName() {
     return englishName;

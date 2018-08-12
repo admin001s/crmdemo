@@ -2,14 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="add-reserve-guhijn" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="model1">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true">&times;
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    选择分配人
+                    批量转移代理商员工
                 </h4>
             </div>
             <div class="modal-body col-lg-12">
@@ -54,18 +54,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-lg-12" id="yg">
-                        <label class="col-lg-3">代理商员工：</label>
-                        <div class="col-lg-5 col-sm-2">
-                            <div class="pos-rel">
-                                <select class="form-control">
-                                    <option value="0">------------</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="alert alert-warning col-lg-12">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+                        </button>
+                        <strong>提示</strong>
+                        此操作将转移所选代理商员工下所有资源一同转移，请谨慎操作！
+                        <br/>
                     </div>
                     <div class="form-group col-lg-12">
-                        <label class="col-lg-12">分配人：<i id="fzr" style="color: #00b3ee"></i></label>
+                        <label class="col-lg-12">转移负责人：<i id="fzr" style="color: #00b3ee"></i></label>
                     </div>
                 </form>
             </div>
@@ -84,22 +82,22 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        var id = [];
+        <c:forEach var="list" items="${id}">
+        id.push(${list});
+        </c:forEach>
         $("#zj,#jl,#zy,#dls,#yg").hide();
         var container = $("#add-reserve-guhijn");
 
         function fp() {
-            if ($("#dls select").val() != "0" || $("#yg select").val() != "0") {
+            if ($("#dls select").val() != "0") {
                 var beiuserId;
-                if ($("#yg select").val() != "0") {
-                    beiuserId = $("#yg select").val();
-                } else {
-                    beiuserId = $("#dls select").val();
-                }
+                beiuserId = $("#dls select").val();
                 $.ajax({
-                    url: "addFp.do",
+                    url: "transferAgencyStaffList.do",
                     data: {
                         beiuserId: beiuserId,
-                        customerId:${id}
+                        id: id
                     },
                     type: "post",
                     dataType: "JSON",
@@ -116,11 +114,11 @@
                     }
                 });
             } else {
-                alert("请选择分配人!");
+                alert("请选择负责人!");
             }
         }
 
-        $(".modal-footer").find("#add").click(function () {
+        $("#model1").find("#add").click(function () {
             fp();
         });
 
@@ -172,16 +170,12 @@
                 $("#jl").hide();
                 $("#zy").hide();
                 $("#dls").hide();
-                $("#yg").hide();
                 $("#jl select").empty();
                 $("#jl select").append(_html);
                 $("#zy select").empty();
                 $("#zy select").append(_html);
                 $("#dls select").empty();
                 $("#dls select").append(_html);
-                $("#yg select").empty();
-                $("#yg select").append(_html);
-                $("#fzr").text("");
             }
         });
         $("#jl select").change(function () {
@@ -210,14 +204,10 @@
                 var _html = '<option value="0">------------</option>';
                 $("#zy").hide();
                 $("#dls").hide();
-                $("#yg").hide();
                 $("#zy select").empty();
                 $("#zy select").append(_html);
                 $("#dls select").empty();
                 $("#dls select").append(_html);
-                $("#yg select").empty();
-                $("#yg select").append(_html);
-                $("#fzr").text("");
             }
         });
         $("#zy select").change(function () {
@@ -245,48 +235,13 @@
             } else {
                 var _html = '<option value="0">------------</option>';
                 $("#dls").hide();
-                $("#yg").hide();
                 $("#dls select").empty();
                 $("#dls select").append(_html);
-                $("#yg select").empty();
-                $("#yg select").append(_html);
-                $("#fzr").text("");
             }
         });
         $("#dls select").change(function () {
             if ($(this).val() != '0') {
-                $("#yg").show();
-                $.ajax({
-                    url: "getCusinfo.do",
-                    data: {
-                        roleId: 6,
-                        userArrangement: $(this).val()
-                    },
-                    type: "post",
-                    dataType: "JSON",
-                    success: function (data) {
-                        var _html = '<option value="0">------------</option>';
-                        $(data).each(function () {
-                            _html += '<option value="' + this.userArrangement + '">' + this.chineseName + '</option>';
-                        });
-                        $("#yg select").empty();
-                        $("#yg select").append(_html);
-                    },
-                    error: function (errMsg) {
-                    }
-                });
                 $("#fzr").text($("#dls select option:selected").text());
-            } else {
-                var _html = '<option value="0">------------</option>';
-                $("#yg").hide();
-                $("#yg select").empty();
-                $("#yg select").append(_html);
-                $("#fzr").text("");
-            }
-        });
-        $("#yg select").change(function(){
-            if ($(this).val() != '0') {
-                $("#fzr").text($("#yg select option:selected").text());
             } else {
                 $("#fzr").text("");
             }
@@ -319,20 +274,6 @@
         {
             $("#dls").show();
             getUser(5, "dls");
-        }
-    else
-        if (${user.roleId}==5
-    )
-        {
-            $("#yg").show();
-            getUser(6, "yg");
-        }
-    else
-        {
-            $("#yg").show();
-            $("#yg select").empty();
-            $("#yg select").append('<option value="${user.userArrangement} "> ${user.chineseName} </option>');
-            $("#yg select").attr("disabled", "disabled");
         }
     });
 </script>

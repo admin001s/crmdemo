@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.AgencystaffDao">
+    <resultMap id="agencystaffVop" type="com.crmdemo.vop.AgencystaffVop">
+        <id column="id" property="id"></id>
+        <result column="agentName" property="agentName"/>
+    </resultMap>
+    <select id="selectAgencystaffListByCondition" resultMap="agencystaffVop">
+        select agencystaff.*,crmagentsinfo.agentName from agencystaff
+        inner join crmagentsinfo on agencystaff.AgentStaffParentid=crmagentsinfo.id
+        where agencystaff.isdelete=0
+        <if test="agentStaffCharacterrelationship !=null">
+            and agentStaffCharacterrelationship like '%${agentStaffCharacterrelationship}%'
+        </if>
+        <if test="agentStaffQq !=null and agentStaffQq !=''">
+            and agentStaffQq like '%${agentStaffQq}%'
+        </if>
+        <if test="agentStaffName !=null and agentStaffName !=''">
+            and agentStaffName like '%${agentStaffName}%'
+        </if>
+        <if test="agentsStaffId !=null and agentsStaffId !=''">
+            and agentsStaffId like '%${agentsStaffId}%'
+        </if>
+        <if test="agentStaffphone !=null and agentStaffphone !=''">
+            and agentStaffphone like '%${agentStaffphone}%'
+        </if>
+        <if test="agentStaffMessage !=null and agentStaffMessage !=''">
+            and crmagentsinfo.AgentName like '%${agentStaffMessage}%'
+        </if>
+    </select>
     <select id="selectAgencystaffList" resultType="Agencystaff">
         select * from agencystaff where agencystaff.isdelete=0
         <if test="agentStaffCharacterrelationship !=null">
@@ -10,7 +37,9 @@
             and id=#{id}
         </if>
     </select>
-
+    <select id="selectAgencystaffById" resultType="Agencystaff">
+        select * from agencystaff where id=#{id}
+    </select>
     <select id="selectAgencystaffCount" resultType="java.lang.Integer">
         select count(1) from `agencystaff` where `isdelete`=0
         <if test="agentsStaffId !=null and agentsStaffId != ''">
@@ -18,6 +47,9 @@
         </if>
         <if test="agentStaffphone !=null and agentStaffphone != ''">
             and `agentStaffphone`=#{agentStaffphone}
+        </if>
+        <if test="agentStaffCharacterrelationship !=null and agentStaffCharacterrelationship!=''">
+            and agentStaffCharacterrelationship like '%${agentStaffCharacterrelationship}%'
         </if>
     </select>
     <insert id="insertAgencystaff">

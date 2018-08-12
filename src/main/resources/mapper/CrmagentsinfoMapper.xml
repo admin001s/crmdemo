@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.CrmagentsinfoDao">
+    <resultMap id="crmagentsinfoVop" type="com.crmdemo.vop.CrmagentsinfoVop">
+        <id column="id" property="id"></id>
+        <association property="crminfo" javaType="com.crmdemo.entity.Crminfo">
+            <id column="userId" property="userId"></id>
+        </association>
+    </resultMap>
     <insert id="insertCrmagentsinfo">
         insert into crmagentsinfo
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -114,13 +120,38 @@
         select * from crmagentsinfo
         where isdelete=0
         <if test="agentRelationship !=null">
-            and  agentRelationship like '%${agentRelationship}%'
+            and agentRelationship like '%${agentRelationship}%'
         </if>
         <if test="id!=null">
             and id=#{id}
         </if>
+        <if test="agentCharacterrelationship !=null">
+            and  agentCharacterrelationship=#{agentCharacterrelationship}
+        </if>
     </select>
-    <update id="updateCrmcustomersinfo">
+    <select id="selectCrmagentsinfoListByCondition" resultMap="crmagentsinfoVop">
+         select * from crmagentsinfo inner join crminfo on crmagentsinfo.ReviewerID=crminfo.UserId
+         where crmagentsinfo.isdelete=0
+        <if test="agentRelationship !=null">
+            and agentRelationship like '%${agentRelationship}%'
+        </if>
+        <if test="agentName !=null and agentName !=''">
+            and agentName like '%${agentName}%'
+        </if>
+        <if test="agentQq !=null and agentQq !=''">
+            and agentQq like '%${agentQq}%'
+        </if>
+        <if test="agentsId !=null and agentsId !=''">
+            and agentsId like '%${agentsId}%'
+        </if>
+        <if test="agentphone !=null and agentphone !=''">
+            and agentphone like '%${agentphone}%'
+        </if>
+        <if test="agentMessage !=null and agentMessage !=''">
+            and crminfo.ChineseName like '%${agentMessage}%'
+        </if>
+    </select>
+    <update id="updateCrmagentsinfo">
         update crmagentsinfo
         <set>
             <if test="agentRelationship != null">
@@ -191,7 +222,13 @@
             and agentsId=#{agentsId}
         </if>
         <if test="agentphone !=null and agentphone !=''">
-            and  agentphone=#{agentphone}
+            and agentphone=#{agentphone}
         </if>
+    </select>
+    <select id="selectCrmagentsinfoById" resultType="Crmagentsinfo">
+        select * from crmagentsinfo where id=#{id}
+    </select>
+    <select id="selectCrmagentsinfoisrepeat" resultType="java.lang.Integer">
+
     </select>
 </mapper>

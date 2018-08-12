@@ -1,12 +1,7 @@
 package com.crmdemo.controller;
 
-import com.crmdemo.entity.Agencystaff;
-import com.crmdemo.entity.Crmagentsinfo;
-import com.crmdemo.entity.Crminfo;
-import com.crmdemo.service.AgencystaffService;
-import com.crmdemo.service.CrmagentsinfoService;
-import com.crmdemo.service.CrmcustomersinfoService;
-import com.crmdemo.service.ProvincesService;
+import com.crmdemo.entity.*;
+import com.crmdemo.service.*;
 import com.crmdemo.util.CommonUtils;
 import com.crmdemo.util.CookieUtils;
 import org.springframework.stereotype.Controller;
@@ -18,6 +13,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class JspController {
@@ -29,6 +25,10 @@ public class JspController {
     AgencystaffService agencystaffService;
     @Resource
     CrmcustomersinfoService crmcustomersinfoService;
+    @Resource
+    CrminfoService crminfoService;
+    @Resource
+    CrmcustomerallocateService crmcustomerallocateService;
     /**
      * 登录页面
      *
@@ -225,6 +225,111 @@ public class JspController {
         modelMap.put("customer",crmcustomersinfoService.selectCrmcustomersinfoById(id));
         modelMap.put("provinces", provincesService.selectProList());
         return "crm/customer_update";
+    }
+
+    /**
+     * 转移代理商页面
+     * @param request
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("transferAgent.do")
+    public String transferAgent(HttpServletRequest request,ModelMap modelMap){
+        modelMap.put("id",request.getParameterValues("id[]"));
+        return "crm/transfer";
+    }
+
+    /**
+     * 转移代理商资源页面
+     * @param id
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("torotaationAgent.do")
+    public String torotaationAgent(Integer id,ModelMap modelMap){
+        modelMap.put("id",id);
+        return "crm/agent_rotation";
+    }
+
+    /**
+     * 转移代理商员工页面
+     * @param request
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("toTransferAgencyStaff.do")
+    public String toTransferAgencyStaff(HttpServletRequest request,ModelMap modelMap){
+        modelMap.put("id",request.getParameterValues("id[]"));
+        return "crm/agencyStaff_transfer";
+    }
+
+    /**
+     * 转移代理商员工资源页面
+     * @param id
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("torotaationAgentStaff.do")
+    public String torotaationAgentStaff(Integer id,ModelMap modelMap){
+        modelMap.put("id",id);
+        return "crm/agenStaff_rotation";
+    }
+
+    /**
+     * 批量转移客户
+     * @param request
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("toCustomerTransfer.do")
+    public String toCustomerTransfer(HttpServletRequest request,ModelMap modelMap){
+        modelMap.put("id",request.getParameterValues("id[]"));
+        return "crm/customer_transfer";
+    }
+
+    /**
+     * 批量分配客户
+     * @param request
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("toCustomerRotation.do")
+    public String toCustomerRotation(HttpServletRequest request,ModelMap modelMap){
+        modelMap.put("id",request.getParameterValues("id[]"));
+        return "crm/customer_rotation";
+    }
+
+    /**
+     * 客户跟进记录页面
+     * @param id
+     * @return
+     */
+    @RequestMapping("tofollowUpDeltail.do")
+    public String tofollowUpDeltail(String id,ModelMap modelMap){
+        Crmcustomersinfo crmcustomersinfo=crmcustomersinfoService.selectCrmcustomersinfoById(Integer.parseInt(id));
+        Crminfo addCrmifo=crminfoService.selectCrminfoById(crmcustomersinfo.getAdduserId());
+        Crmcustomerallocate crmcustomerallocate=new Crmcustomerallocate();
+        crmcustomerallocate.setIsRelation(0);
+        crmcustomerallocate.setCustomerId(crmcustomersinfo.getId());
+        List<Crmcustomerallocate> crmcustomerallocates=crmcustomerallocateService.selectCrmcustomerallocateList(crmcustomerallocate);
+        Crminfo fzrCrminfo=null;
+        if(crmcustomerallocates.size()>0){
+            fzrCrminfo=crminfoService.selectCrminfoById(crmcustomerallocates.get(0).getBeiuserId());
+        }
+
+        modelMap.put("addCrmifo",addCrmifo);
+        modelMap.put("fzrCrminfo",fzrCrminfo);
+        modelMap.put("crmcustomersinfo",crmcustomersinfo);
+        return "crm/follow_up_detail";
+    }
+
+    /**
+     * 地图
+     * @return
+     */
+    @RequestMapping("map.do")
+    public String map(){
+        return "crm/map";
     }
 }
 

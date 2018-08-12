@@ -85,4 +85,15 @@ public class CrminfoServiceImpl implements CrminfoService {
         }
         return crminfo1;
     }
+
+    @Override
+    public Crminfo selectCrminfoById(Integer userId) {
+        Crminfo crminfo=null;
+        try {
+            crminfo=crminfoDao.selectCrminfoById(userId);
+        }catch (Exception e){
+
+        }
+        return crminfo;
+    }
 }

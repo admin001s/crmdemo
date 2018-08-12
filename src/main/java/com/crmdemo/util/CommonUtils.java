@@ -37,6 +37,10 @@ import java.util.zip.GZIPInputStream;
  * @since 2018年5月17日
  */
 public class CommonUtils {
+    public static  Integer getUserId(String str){
+     String[] strs=str.split("/");
+     return  Integer.parseInt(strs[strs.length-1]);
+    }
 
     public static Crminfo getUser(HttpServletRequest request,HttpServletResponse response){
         return  CommonUtils.GetLoginInfo(request, response);

@@ -221,7 +221,7 @@
         INNER JOIN `crmcustomerallocate` ON crmcustomersinfo.`id`=crmcustomerallocate.`customerId`
         INNER JOIN crminfo ON crminfo.`UserId`=crmcustomerallocate.`beiuserId`
         LEFT JOIN `crmcustomerdetails` ON `crmcustomerdetails`.`crmcustomersinfoID`=`crmcustomersinfo`.`id`
-        WHERE `crmcustomersinfo`.`customerStatus`!=1 and crmcustomersinfo.deleteStatus=0
+        WHERE `crmcustomersinfo`.`customerStatus`!=1 and crmcustomersinfo.deleteStatus=0 and  crmcustomerallocate.isRelation=0
         <if test="adduserHierarchy !=null">
             AND crminfo.`userArrangement` LIKE '%${adduserHierarchy}%'
         </if>)
@@ -236,6 +236,28 @@
         <if test="adduserHierarchy !=null">
             AND `crmcustomersinfo`.`adduserHierarchy` LIKE '%${adduserHierarchy}%'
         </if>)) AS a
+        where 1=1
+        <if test="customersId !=null and customersId != ''">
+            and a.customersId like '%${customersId}%'
+        </if>
+        <if test="customersName !=null and customersName != ''">
+            and a.customersName like '%${customersName}%'
+        </if>
+        <if test="qq !=null and qq != ''">
+            and  a.qq like '%${qq}%'
+        </if>
+        <if test="telephone !=null and telephone != ''">
+            and  a.telephone like '%${telephone}%'
+        </if>
+        <if test="cityName !=null and cityName != ''">
+            and a.ChineseName like  '%${cityName}%'
+        </if>
+        <if test="provinceId !=null and provinceId != 0">
+            and a.followupStatus=#{provinceId}
+        </if>
+        <if test="customerStatus !=null and customerStatus !=0">
+            and a.customerStatus =#{customerStatus}
+        </if>
         ORDER BY TIMESTAMP(a.createtime),TIMESTAMP(a.`followupTime`) DESC
     </select>
     <select id="selectCrmcustomersinfoCount" resultType="java.lang.Integer">

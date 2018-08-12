@@ -2,6 +2,7 @@ package com.crmdemo.dao;
 
 import com.crmdemo.entity.Crminfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface CrminfoDao {
     Integer insertCrminfo(Crminfo crminfo);
 
     Integer selectMaxId();
+
+    Integer updateCrminfo(Crminfo crminfo);
+
+    Crminfo selectCrminfoById(@Param("userId") Integer userId);
 }

@@ -2,18 +2,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="add-reserve-guhijn" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="model1">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true">&times;
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    选择分配人
+                    转移代理商员工资源
                 </h4>
             </div>
             <div class="modal-body col-lg-12">
                 <form class="form-horizontal col-lg-12">
+                    <div class="alert alert-warning col-lg-12">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+                        </button>
+                        <strong>提示</strong>
+                        检测到此代理商员工下有资源，请转移到其他代理商员工！
+                        <br/>
+                    </div>
                     <div class="form-group col-lg-12" id="zj">
                         <label class="col-lg-3">渠道总监：</label>
                         <div class="col-lg-5 col-sm-2">
@@ -65,7 +73,7 @@
                         </div>
                     </div>
                     <div class="form-group col-lg-12">
-                        <label class="col-lg-12">分配人：<i id="fzr" style="color: #00b3ee"></i></label>
+                        <label class="col-lg-12">转移代理商员工：<i id="fzr" style="color: #00b3ee"></i></label>
                     </div>
                 </form>
             </div>
@@ -86,20 +94,14 @@
     $(function () {
         $("#zj,#jl,#zy,#dls,#yg").hide();
         var container = $("#add-reserve-guhijn");
-
         function fp() {
-            if ($("#dls select").val() != "0" || $("#yg select").val() != "0") {
-                var beiuserId;
-                if ($("#yg select").val() != "0") {
-                    beiuserId = $("#yg select").val();
-                } else {
-                    beiuserId = $("#dls select").val();
-                }
+            if ($("#yg select").val() != "0") {
+                var beiuserId=$("#yg select").val();
                 $.ajax({
-                    url: "addFp.do",
+                    url: "rotaationAgentStaff.do",
                     data: {
                         beiuserId: beiuserId,
-                        customerId:${id}
+                        id:${id}
                     },
                     type: "post",
                     dataType: "JSON",
@@ -275,7 +277,6 @@
                     error: function (errMsg) {
                     }
                 });
-                $("#fzr").text($("#dls select option:selected").text());
             } else {
                 var _html = '<option value="0">------------</option>';
                 $("#yg").hide();
@@ -284,7 +285,7 @@
                 $("#fzr").text("");
             }
         });
-        $("#yg select").change(function(){
+        $("#yg select").change(function () {
             if ($(this).val() != '0') {
                 $("#fzr").text($("#yg select option:selected").text());
             } else {
@@ -319,20 +320,12 @@
         {
             $("#dls").show();
             getUser(5, "dls");
-        }
-    else
+        }else
         if (${user.roleId}==5
     )
         {
             $("#yg").show();
             getUser(6, "yg");
-        }
-    else
-        {
-            $("#yg").show();
-            $("#yg select").empty();
-            $("#yg select").append('<option value="${user.userArrangement} "> ${user.chineseName} </option>');
-            $("#yg select").attr("disabled", "disabled");
         }
     });
 </script>

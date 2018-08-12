@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.CrmcustomerallocateDao">
+    <resultMap id="crmcustomerallocateVop" type="com.crmdemo.vop.CrmcustomerallocateVop">
+        <id column="id" property="id"></id>
+        <association property="crminfo" javaType="com.crmdemo.entity.Crminfo">
+            <id column="userId" property="userId"></id>
+        </association>
+    </resultMap>
+    <select id="selectCrmcustomerallocateVop" resultMap="crmcustomerallocateVop">
+        SELECT * FROM `crmcustomerallocate` INNER JOIN `crminfo` ON `crmcustomerallocate`.`beiuserId`=`crminfo`.`UserId`
+WHERE `crmcustomerallocate`.`customerId`=#{customerId} ORDER BY `crmcustomerallocate`.`CreateTime`
+    </select>
     <insert id="insertCrmcustomerallocate">
         insert into crmcustomerallocate
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -51,4 +61,52 @@
 
         </trim>
     </insert>
+    <select id="selectCrmcustomerallocateCount" resultType="java.lang.Integer">
+        select count(1) from crmcustomerallocate where isRelation=0
+        <if test="beiuserId !=null">
+            and beiuserId=#{beiuserId}
+        </if>
+    </select>
+    <select id="selectCrmcustomerallocateList" resultType="Crmcustomerallocate">
+        select * from crmcustomerallocate where isRelation=0
+        <if test="beiuserId !=null">
+            and  beiuserId=#{beiuserId}
+        </if>
+        <if test="customerId !=null">
+            and customerId=#{customerId}
+        </if>
+        <if test="isRelation !=null">
+            and isRelation=#{isRelation}
+        </if>
+    </select>
+    <update id="updateCrmcustomerallocate">
+        update crmcustomerallocate
+        <set>
+            <if test="userId != null">
+                userId =
+                #{userId},
+            </if>
+            <if test="beiuserId != null">
+                beiuserId =
+                #{beiuserId},
+            </if>
+            <if test="distributionTime != null">
+                distributionTime =
+                #{distributionTime},
+            </if>
+            <if test="customerId != null">
+                customerId =
+                #{customerId},
+            </if>
+            <if test="updateTime != null">
+                updateTime =
+                #{updateTime},
+            </if>
+            <if test="isRelation != null">
+                isRelation =
+                #{isRelation},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

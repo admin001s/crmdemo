@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.CrmcustomerdetailsDao">
+    <resultMap id="crmcustomerdetailsVop" type="com.crmdemo.vop.CrmcustomerdetailsVop">
+        <id column="id" property="id"/>
+        <association property="crminfo" javaType="com.crmdemo.entity.Crminfo">
+            <id column="userId" property="userId"/>
+        </association>
+    </resultMap>
     <insert id="insertCrmcustomerdetails">
         insert into crmcustomerdetails
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -62,4 +68,9 @@
             </if>
         </trim>
     </insert>
+    <select id="selectcrmcustomerdetailsVopList" resultMap="crmcustomerdetailsVop">
+        SELECT * FROM `crmcustomerdetails` INNER JOIN `crminfo` ON `crmcustomerdetails`.`followupID`=`crminfo`.`UserId`
+WHERE `crminfo`.`userArrangement` LIKE '%${userArrangement}%'
+and `crmcustomerdetails`.`crmcustomersinfoID`= #{userId}
+    </select>
 </mapper>

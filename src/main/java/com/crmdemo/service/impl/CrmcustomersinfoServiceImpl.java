@@ -3,11 +3,15 @@ package com.crmdemo.service.impl;
 import com.crmdemo.dao.*;
 import com.crmdemo.entity.*;
 import com.crmdemo.service.CrmcustomersinfoService;
+import com.crmdemo.util.CommonUtils;
 import com.crmdemo.vop.CrmcustomersinfoVop;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import java.util.List;
 @Service
 public class CrmcustomersinfoServiceImpl implements CrmcustomersinfoService {
@@ -131,6 +135,86 @@ public class CrmcustomersinfoServiceImpl implements CrmcustomersinfoService {
         try {
             if(crmcustomersinfoDao.updateCrmcustomersinfo(crmcustomersinfo)>0){
                 return  true;
+            }
+        }catch (Exception e){
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateCustomersTransfer(String[] ids, String beiuserId, HttpServletRequest request,HttpServletResponse response) {
+        try {
+            for(String id:ids){
+                Crmcustomerallocate crmcustomerallocate=new Crmcustomerallocate();
+                crmcustomerallocate.setCustomerId(Integer.parseInt(id));
+                crmcustomerallocate.setIsRelation(0);
+                List<Crmcustomerallocate> crmcustomerallocatelist=crmcustomerallocateDao.selectCrmcustomerallocateList(crmcustomerallocate);
+                if(crmcustomerallocatelist.size()>0){
+                    Crmcustomerallocate crmcustomerallocate1=crmcustomerallocatelist.get(0);
+                    Crmcustomerallocate crmcustomerallocate2=new Crmcustomerallocate();
+                    crmcustomerallocate2.setId(crmcustomerallocate1.getId());
+                    crmcustomerallocate2.setId(crmcustomerallocate1.getId());
+                    crmcustomerallocate2.setIsRelation(1);
+                    if(crmcustomerallocateDao.updateCrmcustomerallocate(crmcustomerallocate2)<0){
+                        throw new Exception();
+                    }crmcustomerallocate2.setId(null);
+                    crmcustomerallocate2.setIsRelation(0);
+                    crmcustomerallocate2.setBeiuserId(CommonUtils.getUserId(beiuserId));
+                    crmcustomerallocate2.setCustomerId(crmcustomerallocate1.getCustomerId());
+                    crmcustomerallocate2.setCreateTime(new Timestamp(System.currentTimeMillis()));
+                    crmcustomerallocate2.setDistributionTime(new Timestamp(System.currentTimeMillis()));
+                    crmcustomerallocate2.setUserId(CommonUtils.getUser(request,response).getUserId());
+                    if (crmcustomerallocateDao.insertCrmcustomerallocate(crmcustomerallocate2) < 0) {
+                        throw new Exception();
+                    }
+                }else {
+                    Crmcustomerallocate crmcustomerallocate2=new Crmcustomerallocate();
+                    crmcustomerallocate2.setUserId(CommonUtils.getUser(request,response).getUserId());
+                    crmcustomerallocate2.setBeiuserId(CommonUtils.getUserId(beiuserId));
+                    crmcustomerallocate2.setCustomerId(Integer.parseInt(id));
+                    crmcustomerallocate2.setIsRelation(0);
+                    crmcustomerallocate2.setCreateTime(new Timestamp(System.currentTimeMillis()));
+                    crmcustomerallocate2.setDistributionTime(new Timestamp(System.currentTimeMillis()));
+                    if(crmcustomerallocateDao.insertCrmcustomerallocate(crmcustomerallocate2)<0){
+                        throw  new  Exception();
+                    }
+                    Crmcustomersinfo crmcustomersinfo=new Crmcustomersinfo();
+                    crmcustomersinfo.setId(Integer.parseInt(id));
+                    crmcustomersinfo.setCustomerStatus(2);
+                    if(crmcustomersinfoDao.updateCrmcustomersinfo(crmcustomersinfo)<0){
+                        throw  new  Exception();
+                    }
+                }
+                return true;
+            }
+        }catch (Exception e){
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean rotationCustomers(String[] ids, String beiuserId, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            for(String id:ids){
+                    Crmcustomerallocate crmcustomerallocate2=new Crmcustomerallocate();
+                    crmcustomerallocate2.setUserId(CommonUtils.getUser(request,response).getUserId());
+                    crmcustomerallocate2.setBeiuserId(CommonUtils.getUserId(beiuserId));
+                    crmcustomerallocate2.setCustomerId(Integer.parseInt(id));
+                    crmcustomerallocate2.setIsRelation(0);
+                    crmcustomerallocate2.setCreateTime(new Timestamp(System.currentTimeMillis()));
+                    crmcustomerallocate2.setDistributionTime(new Timestamp(System.currentTimeMillis()));
+                    if(crmcustomerallocateDao.insertCrmcustomerallocate(crmcustomerallocate2)<0){
+                        throw  new  Exception();
+                    }
+                    Crmcustomersinfo crmcustomersinfo=new Crmcustomersinfo();
+                    crmcustomersinfo.setId(Integer.parseInt(id));
+                    crmcustomersinfo.setCustomerStatus(2);
+                    if(crmcustomersinfoDao.updateCrmcustomersinfo(crmcustomersinfo)<0){
+                        throw  new  Exception();
+                    }
+                return true;
             }
         }catch (Exception e){
 
