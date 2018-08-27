@@ -1,5 +1,6 @@
 package com.crmdemo.vop;
 import com.crmdemo.entity.Crmcustomerdetails;
+import com.crmdemo.entity.Crmcustomersinfo;
 import com.crmdemo.entity.Crminfo;
 
 import java.sql.Time;
@@ -8,9 +9,18 @@ import java.util.Date;
 
 public class CrmcustomerdetailsVop extends Crmcustomerdetails {
     private Crminfo crminfo;
+    private Crmcustomersinfo crmcustomersinfo;
     private java.sql.Date createDate;
     private Time time;
     private String[] path;
+
+    public Crmcustomersinfo getCrmcustomersinfo() {
+        return crmcustomersinfo;
+    }
+
+    public void setCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo) {
+        this.crmcustomersinfo = crmcustomersinfo;
+    }
 
     public String[] getPath() {
         return path;

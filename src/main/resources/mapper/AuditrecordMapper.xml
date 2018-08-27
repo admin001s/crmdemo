@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.AuditrecordDao">
+    <resultMap id="auditrecordVop" type="com.crmdemo.vop.AuditrecordVop">
+        <id column="recordId" property="recordId"/>
+        <association property="crminfo" javaType="com.crmdemo.entity.Crminfo">
+            <id column="userId" property="userId"/>
+        </association>
+        <association property="crmcustomerorder" javaType="com.crmdemo.entity.Crmcustomerorder">
+            <id column="id" property="id"/>
+        </association>
+    </resultMap>
+    <insert id="insertAuditrecord">
+        insert into auditrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                ordersId,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="recotdStatus != null">
+                recotdStatus,
+            </if>
+            <if test="userId != null">
+                userId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId},
+            </if>
+            <if test="createdate != null">
+                #{createdate},
+            </if>
+            <if test="recotdStatus != null">
+                #{recotdStatus},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectAuditrecordVops" resultMap="auditrecordVop">
+        SELECT * FROM `auditrecord`
+        INNER JOIN `crminfo` ON `auditrecord`.`userId`=`crminfo`.`UserId`
+        INNER JOIN `crmcustomerorder` ON `crmcustomerorder`.`id`=`auditrecord`.`ordersId`
+        where 1=1
+        <if test="crminfo.userArrangement !=null">
+            and crminfo.userArrangement like '%${crminfo.userArrangement}%'
+        </if>
+        <if test="crminfo.userId !=null">
+            and crminfo.UserId=#{crminfo.userId}
+        </if>
+        <if test="crmcustomerorder.orderId !=null">
+            and crmcustomerorder.orderId like '%${crmcustomerorder.orderId}%'
+        </if>
+        <if test="crmcustomerorder.orderName !=null">
+            and crmcustomerorder.orderName like '%${crmcustomerorder.orderName}%'
+        </if>
+        <if test="crminfo.chineseName !=null">
+            and crminfo.chineseName like '%${crminfo.chineseName}%'
+        </if>
+        <if test="indate !=null and indate !=''">
+            and createdate &gt;= #{indate}
+        </if>
+        <if test="outdate !=null and outdate !=''">
+            and createdate &lt;= #{outdate}
+        </if>
+        <if test="recotdStatus !=null and recotdStatus !=0">
+            and recotdStatus = #{recotdStatus}
+        </if>
+        ORDER BY `auditrecord`.`createdate`
+    </select>
+</mapper>

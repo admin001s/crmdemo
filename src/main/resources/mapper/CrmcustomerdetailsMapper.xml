@@ -6,6 +6,9 @@
         <association property="crminfo" javaType="com.crmdemo.entity.Crminfo">
             <id column="userId" property="userId"/>
         </association>
+        <association property="crmcustomersinfo" javaType="com.crmdemo.entity.Crmcustomersinfo">
+            <id column="c_id" property="id"/>
+        </association>
     </resultMap>
     <insert id="insertCrmcustomerdetails">
         insert into crmcustomerdetails
@@ -72,5 +75,28 @@
         SELECT * FROM `crmcustomerdetails` INNER JOIN `crminfo` ON `crmcustomerdetails`.`followupID`=`crminfo`.`UserId`
 WHERE `crminfo`.`userArrangement` LIKE '%${userArrangement}%'
 and `crmcustomerdetails`.`crmcustomersinfoID`= #{userId}
+    </select>
+    <select id="selectcrmcustomerdetailsVopListByUser" resultMap="crmcustomerdetailsVop">
+        SELECT `crmcustomerdetails`.*,`crmcustomersinfo`.`id` AS c_id,`crmcustomersinfo`.`customersName` FROM
+        crmcustomerdetails inner join crmcustomersinfo on
+        `crmcustomerdetails`.`crmcustomersinfoID`=`crmcustomersinfo`.id
+        WHERE 1=1
+        <if test="followupId !=null">
+            and `crmcustomerdetails`.`followupId`= #{followupId}
+        </if>
+        ORDER BY `crmcustomerdetails`.`followupTime` DESC
+    </select>
+    <select id="selectcrmcustomerByUserCount" resultType="Crmcustomerdetails">
+        SELECT DATE(`crmcustomerdetails`.`followupTime`) as remarks,COUNT(1) as crmcustomersinfoId FROM `crmcustomerdetails` INNER JOIN crminfo ON
+        crminfo.`UserId`=`crmcustomerdetails`.`followupID` where 1=1
+        <if test="followupId !=null">
+           and followupId = #{followupId}
+        </if>
+        <if test="crminfo !=null">
+            <if test="crminfo.userArrangement !=null and crminfo.userArrangement !=''">
+               and  crminfo.userArrangement like '%${userArrangement}%' and followupId =#{crmcustomersinfoID}
+            </if>
+        </if>
+        GROUP BY DATE(`crmcustomerdetails`.`followupTime`) ORDER BY `crmcustomerdetails`.`followupTime` DESC
     </select>
 </mapper>

@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,10 @@ public class JspController {
     CrminfoService crminfoService;
     @Resource
     CrmcustomerallocateService crmcustomerallocateService;
+    @Resource
+    CrmcustomerorderService crmcustomerorderService;
+    @Resource
+    InformationService informationService;
     /**
      * 登录页面
      *
@@ -38,7 +43,14 @@ public class JspController {
     public String index(HttpServletRequest request,HttpServletResponse response) {
         String strCookieValue = CookieUtils.getCookie(request, CookieUtils.COOKIE_NAME_LOGININFO);
         if (strCookieValue != null && !strCookieValue.equals("")) {
-            request.getSession().setAttribute("user",CommonUtils.getUser(request,response));
+            Crminfo crminfo=CommonUtils.getUser(request,response);
+            request.getSession().setAttribute("user",crminfo);
+            Crmcustomersinfo crmcustomersinfo=new Crmcustomersinfo();
+            crmcustomersinfo.setAdduserId(crminfo.getUserId());
+            crmcustomersinfo.setBeOverdue(new Date(System.currentTimeMillis()));
+            crmcustomersinfo.setReadingState(1);
+            List<Crmcustomersinfo> crmcustomersinfos=crmcustomersinfoService.selectCrmcustomersinfosByUser(crmcustomersinfo);
+            informationService.insertInformationEveryDay(crmcustomersinfos,crminfo);
             return "common/left";
         } else {
             // 未登陆
@@ -86,7 +98,7 @@ public class JspController {
     @RequestMapping("agent.do")
     public String agent(HttpServletRequest request,HttpServletResponse response) {
         Crminfo crminfo=CommonUtils.getUser(request,response);
-        if(crminfo.getRoleId()!=5 && crminfo.getRoleId()!=6){
+        if(crminfo.getRoleId()==1 && crminfo.getRoleId()==2 && crminfo.getRoleId()==3 && crminfo.getRoleId()==4){
             return "crm/agent";
         }else {
             return "noJurisdiction";
@@ -102,7 +114,7 @@ public class JspController {
     @RequestMapping("addAgent.do")
     public String addAgent(HttpServletRequest request,HttpServletResponse response) {
         Crminfo crminfo=CommonUtils.getUser(request,response);
-        if(crminfo.getRoleId()!=5 && crminfo.getRoleId()!=6){
+        if(crminfo.getRoleId()==1 && crminfo.getRoleId()==2 && crminfo.getRoleId()==3 && crminfo.getRoleId()==4){
             return "crm/agent_add";
         }else {
             return "noJurisdiction";
@@ -149,7 +161,8 @@ public class JspController {
      */
     @RequestMapping("toagencyStaff.do")
     public String toagencyStaff(HttpServletRequest request, HttpServletResponse response){
-        if(CommonUtils.getUser(request,response).getRoleId()!=6){
+       Crminfo crminfo= CommonUtils.getUser(request,response);
+        if(crminfo.getRoleId()==1 && crminfo.getRoleId()==2 && crminfo.getRoleId()==3 && crminfo.getRoleId()==4 &&crminfo.getRoleId()==5 ){
             return "crm/agencyStaff";
         }else {
             return "noJurisdiction";
@@ -305,7 +318,13 @@ public class JspController {
      * @return
      */
     @RequestMapping("tofollowUpDeltail.do")
-    public String tofollowUpDeltail(String id,ModelMap modelMap){
+    public String tofollowUpDeltail(String id,ModelMap modelMap,Integer id1){
+        if(null != id1){
+            Information information=new Information();
+            information.setMationId(id1);
+            information.setMationStatus(2);
+            informationService.updateInformation(information);
+        }
         Crmcustomersinfo crmcustomersinfo=crmcustomersinfoService.selectCrmcustomersinfoById(Integer.parseInt(id));
         Crminfo addCrmifo=crminfoService.selectCrminfoById(crmcustomersinfo.getAdduserId());
         Crmcustomerallocate crmcustomerallocate=new Crmcustomerallocate();
@@ -316,7 +335,6 @@ public class JspController {
         if(crmcustomerallocates.size()>0){
             fzrCrminfo=crminfoService.selectCrminfoById(crmcustomerallocates.get(0).getBeiuserId());
         }
-
         modelMap.put("addCrmifo",addCrmifo);
         modelMap.put("fzrCrminfo",fzrCrminfo);
         modelMap.put("crmcustomersinfo",crmcustomersinfo);
@@ -331,6 +349,116 @@ public class JspController {
     public String map(){
         return "crm/map";
     }
+
+    /**
+     * 签单
+     * @return
+     */
+    @RequestMapping("toContract.do")
+    public String toContract(){
+        return "crm/contract";
+    }
+
+    /**
+     * 新建签单
+     * @return
+     */
+    @RequestMapping("toContract_add.do")
+    public String toContractadd(HttpServletResponse response,HttpServletRequest request,ModelMap modelMap){
+        Crmcustomersinfo crmcustomersinfo=new Crmcustomersinfo();
+        crmcustomersinfo.setAdduserHierarchy(CommonUtils.getUser(request,response).getUserArrangement());
+        List<Crmcustomersinfo> crmcustomersinfos=crmcustomersinfoService.selectCustomersByUser(crmcustomersinfo);
+        modelMap.put("crmcustomersinfos",crmcustomersinfos);
+        return "crm/contract_add";
+    }
+
+    /**
+     * 审批
+     * @return
+     */
+    @RequestMapping("toSubject.do")
+    public String toSubject(){
+        return "crm/subject";
+    }
+
+    /**
+     * 刷脸测试页面
+     * @return
+     */
+    @RequestMapping("toRecognition.do")
+    public String toRecognition(){
+        return "crm/recognition";
+    }
+
+    /**
+     * 修改签单
+     * @param id
+     * @return
+     */
+    @RequestMapping("toContractUpdate.do")
+    public String toContractUpdate(HttpServletResponse response,HttpServletRequest request,Integer id,ModelMap modelMap){
+        Crmcustomersinfo crmcustomersinfo=new Crmcustomersinfo();
+        crmcustomersinfo.setAdduserHierarchy(CommonUtils.getUser(request,response).getUserArrangement());
+        List<Crmcustomersinfo> crmcustomersinfos=crmcustomersinfoService.selectCustomersByUser(crmcustomersinfo);
+        modelMap.put("crmcustomersinfos",crmcustomersinfos);
+        modelMap.put("orders",crmcustomerorderService.selectCrmcustomerorderById(id));
+        return "crm/contract_update";
+    }
+
+    /**
+     * 财务查看客户信息资料
+     * @param id
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("touserinformation.do")
+    public String touserinformation(String id,ModelMap modelMap){
+        Crmcustomersinfo crmcustomersinfo=crmcustomersinfoService.selectCrmcustomersinfoById(Integer.parseInt(id));
+        modelMap.put("crmcustomersinfo",crmcustomersinfo);
+        return "crm/userinformation";
+    }
+
+    /**
+     * 审批记录页面
+     * @return
+     */
+    @RequestMapping("toAuditrecord.do")
+    public String toAuditrecord(){
+        return "crm/auditrecord";
+    }
+
+    /**
+     * 设置过期时间页面
+     * @param request
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("toExpirytime.do")
+    public String toExpirytime(HttpServletRequest request,ModelMap modelMap){
+        String[] ids = request.getParameterValues("id[]");
+        modelMap.put("ids",ids);
+        return "crm/customer_expirytime";
+    }
+
+    /**
+     * 用户提醒页面
+     * @return
+     */
+    @RequestMapping("toAllNews.do")
+    public String toAllNews(){
+        return "crm/allNews";
+    }
+
+    /**
+     * 我的跟进记录页面
+     * @return
+     */
+    @RequestMapping("toMyFollow.do")
+    public String toMyFollow(){
+        return "crm/myFollow_up_detail";
+    }
+
+
 }
 
 

@@ -41,6 +41,19 @@ public class DateUtil {
     public final static SimpleDateFormat xISO_dateTimeFormat = new SimpleDateFormat(  
             "yyyy/MM/dd HH:mm:ss Z");
 
+
+    public static java.sql.Date strToDate(String strDate) {
+        String str = strDate;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date d = null;
+        try {
+            d = format.parse(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        java.sql.Date date = new java.sql.Date(d.getTime());
+        return date;
+    }
     /**
      * 将String字符串转换为java.sql.Timestamp格式日期,用于数据库保存
      * @param strDate

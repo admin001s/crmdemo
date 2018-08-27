@@ -87,19 +87,25 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12" style="margin-top: 20px" id="transfer">
-                                        <div class="col-lg-3">
-                                            <label class="col-lg-6">已选<span style="color: #0000FF" id="size">0</span>位客户</label>
-                                            <button class="btn btn-sm btn-light col-lg-3" id="transfer1"><i
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-4">已选<span style="color: #0000FF" id="size">0</span>位客户</label>
+                                            <div class="col-lg-4"><button class="btn btn-sm btn-light col-lg-10" id="transfer1"><i
                                                     class="fa fa-mail-forward"></i>转移
-                                            </button>
+                                            </button></div>
+                                            <div class="col-lg-4"><button class="btn btn-sm btn-info col-lg-10 gqsj"><i
+                                                    class="fa fa-mail-forward"></i>过期时间
+                                            </button></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12" style="margin-top: 20px" id="choice">
-                                        <div class="col-lg-3">
-                                            <label class="col-lg-6">已选<span style="color: #0000FF" id="size1">0</span>位客户</label>
-                                            <button class="btn btn-sm btn-info col-lg-3" id="choice1"><i
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-4">已选<span style="color: #0000FF" id="size1">0</span>位客户</label>
+                                            <div class="col-lg-4"><button class="btn btn-sm btn-info col-lg-10" id="choice1"><i
                                                     class="fa fa-mail-forward"></i>分配
-                                            </button>
+                                            </button></div>
+                                            <div class="col-lg-4"><button class="btn btn-sm btn-info col-lg-10 gqsj"><i
+                                                    class="fa fa-mail-forward"></i>过期时间
+                                            </button></div>
                                         </div>
                                     </div>
                                 </ol>
@@ -134,6 +140,18 @@
 
     jQuery(function ($) {
         var customerStatus=0;
+        $(".gqsj").click(function(){
+            var agents = container.find('#table').bootstrapTable('getSelections');
+            if (agents.length > 0) {
+                var arr = [];
+                $(agents).each(function () {
+                    arr.push(this.id);
+                });
+                $('#reserveModal').load('toExpirytime.do', {id:arr}, function (a, b, c) {
+                    $('#reserveModal').modal('show');
+                });
+            }
+        });
         $("#transfer1").click(function () {
             var agents = container.find('#table').bootstrapTable('getSelections');
             if (agents.length > 0) {
@@ -228,14 +246,30 @@
                     checkbox: true
                 }, {
                     field: 'customersId',
-                    title: '用户编号',
+                    title: '客户编号',
                     align: 'center',
                 }, {
                     field: 'customersName',
-                    title: '用户名称',
+                    title: '客户名称',
                     align: 'center',
                     formatter: function (value,row,index) {
                         return '<a href="javascript:;" class="follew" data-id="'+row.id+'">' + value + '</a>';
+                    }
+                }, {
+                    field: 'level',
+                    title: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客户级别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+                    align: 'center',
+                    formatter: function (value,row,index) {
+                        if(value ==1){
+                            return "A(高价值客户)";
+                        }
+                        if(value ==2){
+                            return "B(普通客户)";
+                        }
+                        if(value ==3){
+                            return "C(低价值客户)";
+                        }
+                        return '';
                     }
                 }, {
                     field: 'customersSex',
@@ -276,6 +310,8 @@
                             return '未分配<button class="btn btn-sm btn-primary fp" id="fp" data-id="' + row.id + '">分配</button>';
                         } else if (value == "2") {
                             return "已分配";
+                        }else if (value == "3") {
+                            return "已签单";
                         }
                     }
                 }, {
@@ -323,7 +359,7 @@
                     }
                 }, {
                     field: 'isVip',
-                    title: '用户类型',
+                    title: '客户类型',
                     align: 'center',
                     formatter: function (value, row, index) {
                         if (value == "0") {
@@ -335,6 +371,10 @@
                 }, {
                     field: 'email',
                     title: '联系邮箱',
+                    align: 'center'
+                }, {
+                    field: 'industryCategory',
+                    title: '所属行业',
                     align: 'center'
                 }, {
                     field: 'customerSource',
@@ -413,7 +453,7 @@
                 if (${user.roleId} == "1" || ${user.roleId} == "2" || ${user.roleId} == "3" || ${user.roleId} == "4"
             )
                 {
-                    $(".bianji").on("click", function () {
+                    container.find(".bianji").on("click", function () {
                         $('#reserveModal').load("updateCustomer.do", {
                             id: $(this).attr("data-id")
                         }, function (a, b, c) {

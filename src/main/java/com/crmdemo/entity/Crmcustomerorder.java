@@ -1,6 +1,8 @@
 package com.crmdemo.entity;
 
 
+import com.crmdemo.util.DateUtil;
+
 public class Crmcustomerorder {
 
   private Integer id;
@@ -15,7 +17,33 @@ public class Crmcustomerorder {
   private Integer signingtypeId;
   private java.sql.Timestamp yesSigningTime;
   private java.sql.Timestamp createTime;
+  private String orderId;
+  private String orderName;
+  private Integer money;
 
+  public String getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
+
+  public String getOrderName() {
+    return orderName;
+  }
+
+  public void setOrderName(String orderName) {
+    this.orderName = orderName;
+  }
+
+  public Integer getMoney() {
+    return money;
+  }
+
+  public void setMoney(Integer money) {
+    this.money = money;
+  }
 
   public Integer getId() {
     return id;
@@ -62,8 +90,8 @@ public class Crmcustomerorder {
   }
 
 
-  public java.sql.Timestamp getSigningTime() {
-    return signingTime;
+  public String getSigningTime() {
+    return DateUtil.dateToStr(signingTime);
   }
 
   public void setSigningTime(java.sql.Timestamp signingTime) {

@@ -1,6 +1,7 @@
 package com.crmdemo.entity;
 
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Crmcustomerallocate {
@@ -13,6 +14,15 @@ public class Crmcustomerallocate {
   private Integer customerId;
   private java.sql.Timestamp updateTime;
   private Integer isRelation;
+  private java.sql.Date distributionDate;
+
+  public Date getDistributionDate() {
+    return distributionDate;
+  }
+
+  public void setDistributionDate(Date distributionDate) {
+    this.distributionDate = distributionDate;
+  }
 
   public Integer getIsRelation() {
     return isRelation;

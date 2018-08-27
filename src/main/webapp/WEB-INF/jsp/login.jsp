@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -12,24 +12,74 @@
     <!--
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="assets/css/ace-fonts.css" />
-    <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-fonts.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style"/>
     <link rel="stylesheet" href="assets/toastr/toastr.min.css"/>
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-part2.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css"/>
     <![endif]-->
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" href="assets/newadd/style.css"/>
+    <style>
+        .admin_login {
+            background: #213838;
+        }
+
+        canvas {
+            z-index: -1;
+            position: absolute;
+        }
+    </style>
+    <script src="assets/newadd/jquery.js"></script>
+    <script src="assets/newadd/verificationNumbers.js"></script>
+    <script src="assets/newadd/Particleground.js"></script>
     <script src="assets/js/ace-extra.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <!--[if lte IE 8]>
     <script src="assets/js/html5shiv.min.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
-    <script src="assets/toastr/toastr.min.js"></script>
+
+    <style type="text/css">
+        h1 {
+            color: #fff;
+            text-align: center;
+            font-weight: 100;
+            margin-top: 40px;
+        }
+
+        #media {
+            width: 280px;
+            height: 250px;
+            margin: 10px auto 0;
+            border-radius: 30px;
+            overflow: hidden;
+            opacity: 0.7px;
+        }
+
+        #video {
+
+        }
+
+        #canvas {
+            display: none;
+        }
+
+        #btn {
+            width: 160px;
+            height: 50px;
+            background: #03a9f4;
+            margin: 70px auto 0;
+            text-align: center;
+            line-height: 50px;
+            color: #fff;
+            border-radius: 40px;
+        }
+    </style>
 </head>
 <body class="login-layout blur-login">
 <div class="main-container">
@@ -39,7 +89,7 @@
                 <div class="login-container">
                     <div class="center">
                         <h1>
-                            <span class="white">这里放后台登录名称</span>
+                            <span class="white">奋斗CRM</span>
                         </h1>
                     </div>
 
@@ -60,14 +110,16 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" id="crmName"/>
+															<input type="text" class="form-control" placeholder="用户名"
+                                                                   id="crmName"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" id="crmPwd"/>
+															<input type="password" class="form-control" placeholder="密码"
+                                                                   id="crmPwd"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
                                             </label>
@@ -76,11 +128,12 @@
 
                                             <div class="clearfix">
                                                 <label class="inline">
-                                                    <input type="checkbox" class="ace" />
+                                                    <input type="checkbox" class="ace"/>
                                                     <span class="lbl"> 记住我</span>
                                                 </label>
 
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary" id="comment">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary"
+                                                        id="comment">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">登录</span>
                                                 </button>
@@ -101,7 +154,7 @@
                                     </div>
 
                                     <div>
-                                        <a href="#" data-target="#signup-box" class="user-signup-link">
+                                        <a href="#" data-target="#signup-box" id="sl" class="user-signup-link">
                                             用户注册
                                             <i class="ace-icon fa fa-arrow-right"></i>
                                         </a>
@@ -127,7 +180,8 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" class="form-control"
+                                                                   placeholder="Email"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </label>
@@ -151,81 +205,166 @@
                             </div><!-- /.widget-body -->
                         </div><!-- /.forgot-box -->
 
-                        <div id="signup-box" class="signup-box widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header green lighter bigger">
-                                        <i class="ace-icon fa fa-users blue"></i>
-                                        新用户注册
-                                    </h4>
-
-                                    <div class="space-6"></div>
-                                    <p> 输入详细信息: </p>
-
-                                    <form>
-                                        <fieldset>
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
-															<i class="ace-icon fa fa-envelope"></i>
-														</span>
-                                            </label>
-
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" />
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-                                            </label>
-
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-                                            </label>
-
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="确认密码" />
-															<i class="ace-icon fa fa-retweet"></i>
-														</span>
-                                            </label>
-
-                                            <label class="block">
-                                                <input type="checkbox" class="ace" />
-                                                <span class="lbl">
-															我接受
-															<a href="#">用户协议</a>
-														</span>
-                                            </label>
-
-                                            <div class="space-24"></div>
-
-                                            <div class="clearfix">
-                                                <button type="reset" class="width-30 pull-left btn btn-sm">
-                                                    <i class="ace-icon fa fa-refresh"></i>
-                                                    <span class="bigger-110">重置</span>
-                                                </button>
-
-                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success">
-                                                    <span class="bigger-110">注册</span>
-
-                                                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                                                </button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
+                        <div class="col-lg-12">
+                            <dl class="admin_login signup-box widget-box no-border" id="signup-box">
+                                <dt>
+                                    <strong>后台管理系统</strong><em></em> <strong>请把你的脸放摄像头面前</strong>
+                                </dt>
+                                <div id="media">
+                                    <video id="video" width="530" height="300" autoplay></video>
+                                    <canvas id="canvas" width="400" height="300"></canvas>
                                 </div>
-
+                                <dd>
+                                    <input type="button" onclick="query()" value="立即登录"
+                                           class="submit_btn"/>
+                                </dd>
                                 <div class="toolbar center">
-                                    <a href="#" data-target="#login-box" class="back-to-login-link">
-                                        <i class="ace-icon fa fa-arrow-left"></i>
+                                    <a href="#" id="close" data-target="#login-box" class="back-to-login-link">
                                         返回登录
+                                        <i class="ace-icon fa fa-arrow-right"></i>
                                     </a>
                                 </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.signup-box -->
+
+                            </dl>
+                            <script type="text/javascript" src="assets/newadd/jquery-3.1.1.min.js"></script>
+                            <script type="text/javascript">
+                                //var 是定义变量
+                                var video = document.getElementById("video"); //获取video标签
+                                var context = canvas.getContext("2d");
+                                var con = {
+                                    audio: false,
+                                    video: {
+                                        width: 1980,
+                                        height: 1024,
+                                    }
+                                };
+
+                                /*
+                                                                $("#close").click(function(){
+                                                                    context.drawImage(video,0,0,1024,800)
+                                                                });*/
+                                function index(userId) {
+                                    $.ajax({
+                                        type: "post",
+                                        url: "login2.do",
+                                        data: {"userId": userId},
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            /* alert(data) */
+                                            if (data) {
+                                                window.location.href = "index.do";
+                                            } else {
+
+                                            }
+                                        }
+                                    });
+                                }
+
+                                function db(userId,base) {
+                                    var a = false;
+                                    $.ajax({
+                                        type: "post",
+                                        url: "contrast.do",
+                                        async: false,
+                                        data: {"userId": userId,"base":base},
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            /* alert(data) */
+                                            if (data.error_code == 0) {
+                                                if (data.result.score > 90) {
+                                                    a = true;
+                                                } else {
+                                                    a = false;
+                                                }
+                                            } else {
+                                                a = false;
+                                            }
+                                        }
+                                    });
+                                    return a;
+                                }
+
+                                function jc(base) {
+                                    var a = false;
+                                    $.ajax({
+                                        type: "post",
+                                        url: "quality.do",
+                                        async: false,
+                                        data: {"base": base},
+                                        dataType: "JSON",
+                                        success: function (data) {
+                                            /* alert(data) */
+                                            if (data) {
+                                                a = true;
+                                            } else {
+                                                a = false;
+                                            }
+                                        }
+                                    });
+                                    return a;
+                                }
+
+                                $("#sl").click(function () {
+                                    //导航 获取用户媒体对象
+                                    navigator.mediaDevices.getUserMedia(con)
+                                        .then(function (stream) {
+                                            video.src = window.URL.createObjectURL(stream);
+                                            video.onloadmetadate = function (e) {
+                                                video.play();
+                                            }
+                                        });
+                                });
+
+                                function query() {
+
+                                    //把流媒体数据画到convas画布上去
+                                    context.drawImage(video, 0, 0, 400, 300);
+                                    var base = getBase64();
+
+                                    if(jc(base)){
+                                        $.ajax({
+                                            type: "post",
+                                            url: "recognition.do",
+                                            data: {"base": base},
+                                            dataType: "JSON",
+                                            success: function (data) {
+                                                /* alert(data) */
+                                                if (data.error_code == 0) {
+                                                    if (data.result.user_list[0].score > 90) {
+                                                        var id = data.result.user_list[0].user_id;
+                                                        /*if (db(id,base)) {*/
+                                                            index(id);
+                                                        /*} else {
+                                                            alert("重新识别！");
+                                                        }*/
+                                                    } else {
+                                                        toastr.error("重新识别！");
+                                                    }
+                                                } else if (data.error_code == 222207) {
+                                                    toastr.error("无此人！");
+                                                } else if (data.error_code == 222202 || data.error_code == 222203) {
+                                                    toastr.error("未检测到人脸！");
+                                                }
+                                                else if (data.error_code == 223113 || data.error_code == 223114 || data.error_code == 223115 || data.error_code == 223116 || data.error_code == 223121
+                                                    || data.error_code == 223122 || data.error_code == 223123 || data.error_code == 223124 || data.error_code == 223125 || data.error_code == 223126
+                                                    || data.error_code == 223127) {
+                                                    toastr.error("请到光线强的地方，请不到遮头掩面，请露出眉毛！");
+                                                }
+                                            }
+                                        });
+                                    }
+
+
+                                }
+
+                                function getBase64() {
+                                    var imgSrc = document.getElementById("canvas").toDataURL(
+                                        "image/png");
+                                    return imgSrc.split("base64,")[1];
+
+                                };
+                            </script>
+                        </div>
                     </div><!-- /.position-relative -->
 
                 </div>
@@ -238,47 +377,49 @@
 
 <!--[if !IE]> -->
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='assets/js/jquery.min.js'>" + "<" + "/script>");
 </script>
 
 <!-- <![endif]-->
-
+<script src="assets/toastr/toastr.min.js"></script>
 <!--[if IE]>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>" + "<" + "/script>");
 </script>
 <![endif]-->
 <script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-    jQuery(function($) {
-        $(document).on('click', '.toolbar a[data-target]', function(e) {
+    jQuery(function ($) {
+        $(document).on('click', '.toolbar a[data-target]', function (e) {
             e.preventDefault();
             var target = $(this).data('target');
             $('.widget-box.visible').removeClass('visible');//hide others
             $(target).addClass('visible');//show target
         });
-        $("#comment").on('click', function() {
+
+        $("#comment").on('click', function () {
             $.ajax({
-                url : "dologin.do",
-                data : {
-                    userName:$("#crmName").val().trim(),
-                    passWord:$("#crmPwd").val().trim()
+                url: "dologin.do",
+                data: {
+                    userName: $("#crmName").val().trim(),
+                    passWord: $("#crmPwd").val().trim()
                 },
-                type : "post",
-                dataType : "JSON",
-                success : function(data) {
+                type: "post",
+                dataType: "JSON",
+                success: function (data) {
                     if (data.is) {
                         toastr.success(data.tips);
-                        window.location.href="/index.do";
+                        window.location.href = "/index.do";
                     } else {
                         toastr.error(data.tips);
                     }
                 },
-                error : function(errMsg) {}
+                error: function (errMsg) {
+                }
             });
         });
     });

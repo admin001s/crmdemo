@@ -70,7 +70,7 @@ WHERE `crmcustomerallocate`.`customerId`=#{customerId} ORDER BY `crmcustomerallo
     <select id="selectCrmcustomerallocateList" resultType="Crmcustomerallocate">
         select * from crmcustomerallocate where isRelation=0
         <if test="beiuserId !=null">
-            and  beiuserId=#{beiuserId}
+            and beiuserId=#{beiuserId}
         </if>
         <if test="customerId !=null">
             and customerId=#{customerId}
@@ -109,4 +109,20 @@ WHERE `crmcustomerallocate`.`customerId`=#{customerId} ORDER BY `crmcustomerallo
         </set>
         where id = #{id}
     </update>
+    <select id="selectCrmcustomerallByUserCount" resultType="Crmcustomerallocate">
+        SELECT DATE(`crmcustomerallocate`.distributionTime) AS distributionDate,COUNT(1) AS
+        userId,crmcustomerallocate.id FROM
+        `crmcustomerallocate` INNER JOIN `crminfo` ON `crmcustomerallocate`.`beiuserId`=crminfo.`UserId`
+        WHERE `crmcustomerallocate`.`isRelation`=0
+        <if test="beiuserId !=null">
+            and `crmcustomerallocate`.`beiuserId` = #{beiuserId}
+        </if>
+        <if test="crminfo != null">
+            <if test="crminfo.userArrangement !=null and crminfo.userArrangement !=''">
+                and crminfo.userArrangement like '%${crminfo.userArrangement}%' and `crmcustomerallocate`.`beiuserId` !=
+                #{userId}
+            </if>
+        </if>
+        GROUP BY DATE(`crmcustomerallocate`.distributionTime) order by `crmcustomerallocate`.distributionTime desc
+    </select>
 </mapper>

@@ -17,23 +17,15 @@
 
 <body>
 <!--百度地图容器-->
-<div style="width:697px;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
+<div style="height:550px;border:#ccc solid 1px;" class="" id="dituContent"></div>
 </body>
 <script type="text/javascript">
-    var map = new BMap.Map("dituContent")
-    map.centerAndZoom("佛山市富荣大厦",11);
-    var geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function(r){
-        if(this.getStatus() == BMAP_STATUS_SUCCESS){
-            var mk = new BMap.Marker(r.point);
-            map.addOverlay(mk);
-            map.panTo(r.point);
-            alert('您的位置：'+r.point.lng+','+r.point.lat);
-        }
-        else {
-            alert('failed'+this.getStatus());
-        }
-    },{enableHighAccuracy: true})
+    var map = new BMap.Map("dituContent");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+    var local = new BMap.LocalSearch(map, {
+        renderOptions:{map: map}
+    });
+    local.search("佛山");
     setMapEvent();
     addMapControl();
     //地图事件设置函数：

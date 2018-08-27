@@ -3,6 +3,7 @@ package com.crmdemo.entity;
 
 import com.crmdemo.util.DateUtil;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Crmcustomersinfo {
@@ -38,13 +39,31 @@ public class Crmcustomersinfo {
   private String addmethod;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private java.sql.Timestamp beOverdue;
+  private java.sql.Date beOverdue;
+  private  Integer level;
+  private Integer readingState;
 
-  public Timestamp getBeOverdue() {
+  public Integer getReadingState() {
+    return readingState;
+  }
+
+  public void setReadingState(Integer readingState) {
+    this.readingState = readingState;
+  }
+
+  public Integer getLevel() {
+    return level;
+  }
+
+  public void setLevel(Integer level) {
+    this.level = level;
+  }
+
+  public Date getBeOverdue() {
     return beOverdue;
   }
 
-  public void setBeOverdue(Timestamp beOverdue) {
+  public void setBeOverdue(Date beOverdue) {
     this.beOverdue = beOverdue;
   }
 

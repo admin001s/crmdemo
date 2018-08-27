@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="assets/toastr/toastr.min.css"/>
 <style>
     .warning {
         border: 1px solid red;
@@ -83,14 +84,13 @@
                                                            class="col-xs-10 col-sm-5" autocomplete="off"/>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label no-padding-right"
-                                                       for="agentaddress">代理商联系地址： </label>
-
+                                                       for="agentName">代理商联络人： </label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" id="agentaddress" placeholder="输入代理商联系地址"
-                                                           class=" col-xs-10 col-sm-5" autocomplete="off"/>
+                                                    <input type="text" autocomplete="off" id="agentName"
+                                                           placeholder="输入代理商联络人"
+                                                           class="col-xs-10 col-sm-5"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -146,13 +146,14 @@
                                                 </div>
                                             </div>
 
+
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label no-padding-right"
-                                                       for="agentName">代理商联络人： </label>
+                                                       for="agentaddress">代理商联系地址： </label>
+
                                                 <div class="col-sm-9">
-                                                    <input type="text" autocomplete="off" id="agentName"
-                                                           placeholder="输入代理商联络人"
-                                                           class="col-xs-10 col-sm-5"/>
+                                                    <input type="text" id="agentaddress" placeholder="输入代理商联系地址"
+                                                           class=" col-xs-10 col-sm-5" autocomplete="off"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -220,7 +221,7 @@
                                                            for="agentsId">
                                                         名称：</label>
                                                     <div class="col-lg-9 col-sm-9">
-                                                        <input type="text" id="chineseName" placeholder="输入名称"
+                                                        <input type="text" id="chineseName" placeholder="输入名称" readonly="readonly"
                                                                class="col-xs-10 col-sm-5" autocomplete="off"/>
                                                     </div>
                                                 </div>
@@ -303,9 +304,57 @@
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
-
+<script src="assets/toastr/toastr.min.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    //邮箱
+    function
+    checkEmail(str){
+        var
+            re = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
+        if(re.test(str)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //验证帐号是否合法
+
+    //验证规则：字母、数字、下划线组成，字母开头，4-16位。
+
+    function
+    checkUser(str) {
+        var
+            re = /^[a-zA-z]\w{3,15}$/;
+        if (re.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //手机号码
+
+    //验证规则：11位数字，以1开头。
+    function checkMobile(str) {
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (myreg.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // 判断qq
+
+    function qq(str) {
+        var myreg = /^[0-9]{5,10}$/;
+        if (myreg.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     jQuery(function ($) {
         function isrepeat(a, b, c) {
             var is;
@@ -330,6 +379,48 @@
                 }
             });
             return is;
+        }
+        function userAdd(){
+            if($("#userName").val() ==""){
+                toastr.error("请填写账号！");
+                return false;
+            }
+            if($("#passWord").val() ==""){
+                toastr.error("请填写密码！");
+                return false;
+            }
+            if($("#oldpassWord").val() !="" && $("#oldpassWord").val() != $("#passWord").val()){
+                toastr.error("两次密码不相同！");
+                return false;
+            }
+            return true;
+        }
+        function agentadd() {
+            if ($("#agentsId").val() == "") {
+                toastr.error("请填写编号！");
+                return false;
+            }
+            if ($("#agentName").val() == "") {
+                toastr.error("请填写联系人名称！");
+                return false;
+            }
+            if ($("#agentphone").val() == "") {
+                toastr.error("请填写联系人电话号码！");
+                return false;
+            }
+            if ($("#agentphone").val() != "" && !checkMobile($("#agentphone").val())){
+                toastr.error("请填写正确电话号码！");
+                return false;
+            }
+            if($("#agentQq").val() != "" && !qq($("#agentQq").val())){
+                toastr.error("请填写正确QQ！");
+                return false;
+            }
+            if($("#agentemail").val() != "" && !checkEmail($("#agentemail").val())){
+                toastr.error("请填写正确邮箱！");
+                return false;
+            }
+            return true;
         }
 
         function add() {
@@ -453,14 +544,16 @@
         });
 
         function isadd() {
-            var iss=true;
+            var iss = true;
             if ($("#agentsId").val() != '' && $("#agentsId").val() != null) {
-                if(!isrepeat($("#agentsId").val(), null, null)){
+                if (!isrepeat($("#agentsId").val(), null, null)) {
+                    toastr.error("已有该编号！");
                     return false;
                 }
             }
             if ($("#agentphone").val() != '' && $("#agentphone").val() != null) {
-                if(!isrepeat(null, $("#agentphone").val(), null)){
+                if (!isrepeat(null, $("#agentphone").val(), null)) {
+                    toastr.error("已有改电话号码！!");
                     return false;
                 }
             }
@@ -478,18 +571,27 @@
             }).unbind()
             .on('change', function (e, info) {
                 if (info.step == 1) {
-                    if (isadd() == false) {
-                        return isadd();
+                    if(agentadd()==true){
+                        if (isadd() == false) {
+                            return false;
+                        }
+                    }else {
+                        return false;
                     }
+
                 }
                 if (info.step == 2) {
                     if ($("#zy select").val() == '0') {
+                        toastr.error("请选择分配人！");
                         return false;
                     } else {
                         $("#chineseName").val($("#agentName").val());
                     }
                 }
                 if (info.step == 3) {
+                    if(userAdd()==false){
+                        return false;
+                    }
                     var is1;
                     $.ajax({
                         url: "isUserRepeat.do",
@@ -500,6 +602,9 @@
                         type: "post",
                         dataType: "JSON",
                         success: function (data) {
+                            if(data==false){
+                                toastr.error("已存在该账号！");
+                            }
                             is1 = data;
 
                         },

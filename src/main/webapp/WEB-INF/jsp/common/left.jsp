@@ -45,6 +45,21 @@
                             <i class="menu-icon fa fa-users"></i>
                             客户
                         </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="one" data-url="toContract.do">
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-users"></i>
+                            签单
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="one" data-url="toSubject.do">
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-users"></i>
+                            审批
+                        </a>
 
                         <b class="arrow"></b>
                     </li>
@@ -52,41 +67,41 @@
             </li>
 
             <li class="">
-                <a href="widgets.html">
+                <a href="#"  class="dropdown-toggle">
                     <i class="menu-icon fa fa-list-alt"></i>
-                    <span class="menu-text"> 插件 </span>
+                    <span class="menu-text"> 销售支持 </span>
+                    <b class="arrow fa fa-angle-down"></b>
                 </a>
 
                 <b class="arrow"></b>
+                <ul class="submenu">
+                    <li class="one" data-url="toMyFollow.do">
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            我的跟进记录
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="one" data-url="toagencyStaff.do">
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            代理商员工
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="one" data-url="customer.do">
+                        <a href="javascript:;">
+                            <i class="menu-icon fa fa-users"></i>
+                            客户
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
             </li>
 
-            <li class="">
-                <a href="calendar.html">
-                    <i class="menu-icon fa fa-calendar"></i>
-
-                    <span class="menu-text">
-								日历
-
-                        <!-- #section:basics/sidebar.layout.badge -->
-								<span class="badge badge-transparent tooltip-error" title="有2件重要事件">
-									<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
-								</span>
-
-                        <!-- /section:basics/sidebar.layout.badge -->
-							</span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="">
-                <a href="gallery.html">
-                    <i class="menu-icon fa fa-picture-o"></i>
-                    <span class="menu-text"> 相册 </span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
 
             <li class="">
                 <a href="#" class="dropdown-toggle">
@@ -234,72 +249,6 @@
                     </li>
                 </ul>
             </li>
-
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-file-o"></i>
-
-                    <span class="menu-text">
-								其他页面
-
-                        <!-- #section:basics/sidebar.layout.badge -->
-								<span class="badge badge-primary">5</span>
-
-                        <!-- /section:basics/sidebar.layout.badge -->
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="faq.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            帮助页面
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="error-404.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            404错误页面
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="error-500.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            500错误页面
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="grid.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            网格
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-
-                    <li class="">
-                        <a href="blank.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            空白页面
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
         </ul><!-- /.nav-list -->
 
         <!-- #section:basics/sidebar.layout.minimize -->
@@ -317,6 +266,7 @@
             var url=$(this).attr("data-url");
             $('#workstation').load(url);
         });
+
     });
 </script>
     <!-- /section:basics/sidebar -->

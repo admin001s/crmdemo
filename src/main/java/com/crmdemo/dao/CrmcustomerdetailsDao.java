@@ -10,5 +10,10 @@ import java.util.List;
 @Mapper
 public interface CrmcustomerdetailsDao {
     Integer insertCrmcustomerdetails(Crmcustomerdetails crmcustomerdetails);
+
     List<CrmcustomerdetailsVop> selectcrmcustomerdetailsVopList(Crminfo crminfo);
+
+    List<CrmcustomerdetailsVop> selectcrmcustomerdetailsVopListByUser(Crmcustomerdetails crmcustomerdetails);
+
+    List<Crmcustomerdetails> selectcrmcustomerByUserCount(CrmcustomerdetailsVop crmcustomerdetailsVop);
 }

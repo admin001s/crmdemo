@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.crmdemo.dao.CrminfoDao">
+    <resultMap id="crminfos" type="Crminfo">
+        <id property="userId" column="userId"/>
+        <result property="roleName" column="RoleName"/>
+    </resultMap>
     <select id="selectcrmByName" resultType="Crminfo">
         select * from crminfo where isavailable=0
         <if test="userName !=null">
@@ -125,4 +129,10 @@
             </set>
             where userid = #{userId}
     </update>
+    <select id="selectCrminfoByUser" resultMap="crminfos">
+        select crminfo.*,crmrole.RoleName from crminfo inner join crmrole on crminfo.RoleId=crmrole.RoleId where 1=1
+        <if test="userArrangement !=null">
+           and  userArrangement like '%${userArrangement}%' and userArrangement != #{userArrangement}
+        </if>
+    </select>
 </mapper>

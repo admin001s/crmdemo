@@ -9,8 +9,14 @@ import java.util.List;
 @Mapper
 public interface CrmcustomerallocateDao {
     Integer insertCrmcustomerallocate(Crmcustomerallocate crmcustomerallocate);
+
     Integer selectCrmcustomerallocateCount(Crmcustomerallocate crmcustomerallocate);
+
     List<Crmcustomerallocate> selectCrmcustomerallocateList(Crmcustomerallocate crmcustomerallocate);
+
     Integer updateCrmcustomerallocate(Crmcustomerallocate crmcustomerallocate);
+
     List<CrmcustomerallocateVop> selectCrmcustomerallocateVop(Crmcustomerallocate crmcustomerallocate);
+
+    List<CrmcustomerallocateVop> selectCrmcustomerallByUserCount(CrmcustomerallocateVop crmcustomerallocateVop);
 }

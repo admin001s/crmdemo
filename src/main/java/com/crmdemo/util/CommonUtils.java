@@ -37,6 +37,27 @@ import java.util.zip.GZIPInputStream;
  * @since 2018年5月17日
  */
 public class CommonUtils {
+    /**
+     * 查看一个字符串是否可以转换为数字
+     * @param str 字符串
+     * @return true 可以; false 不可以
+     */
+    public static boolean isStr2Num(String str) {
+        try {
+            if(Integer.parseInt(str)==0){
+                return false;
+            }
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    public static  Integer getUserPid(String str){
+        String[] strs=str.split("/");
+        return  Integer.parseInt(strs[strs.length-2]);
+    }
+
     public static  Integer getUserId(String str){
      String[] strs=str.split("/");
      return  Integer.parseInt(strs[strs.length-1]);

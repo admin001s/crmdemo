@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -12,25 +14,25 @@
     <!--
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap-table.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style"/>
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-part2.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css"/>
     <![endif]-->
-    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+
     <![endif]-->
-
-    <script type="assets/js/jquery.min.js"></script>
-
+    <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/ace-extra.min.js"></script>
     <!--[if lte IE 8]>
     <script src="assets/js/html5shiv.min.js"></script>
     <script src="assets/js/respond.min.js"></script>
+    <script src="assets/toastr/toastr.min.js"></script>
     <![endif]-->
 
 </head>
@@ -56,7 +58,7 @@
             <!-- #section:basics/navbar.layout.brand -->
             <a href="#" class="navbar-brand">
                 <small>
-                    <img src="assets/avatars/logo.png" alt="" />
+                    <img src="assets/avatars/logo.png" alt=""/>
                 </small>
             </a>
         </div>
@@ -67,106 +69,22 @@
                 <li class="green">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-                        <span class="badge badge-success">5</span>
+                        <span class="badge badge-success" id="fa"></span>
                     </a>
 
                     <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                         <li class="dropdown-header">
                             <i class="ace-icon fa fa-envelope-o"></i>
-                            13条未读信息
+                            <span id="fa1"></span>条未读信息
                         </li>
 
                         <li class="dropdown-content">
-                            <ul class="dropdown-menu dropdown-navbar">
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-                                        <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">B2C:</span>
-														系统产生20个错误，12个警告...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>2014-12-15 18:00:00</span>
-													</span>
-												</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-                                        <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">积分商城:</span>
-														系统产生20个错误，12个警告...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>2014-12-15 18:00:00</span>
-													</span>
-												</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
-                                        <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">政府机票采购:</span>
-														系统产生20个错误，12个警告...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>2014-12-15 18:00:00</span>
-													</span>
-												</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
-                                        <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">B2B:</span>
-														系统产生20个错误，12个警告...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>2014-12-15 18:00:00</span>
-													</span>
-												</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <img src="assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
-                                        <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">货运系统:</span>
-														系统产生20个错误，12个警告...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>2014-12-15 18:00:00</span>
-													</span>
-												</span>
-                                    </a>
-                                </li>
+                            <ul class="dropdown-menu dropdown-navbar" id="ru">
                             </ul>
                         </li>
 
                         <li class="dropdown-footer">
-                            <a href="inbox.html">
+                            <a href="javascript:;" id="xx">
                                 查看全部消息
                                 <i class="ace-icon fa fa-arrow-right"></i>
                             </a>
@@ -177,9 +95,9 @@
                 <!-- #section:basics/navbar.user_menu -->
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
-									欢迎您<br />
+									欢迎您<br/>
 									${user.chineseName}
 								</span>
 
@@ -219,5 +137,57 @@
     </div><!-- /.navbar-container -->
 </div>
 <script type="text/javascript">
+    $(function () {
+        function getMation() {
+            $.ajax({
+                url: "getMation.do",
+                data: {},
+                async: false,
+                type: "post",
+                dataType: "JSON",
+                success: function (data) {
+                    if(data.length>8){
+                        $("#fa").text(8);
+                        $("#fa1").text(8);
+                    }else {
+                        $("#fa").text(data.length);
+                        $("#fa1").text(data.length);
+                    }
+                    $("#ru").empty();
+                    var _html='';
+                    $(data).each(function (i) {
+                        if(i<8){
+                            _html+='<li>\n' +
+                                '                                    <a href="javascript:;" data-id="'+this.customerId+'" data-url="tofollowUpDeltail.do"\n' +
+                                '                                       class="toDetailed" data-id1="'+this.mationId+'">\n' +
+                                '                                            <span class="msg-body">\n' +
+                                '\t\t\t\t\t\t\t\t\t\t\t\t\t<span class="msg-title">\n' +
+                                '\t\t\t\t\t\t\t\t\t\t\t\t\t\t警告:您负责的<span class="blue">'+this.title+'</span>\n' +
+                                '\t\t\t\t\t\t\t\t\t\t\t\t\t</span>\n' +
+                                '\t\t\t\t\t\t\t\t\t\t\t\t</span>\n' +
+                                '                                    </a>\n' +
+                                '                                </li>'
+                        }
+                    });
+                    $("#ru").append(_html);
+                    rep();
+                },
+                error: function (errMsg) {
+                }
+            });
 
+        }
+        function rep(){
+            $(".toDetailed").unbind().click(function(){
+                var url=$(this).attr("data-url");
+                $('#workstation').load(url,{id:$(this).attr("data-id"),id1:$(this).attr("data-id1")},function () {
+                    getMation();
+                });
+            });
+            $("#xx").unbind().click(function(){
+                $('#workstation').load("toAllNews.do");
+            });
+        }
+        getMation();
+    });
 </script>

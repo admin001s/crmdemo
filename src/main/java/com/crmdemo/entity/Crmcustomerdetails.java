@@ -1,6 +1,10 @@
 package com.crmdemo.entity;
 
 
+import com.crmdemo.util.DateUtil;
+
+import java.sql.Date;
+
 public class Crmcustomerdetails {
 
   private Integer id;
@@ -13,6 +17,15 @@ public class Crmcustomerdetails {
   private java.sql.Timestamp createTime;
   private String remarks;
   private String followMethod;
+  private java.sql.Date followupDate;
+
+  public Date getFollowupDate() {
+    return followupDate;
+  }
+
+  public void setFollowupDate(Date followupDate) {
+    this.followupDate = followupDate;
+  }
 
   public String getFollowMethod() {
     return followMethod;
@@ -93,8 +106,8 @@ public class Crmcustomerdetails {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
-    return createTime;
+  public String getCreateTime() {
+    return DateUtil.dateToStr(createTime);
   }
 
   public void setCreateTime(java.sql.Timestamp createTime) {

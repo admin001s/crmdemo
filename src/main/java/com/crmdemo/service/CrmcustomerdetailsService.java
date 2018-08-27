@@ -10,5 +10,9 @@ import java.util.List;
 
 public interface CrmcustomerdetailsService {
     boolean insertCrmcustomerdetails(Crmcustomerdetails crmcustomerdetails);
+
     List<CrmcustomerdetailsVop> selectCrmcustomerdetailsVopList(Integer id, HttpServletRequest request, HttpServletResponse response);
+
+    List<CrmcustomerdetailsVop> selectcrmcustomerdetailsVopListByUser(Integer userId);
+    List<Crmcustomerdetails> selectcrmcustomerByUserCount(CrmcustomerdetailsVop crmcustomerdetailsVop);
 }

@@ -21,4 +21,6 @@ public interface CrminfoDao {
     Integer updateCrminfo(Crminfo crminfo);
 
     Crminfo selectCrminfoById(@Param("userId") Integer userId);
+
+    List<Crminfo> selectCrminfoByUser(Crminfo crminfo);
 }

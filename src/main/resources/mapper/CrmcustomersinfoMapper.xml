@@ -108,6 +108,9 @@
             <if test="updateTime != null">
                 updateTime,
             </if>
+            <if test="level != null">
+                `level`,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="customersId != null">
@@ -200,6 +203,9 @@
             <if test="updateTime != null">
                 #{updateTime},
             </if>
+            <if test="level != null">
+                #{level},
+            </if>
         </trim>
     </insert>
 
@@ -215,18 +221,23 @@
 
     </select>
     <select id="selectCrmcustomersinfoList" resultMap="crmcustomersinfoVop">
-        SELECT a.* FROM ((SELECT crmcustomersinfo.*,`crminfo`.`ChineseName`,`crminfo`.`RoleId`,`crminfo`.`userArrangement`,`crminfo`.`UserId`,`crminfo`.`UserName`,crmcustomerdetails.`id` AS
+        SELECT a.* FROM ((SELECT
+        crmcustomersinfo.*,`crminfo`.`ChineseName`,`crminfo`.`RoleId`,`crminfo`.`userArrangement`,`crminfo`.`UserId`,`crminfo`.`UserName`,crmcustomerdetails.`id`
+        AS
         c_id,crmcustomerdetails.`followupTime`,crmcustomerdetails.`remarks`,crmcustomerdetails.`followupStatus`
         FROM crmcustomersinfo
         INNER JOIN `crmcustomerallocate` ON crmcustomersinfo.`id`=crmcustomerallocate.`customerId`
         INNER JOIN crminfo ON crminfo.`UserId`=crmcustomerallocate.`beiuserId`
         LEFT JOIN `crmcustomerdetails` ON `crmcustomerdetails`.`crmcustomersinfoID`=`crmcustomersinfo`.`id`
-        WHERE `crmcustomersinfo`.`customerStatus`!=1 and crmcustomersinfo.deleteStatus=0 and  crmcustomerallocate.isRelation=0
+        WHERE `crmcustomersinfo`.`customerStatus`!=1 and crmcustomersinfo.deleteStatus=0 and
+        crmcustomerallocate.isRelation=0
         <if test="adduserHierarchy !=null">
             AND crminfo.`userArrangement` LIKE '%${adduserHierarchy}%'
         </if>)
         UNION ALL
-        (SELECT crmcustomersinfo.*,`crminfo`.`ChineseName`,`crminfo`.`RoleId`,`crminfo`.`userArrangement`,`crminfo`.`UserId`,`crminfo`.`UserName`,crmcustomerdetails.`id` AS
+        (SELECT
+        crmcustomersinfo.*,`crminfo`.`ChineseName`,`crminfo`.`RoleId`,`crminfo`.`userArrangement`,`crminfo`.`UserId`,`crminfo`.`UserName`,crmcustomerdetails.`id`
+        AS
         c_id,crmcustomerdetails.`followupTime`,crmcustomerdetails.`remarks`,crmcustomerdetails.`followupStatus`
         FROM crmcustomersinfo
         LEFT JOIN `crmcustomerallocate` ON crmcustomersinfo.`id`=crmcustomerallocate.`customerId`
@@ -244,13 +255,13 @@
             and a.customersName like '%${customersName}%'
         </if>
         <if test="qq !=null and qq != ''">
-            and  a.qq like '%${qq}%'
+            and a.qq like '%${qq}%'
         </if>
         <if test="telephone !=null and telephone != ''">
-            and  a.telephone like '%${telephone}%'
+            and a.telephone like '%${telephone}%'
         </if>
         <if test="cityName !=null and cityName != ''">
-            and a.ChineseName like  '%${cityName}%'
+            and a.ChineseName like '%${cityName}%'
         </if>
         <if test="provinceId !=null and provinceId != 0">
             and a.followupStatus=#{provinceId}
@@ -278,7 +289,7 @@
     <update id="updateCrmcustomersinfo">
         update crmcustomersinfo
         <set>
-            <if test="customersName != null">
+            <if test="customersName != null and customersName != ''">
                 customersName = #{customersName},
             </if>
             <if test="customersSex != null">
@@ -287,73 +298,73 @@
             <if test="provinceId != null">
                 provinceId = #{provinceId},
             </if>
-            <if test="provinceName != null">
+            <if test="provinceName != null and provinceName != ''">
                 provinceName = #{provinceName},
             </if>
-            <if test="cityName != null">
+            <if test="cityName != null and cityName != ''">
                 cityName = #{cityName},
             </if>
-            <if test="countryName != null">
+            <if test="countryName != null and countryName != ''">
                 countryName = #{countryName},
             </if>
-            <if test="department != null">
+            <if test="department != null and department != ''">
                 department = #{department},
             </if>
-            <if test="mainsalesarea != null">
+            <if test="mainsalesarea != null and mainsalesarea != ''">
                 mainsalesarea = #{mainsalesarea},
             </if>
-            <if test="mobilephone != null">
+            <if test="mobilephone != null and mobilephone != ''">
                 mobilephone = #{mobilephone},
             </if>
-            <if test="telephone != null">
+            <if test="telephone != null and telephone != ''">
                 telephone = #{telephone},
             </if>
-            <if test="qq != null">
+            <if test="qq != null and qq != ''">
                 qq = #{qq},
             </if>
-            <if test="isVip != null">
+            <if test="isVip != null ">
                 isVip = #{isVip},
             </if>
-            <if test="email != null">
+            <if test="email != null and email != ''">
                 email = #{email},
             </if>
-            <if test="fax != null">
+            <if test="fax != null and fax != ''">
                 fax = #{fax},
             </if>
-            <if test="industryCategory != null">
+            <if test="industryCategory != null and industryCategory != ''">
                 industryCategory = #{industryCategory},
             </if>
-            <if test="industrySubclass != null">
+            <if test="industrySubclass != null and industrySubclass != ''">
                 industrySubclass = #{industrySubclass},
             </if>
-            <if test="customerSource != null">
+            <if test="customerSource != null and customerSource != ''">
                 customerSource = #{customerSource},
             </if>
-            <if test="customerUrlSource != null">
+            <if test="customerUrlSource != null and customerUrlSource != ''">
                 customerUrlSource = #{customerUrlSource},
             </if>
-            <if test="companywebsite != null">
+            <if test="companywebsite != null and companywebsite != ''">
                 companywebsite = #{companywebsite},
             </if>
-            <if test="companyAddress != null">
+            <if test="companyAddress != null and companyAddress != ''">
                 companyAddress = #{companyAddress},
             </if>
-            <if test="companydetails != null">
+            <if test="companydetails != null and companydetails != ''">
                 companydetails = #{companydetails},
             </if>
             <if test="customerStatus != null">
                 customerStatus = #{customerStatus},
             </if>
-            <if test="mainproducts != null">
+            <if test="mainproducts != null and mainproducts != ''">
                 mainproducts = #{mainproducts},
             </if>
             <if test="adduserId != null">
                 adduserId = #{adduserId},
             </if>
-            <if test="adduserHierarchy != null">
+            <if test="adduserHierarchy != null and adduserHierarchy != ''">
                 adduserHierarchy = #{adduserHierarchy},
             </if>
-            <if test="deleteStatus != null">
+            <if test="deleteStatus != null ">
                 deleteStatus = #{deleteStatus},
             </if>
             <if test="addmethod != null">
@@ -365,7 +376,53 @@
             <if test="beOverdue != null">
                 beOverdue = #{beOverdue},
             </if>
+            <if test="level != null">
+                `level` = #{level},
+            </if>
+            <if test="readingState != null">
+                `readingState` = #{readingState},
+            </if>
         </set>
-        where id = #{id}
+        <if test="id !=null">
+            where id = #{id}
+        </if>
     </update>
+    <select id="selectCustomersByUser" resultType="Crmcustomersinfo">
+        SELECT `crmcustomersinfo`.* FROM `crmcustomersinfo` INNER JOIN `crmcustomerallocate` ON
+        `crmcustomersinfo`.`id`=`crmcustomerallocate`.`customerId`
+        INNER JOIN `crminfo` ON `crmcustomerallocate`.`beiuserId`=`crminfo`.`UserId`
+        INNER JOIN `crmcustomerdetails` ON `crmcustomerdetails`.`crmcustomersinfoID`=`crmcustomersinfo`.`id`
+        WHERE `crmcustomersinfo`.`deleteStatus`=0 AND `crmcustomerallocate`.`isRelation`=0 and
+        `crmcustomerdetails`.`followupStatus`=4
+        <if test="adduserHierarchy !=null">
+            and `crminfo`.`userArrangement` LIKE '%${adduserHierarchy}%'
+        </if>
+        AND `crmcustomersinfo`.id NOT IN((SELECT `crmcustomerorder`.`customersId` FROM `crmcustomerorder` WHERE
+        `crmcustomerorder`.`isdelete`=0))
+    </select>
+    <select id="selectCrmcustomersinfos" resultType="Crmcustomersinfo">
+        select * from crmcustomersinfo
+        where crmcustomersinfo.deleteStatus=0
+        <if test="customerStatus !=null">
+            and customerStatus = #{customerStatus}
+        </if>
+        <if test="beOverdue !=null">
+            and beOverdue &lt; #{beOverdue}
+        </if>
+    </select>
+    <select id="selectCrmcustomersinfosByUser" resultType="Crmcustomersinfo">
+        SELECT crmcustomersinfo.* FROM `crmcustomersinfo` INNER JOIN `crmcustomerallocate`
+        ON `crmcustomerallocate`.`customerId`=`crmcustomersinfo`.`id`
+        WHERE `crmcustomersinfo`.`deleteStatus`=0 AND `crmcustomerallocate`.`isRelation`=0
+        <if test="adduserId !=null">
+            and `crmcustomerallocate`.`beiuserId` = #{adduserId}
+        </if>
+        <if test="beOverdue !=null">
+            and crmcustomersinfo.beOverdue &lt;= #{beOverdue}
+        </if>
+        <if test="readingState != null">
+            and  crmcustomersinfo.`readingState` = #{readingState}
+        </if>
+        ORDER BY crmcustomersinfo.`readingState`
+    </select>
 </mapper>

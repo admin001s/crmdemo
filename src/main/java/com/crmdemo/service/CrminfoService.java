@@ -1,5 +1,6 @@
 package com.crmdemo.service;
 import com.crmdemo.entity.*;
+import com.crmdemo.vop.UserClass;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CrminfoService {
     Integer selectMaxId();
 
     Crminfo selectCrminfoById(Integer userId);
+
+    List<UserClass> selectCrminfoByUser(Crminfo crminfo);
 }

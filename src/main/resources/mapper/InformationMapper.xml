@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.InformationDao">
+    <resultMap id="informationVop" type="com.crmdemo.vop.InformationVop">
+        <id column="mationId" property="mationId"/>
+        <association property="crmcustomerorder" javaType="com.crmdemo.entity.Crmcustomerorder">
+            <id column="id" property="id"/>
+        </association>
+    </resultMap>
+    <insert id="insertInformation">
+        insert into information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="mationStatus != null">
+                mationStatus,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="customerId != null">
+                customerId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="mationStatus != null">
+                #{mationStatus},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="customerId != null">
+                #{customerId},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectInfomations" resultType="com.crmdemo.entity.Information">
+        select * from information
+        where information.mationStatus != 3
+        <if test="mationStatus !=null">
+          and   information.mationStatus=#{mationStatus}
+        </if>
+        <if test="userId !=null">
+           and  information.userId=#{userId}
+        </if>
+        order by information.mationStatus,information.createTime
+    </select>
+    <update id="updateInformation">
+        update information
+        <set>
+            <if test="userId != null">
+                userId = #{userId},
+            </if>
+            <if test="title != null and title !=''">
+                title = #{title},
+            </if>
+            <if test="mationStatus != null">
+                mationStatus = #{mationStatus},
+            </if>
+            <if test="customerId != null">
+                customerId = #{customerId},
+            </if>
+        </set>
+        <if test="mationId !=null">
+            where mationId = #{mationId}
+        </if>
+    </update>
+    <update id="updateInformationByUser">
+        update information
+        <set>
+            <if test="title != null and title !=''">
+                title = #{title},
+            </if>
+            <if test="mationStatus != null">
+                mationStatus = #{mationStatus},
+            </if>
+            <if test="customerId != null">
+                customerId = #{customerId},
+            </if>
+        </set>
+        where 1=1
+        <if test="mationId !=null">
+           and  mationId = #{mationId}
+        </if>
+        <if test="userId != null">
+            and userId = #{userId}
+        </if>
+    </update>
+</mapper>

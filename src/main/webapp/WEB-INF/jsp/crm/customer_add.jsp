@@ -88,7 +88,22 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1-1">客户性别: </label>
+                                                <label class="col-sm-3 control-label no-padding-right"
+                                                       for="provinceName">客户级别：</label>
+                                                <div class="col-sm-2">
+                                                    <div class="pos-rel">
+                                                        <select class="form-control" id="level">
+                                                            <option value="0">请选择客户级别</option>
+                                                            <option value="1">A(高价值客户)</option>
+                                                            <option value="2">B(普通客户)</option>
+                                                            <option value="3">C(低价值客户)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label no-padding-right"
+                                                       for="form-field-1-1-1">客户性别: </label>
                                                 <div class="col-sm-9">
                                                     <div>
                                                         <label class="line-height-1 blue">
@@ -97,7 +112,8 @@
                                                             <span class="lbl"> 男</span>
                                                         </label>
                                                         <label class="line-height-1 blue">
-                                                            <input name="customersSex" value="1" type="radio" class="ace"/>
+                                                            <input name="customersSex" value="1" type="radio"
+                                                                   class="ace"/>
                                                             <span class="lbl"> 女</span>
                                                         </label>
                                                     </div>
@@ -137,7 +153,8 @@
                                                 <label class="col-sm-3 control-label no-padding-right"
                                                        for="department">部门： </label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" autocomplete="off" id="department" placeholder="输入部门"
+                                                    <input type="text" autocomplete="off" id="department"
+                                                           placeholder="输入部门"
                                                            class="col-xs-10 col-sm-5"/>
                                                 </div>
                                             </div>
@@ -145,7 +162,8 @@
                                                 <label class="col-sm-3 control-label no-padding-right"
                                                        for="position">职位： </label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" autocomplete="off" id="position" placeholder="输入职位"
+                                                    <input type="text" autocomplete="off" id="position"
+                                                           placeholder="输入职位"
                                                            class="col-xs-10 col-sm-5"/>
                                                 </div>
                                             </div>
@@ -164,22 +182,26 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label no-padding-right" for="qq">QQ： </label>
+                                                <label class="col-sm-3 control-label no-padding-right"
+                                                       for="qq">QQ： </label>
                                                 <div class="col-sm-9">
                                                     <input type="text" autocomplete="off" id="qq" placeholder="输入QQ"
                                                            class="col-xs-10 col-sm-5"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1-1">是否VIP: </label>
+                                                <label class="col-sm-3 control-label no-padding-right"
+                                                       for="form-field-1-1-1">是否VIP: </label>
                                                 <div class="col-sm-9">
                                                     <div>
                                                         <label class="line-height-1 blue">
-                                                            <input name="isVip" id="isVIP" value="0" type="radio" class="ace"/>
+                                                            <input name="isVip" id="isVIP" value="0" type="radio"
+                                                                   class="ace"/>
                                                             <span class="lbl"> 是</span>
                                                         </label>
                                                         <label class="line-height-1 blue">
-                                                            <input name="isVip" value="1" type="radio" class="ace" checked/>
+                                                            <input name="isVip" value="1" type="radio" class="ace"
+                                                                   checked/>
                                                             <span class="lbl"> 否</span>
                                                         </label>
                                                     </div>
@@ -192,18 +214,35 @@
 
                                                 <div class="col-xs-12 col-sm-9">
                                                     <div class="clearfix">
-                                                        <input type="email" name="email" id="email" class="col-xs-12 col-sm-6"/>
+                                                        <input type="email" name="email" id="email"
+                                                               class="col-xs-12 col-sm-6"/>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="col-lg-3 col-sm-3 control-label no-padding-right"
-                                                       for="industryCategory"> 行业大类：</label>
-
-                                                <div class="col-lg-9 col-sm-9">
-                                                    <input type="text" id="industryCategory" placeholder="输入行业大类"
-                                                           class="col-xs-10 col-sm-5" autocomplete="off"/>
+                                                       for="industryCategory"> 所属行业：</label>
+                                                <div class="col-sm-3">
+                                                    <div class="pos-rel">
+                                                        <select class="form-control" id="industryCategory">
+                                                            <option value="0">请选择所属行业</option>
+                                                            <option value="服务">服务</option>
+                                                            <option value="金融">金融</option>
+                                                            <option value="电信">电信</option>
+                                                            <option value="教育">教育</option>
+                                                            <option value="高科技">高科技</option>
+                                                            <option value="政府">政府</option>
+                                                            <option value="制造">制造</option>
+                                                            <option value="能源">能源</option>
+                                                            <option value="零售">零售</option>
+                                                            <option value="媒体">媒体</option>
+                                                            <option value="娱乐">娱乐</option>
+                                                            <option value="咨询">咨询</option>
+                                                            <option value="非盈利事业">非盈利事业</option>
+                                                            <option value="公共事业">公共事业</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -220,10 +259,19 @@
                                             <div class="form-group">
                                                 <label class="col-lg-3 col-sm-3 control-label no-padding-right"
                                                        for="customerSource"> 客户来源：</label>
-
-                                                <div class="col-lg-9 col-sm-9">
-                                                    <input type="text" id="customerSource" placeholder="输入客户来源"
-                                                           class="col-xs-10 col-sm-5" autocomplete="off"/>
+                                                <div class="col-sm-3">
+                                                    <div class="pos-rel">
+                                                        <select class="form-control" id="customerSource">
+                                                            <option value="0">请选择客户来源</option>
+                                                            <option value="广告">广告</option>
+                                                            <option value="社交推广">社交推广</option>
+                                                            <option value="研讨会">研讨会</option>
+                                                            <option value="搜索引擎">搜索引擎</option>
+                                                            <option value="客户介绍">客户介绍</option>
+                                                            <option value="代理商">代理商</option>
+                                                            <option value="其他">其他</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -257,7 +305,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label no-padding-right" for="companydetails">公司详情：</label>
+                                                <label class="col-sm-3 control-label no-padding-right"
+                                                       for="companydetails">公司详情：</label>
                                                 <div class="col-sm-9">
                                                     <div class="pos-rel">
                                                 <textarea class="form-control limited autosize-transition"
@@ -284,7 +333,7 @@
                                             </button>
                                             <strong>提示</strong>
                                             如果您未将此用户分配到代理商或代理商员工，此操作将无效！
-                                            <br />
+                                            <br/>
                                         </div>
                                         <div>
                                             <div class="form-group" id="zj">
@@ -328,15 +377,15 @@
                                                 </div>
                                             </div>
                                             <div class="form-group" id="yg">
-                                            <label class="col-lg-1">代理商员工：</label>
-                                            <div class="col-lg-3 col-sm-2">
-                                                <div class="pos-rel">
-                                                    <select class="form-control">
-                                                        <option value="0">------------</option>
-                                                    </select>
+                                                <label class="col-lg-1">代理商员工：</label>
+                                                <div class="col-lg-3 col-sm-2">
+                                                    <div class="pos-rel">
+                                                        <select class="form-control">
+                                                            <option value="0">------------</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
                                         </div>
                                     </div>
@@ -403,6 +452,7 @@
 <script type="text/javascript">
     jQuery(function ($) {
         $("#tiao").hide();
+
         function isrepeat(a, b, c) {
             var is;
             $.ajax({
@@ -410,7 +460,7 @@
                 data: {
                     customersId: a,
                     telephone: b,
-                    companywebsite:c
+                    companywebsite: c
                 },
                 async: false,
                 type: "post",
@@ -427,32 +477,34 @@
             });
             return is;
         }
+
         function isadd() {
-            var iss=true;
+            var iss = true;
             if ($("#customersId").val() != '' && $("#customersId").val() != null) {
-                 if(!isrepeat($("#customersId").val(), null, null)){
-                     return false;
-                 }
+                if (!isrepeat($("#customersId").val(), null, null)) {
+                    return false;
+                }
             }
             if ($("#telephone").val() != '' && $("#telephone").val() != null) {
-                if(!isrepeat(null, $("#telephone").val(), null)){
+                if (!isrepeat(null, $("#telephone").val(), null)) {
                     return false;
                 }
             }
             if ($("#companywebsite").val() != '' && $("#companywebsite").val() != null) {
-                if(!isrepeat(null, null, $("#companywebsite").val())){
+                if (!isrepeat(null, null, $("#companywebsite").val())) {
                     return false;
                 }
             }
             return iss;
         }
+
         function add() {
             var isex;
             var fp;
-            if($("#yg select").val()!="0"){
-                fp=$("#yg select").val();
-            }else if($("#dls select").val()!="0"){
-                fp=$("#dls select").val();
+            if ($("#yg select").val() != "0") {
+                fp = $("#yg select").val();
+            } else if ($("#dls select").val() != "0") {
+                fp = $("#dls select").val();
             }
             $.ajax({
                 url: "addCrmcustomersinfo.do",
@@ -477,16 +529,17 @@
                     mainproducts: $("#mainproducts").val(),
                     customerUrlSource: $("#customerUrlSource").val(),
                     qq: $("#qq").val(),
-                    fp:fp
+                    fp: fp,
+                    level: $("#level").val()
                 },
                 async: false,
                 type: "post",
                 dataType: "JSON",
                 success: function (data) {
                     if (data) {
-                        isex=true;
+                        isex = true;
                     } else {
-                        isex=false;
+                        isex = false;
                     }
                 },
                 error: function (errMsg) {
@@ -669,8 +722,10 @@
                 if (info.step == 1) {
                     if (isadd() == false) {
                         return isadd();
-                    }else{
-                        if(${user.roleId}!=6)
+                    } else {
+                        if (${user.roleId}!=
+                        6
+                    )
                         {
                             $("#tiao").show();
                         }
@@ -680,7 +735,7 @@
                     $("#tiao").hide();
                 }
                 if (info.step == 1 && is) {
-                    if (${user.roleId}==1  && is
+                    if (${user.roleId}==1 && is
                 )
                     {
                         $("#zj").show();
@@ -704,11 +759,18 @@
                         getUser(4, "zy");
                         is = false;
                     }
-                   else if(${user.roleId}==4 && is){
+                else
+                    if (${user.roleId}==4 && is
+                )
+                    {
                         $("#dls").show();
                         getUser(5, "dls");
                         is = false;
-                    }else if(${user.roleId}==5 && is){
+                    }
+                else
+                    if (${user.roleId}==5 && is
+                )
+                    {
                         $("#yg").show();
                         getUser(6, "yg");
                         is = false;

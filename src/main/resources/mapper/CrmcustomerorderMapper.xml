@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crmdemo.dao.CrmcustomerorderDao">
+
+    <resultMap id="crmcustomerorderVop" type="com.crmdemo.vop.CrmcustomerorderVop">
+        <id column="id" property="id"/>
+        <association property="crminfo" javaType="com.crmdemo.entity.Crminfo">
+            <id property="userId" column="userId"/>
+        </association>
+        <association property="crmcustomersinfo" javaType="com.crmdemo.entity.Crmcustomersinfo">
+            <id property="id" column="c_id"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertCrmcustomerorder">
+        insert into crmcustomerorder
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customersId != null">
+                customersId,
+            </if>
+            <if test="signingfollowupId != null">
+                signingfollowupId,
+            </if>
+            <if test="followupHierarchy != null">
+                followupHierarchy,
+            </if>
+            <if test="signingStatus != null">
+                signingStatus,
+            </if>
+            <if test="signingTime != null">
+                signingTime,
+            </if>
+            <if test="reviewerId != null">
+                reviewerId,
+            </if>
+            <if test="reviewerLevel != null">
+                reviewerLevel,
+            </if>
+            <if test="isdelete != null">
+                isdelete,
+            </if>
+            <if test="signingtypeId != null">
+                signingtypeId,
+            </if>
+            <if test="yesSigningTime != null">
+                yesSigningTime,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="orderId != null">
+                orderId,
+            </if>
+            <if test="orderName != null">
+                orderName,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customersId != null">
+                #{customersId},
+            </if>
+            <if test="signingfollowupId != null">
+                #{signingfollowupId},
+            </if>
+            <if test="followupHierarchy != null">
+                #{followupHierarchy},
+            </if>
+            <if test="signingStatus != null">
+                #{signingStatus},
+            </if>
+            <if test="signingTime != null">
+                #{signingTime},
+            </if>
+            <if test="reviewerId != null">
+                #{reviewerId},
+            </if>
+            <if test="reviewerLevel != null">
+                #{reviewerLevel},
+            </if>
+            <if test="isdelete != null">
+                #{isdelete},
+            </if>
+            <if test="signingtypeId != null">
+                #{signingtypeId},
+            </if>
+            <if test="yesSigningTime != null">
+                #{yesSigningTime},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="orderId != null">
+                #{orderId},
+            </if>
+            <if test="orderName != null">
+                #{orderName},
+            </if>
+            <if test="money != null">
+                #{money},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateCrmcustomerorder">
+        update crmcustomerorder
+        <set>
+            <if test="signingfollowupId != null">
+                signingfollowupId = #{signingfollowupId},
+            </if>
+            <if test="followupHierarchy != null">
+                followupHierarchy = #{followupHierarchy},
+            </if>
+            <if test="signingStatus != null">
+                signingStatus = #{signingStatus},
+            </if>
+            <if test="signingTime != null">
+                signingTime = #{signingTime},
+            </if>
+            <if test="reviewerId != null">
+                reviewerId = #{reviewerId},
+            </if>
+            <if test="reviewerLevel != null and reviewerLevel != ''">
+                reviewerLevel = #{reviewerLevel},
+            </if>
+            <if test="isdelete != null">
+                isdelete = #{isdelete},
+            </if>
+            <if test="signingtypeId != null">
+                signingtypeId = #{signingtypeId},
+            </if>
+            <if test="yesSigningTime != null">
+                yesSigningTime = #{yesSigningTime},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime},
+            </if>
+            <if test="orderId != null and orderId != ''">
+                orderId = #{orderId},
+            </if>
+            <if test="orderName != null ">
+                orderName = #{orderName},
+            </if>
+            <if test="money != null">
+                money = #{money},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectCrmcustomerorderVopList" resultMap="crmcustomerorderVop">
+        SELECT `crmcustomerorder`.*,`crminfo`.*,`crmcustomersinfo`.`customersName`,`crmcustomersinfo`.`id` as c_id FROM
+        `crmcustomerorder`
+        INNER JOIN `crminfo` ON `crmcustomerorder`.`signingfollowupID`=`crminfo`.`UserId`
+        INNER JOIN `crmcustomersinfo` ON `crmcustomersinfo`.`id`=`crmcustomerorder`.`customersId`
+        WHERE `crmcustomerorder`.`isdelete`=0
+        <if test="crminfo.userArrangement !=null and crminfo.userArrangement !=''">
+            and crminfo.userArrangement like '%${crminfo.userArrangement}%'
+        </if>
+        <if test="orderId !=null and orderId !=''">
+            and orderId like '%${orderId}%'
+        </if>
+        <if test="orderName !=null and orderName != ''">
+            and orderName like '%${orderName}%'
+        </if>
+        <if test="crminfo.chineseName !=null and crminfo.chineseName !=''">
+            and crminfo.chineseName like '%${crminfo.chineseName}%'
+        </if>
+        <if test="crmcustomersinfo.customersName !=null and crmcustomersinfo.customersName !=''">
+            and crmcustomersinfo.customersName like '%${crmcustomersinfo.customersName}%'
+        </if>
+        <if test="crminfo.userId !=null">
+            and crminfo.UserId =#{crminfo.userId}
+        </if>
+        <if test="signingStatus !=null">
+            and crmcustomerorder.signingStatus =#{signingStatus}
+        </if>
+        <if test="indate !=null and indate !=''">
+            and crmcustomerorder.SigningTime &gt;= #{indate}
+        </if>
+        <if test="outdate !=null and outdate !=''">
+            and crmcustomerorder.SigningTime &lt;= #{outdate}
+        </if>
+    </select>
+
+    <select id="selectCrmcustomerorderById" resultMap="crmcustomerorderVop">
+        SELECT `crmcustomerorder`.*,`crminfo`.*,`crmcustomersinfo`.`customersName`,`crmcustomersinfo`.`id` as c_id FROM `crmcustomerorder`
+        INNER JOIN `crminfo` ON `crmcustomerorder`.`signingfollowupID`=`crminfo`.`UserId`
+        INNER JOIN `crmcustomersinfo` ON `crmcustomersinfo`.`id`=`crmcustomerorder`.`customersId`
+        WHERE `crmcustomerorder`.`isdelete`=0 and `crmcustomerorder`.id=#{id}
+    </select>
+
+    <select id="selectCrmcustomerorderCount" resultType="Crmcustomerorder">
+        SELECT DATE_FORMAT(`crmcustomerorder`.`yesSigningTime` ,'%m' ) as orderId,COUNT(1) as reviewerId,crmcustomerorder.id
+        FROM `crmcustomerorder` WHERE `crmcustomerorder`.`SigningStatus`=3
+        <if test="signingfollowupId !=null">
+            AND `crmcustomerorder`.`signingfollowupID`=#{signingfollowupId}
+        </if>
+        <if test="followupHierarchy !=null and followupHierarchy !=''">
+            AND `crmcustomerorder`.`followupHierarchy` like '%${followupHierarchy}%' and `crmcustomerorder`.`signingfollowupID` !=#{customersId}
+        </if>
+        GROUP BY DATE_FORMAT(`crmcustomerorder`.`yesSigningTime` ,'%m' ) ORDER BY `crmcustomerorder`.`yesSigningTime`
+        DESC LIMIT 0,7
+    </select>
+</mapper>

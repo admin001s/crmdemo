@@ -14,12 +14,15 @@ public interface CrmcustomersinfoService {
 
     //查询客户
     List<Crmcustomersinfo> selectcrmcustomersinfo(String open);
+
     boolean addCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo);
+
     List<CrmcustomersinfoVop> selectCrmcustomersinfoList(Crmcustomersinfo crmcustomersinfo);
 
     boolean isrepeat(Crmcustomersinfo crmcustomersinfo);
+
     //为客户分配根据人员
-    boolean updateCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo , Crmcustomerallocate crmcustomerallocate);
+    boolean updateCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo, Crmcustomerallocate crmcustomerallocate);
 
     Crmcustomersinfo selectCrmcustomersinfoById(Integer id);
 
@@ -28,5 +31,12 @@ public interface CrmcustomersinfoService {
     boolean updateCrmcustomersinfo(Crmcustomersinfo crmcustomersinfo);
 
     boolean updateCustomersTransfer(String[] id, String beiuserId, HttpServletRequest request, HttpServletResponse response);
-    boolean rotationCustomers(String[] id,String beiuserId, HttpServletRequest request, HttpServletResponse response);
+
+    boolean rotationCustomers(String[] id, String beiuserId, HttpServletRequest request, HttpServletResponse response);
+
+    List<Crmcustomersinfo> selectCustomersByUser(Crmcustomersinfo crmcustomersinfo);
+
+    boolean updateCustomersBeOverdue(String[] ids,Crmcustomersinfo crmcustomersinfo);
+
+    List<Crmcustomersinfo> selectCrmcustomersinfosByUser(Crmcustomersinfo crmcustomersinfo);
 }

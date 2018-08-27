@@ -4,10 +4,12 @@ import com.crmdemo.dao.CrminfoDao;
 import com.crmdemo.entity.Crminfo;
 import com.crmdemo.service.CrminfoService;
 import com.crmdemo.util.CommonUtils;
+import com.crmdemo.vop.UserClass;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -95,5 +97,31 @@ public class CrminfoServiceImpl implements CrminfoService {
 
         }
         return crminfo;
+    }
+
+    @Override
+    public List<UserClass> selectCrminfoByUser(Crminfo crminfo) {
+        List<UserClass> userClasses=new ArrayList<>();
+        List<Crminfo> crminfoList=null;
+        UserClass userClass1=new UserClass();
+        userClass1.setId(crminfo.getUserId());
+        userClass1.setPid(0);
+        userClass1.setName(crminfo.getChineseName());
+        userClass1.setIcon("assets/newadd/img/diy/1_close.png");
+        userClasses.add(userClass1);
+        try {
+            crminfoList=crminfoDao.selectCrminfoByUser(crminfo);
+            for (Crminfo crminfo1:crminfoList){
+                UserClass userClass=new UserClass();
+                userClass.setId(crminfo1.getUserId());
+                userClass.setPid(CommonUtils.getUserPid(crminfo1.getUserArrangement()));
+                userClass.setName(crminfo1.getChineseName()+"("+crminfo1.getRoleName()+")");
+                userClass.setIcon("assets/newadd/img/diy/1_open.png");
+                userClasses.add(userClass);
+            }
+        }catch (Exception e){
+
+        }
+        return userClasses;
     }
 }

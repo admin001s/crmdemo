@@ -13,6 +13,33 @@ public class Crminfo {
   private java.sql.Timestamp updateTime;
   private String userArrangement;
   private Integer isavailable;
+  private String userPath;
+  private String pathVar;
+  private String roleName;
+
+  public String getRoleName() {
+    return roleName;
+  }
+
+  public void setRoleName(String roleName) {
+    this.roleName = roleName;
+  }
+
+  public String getUserPath() {
+    return userPath;
+  }
+
+  public void setUserPath(String userPath) {
+    this.userPath = userPath;
+  }
+
+  public String getPathVar() {
+    return pathVar;
+  }
+
+  public void setPathVar(String pathVar) {
+    this.pathVar = pathVar;
+  }
 
   public Integer getIsavailable() {
     return isavailable;
